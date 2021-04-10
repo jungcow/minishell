@@ -21,4 +21,5 @@
 ## 유용한  링크
 
 ### termios 관련
-- [termios 구조체 사용 방법](https://wiki.ubuntu-kr.org/index.php/Terminal_Programming)
+- [termios 구조체 사용 방법1](https://wiki.ubuntu-kr.org/index.php/Terminal_Programming)
+- [termios 구조체 사용 방법2](http://neosrtos.com/docs/posix_api/termios.html)
