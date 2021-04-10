@@ -23,3 +23,6 @@
 ### termios 관련
 - [termios 구조체 사용 방법1](https://wiki.ubuntu-kr.org/index.php/Terminal_Programming)
 - [termios 구조체 사용 방법2](http://neosrtos.com/docs/posix_api/termios.html)
+
+### termcap 관련
+- [termcap library document](https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html)

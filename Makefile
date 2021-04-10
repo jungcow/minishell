@@ -1,3 +1,4 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CURSES = -lncurses
+CFLAGS = -Wall -Werror -Wextra $(CURSES)
