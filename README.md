@@ -17,3 +17,8 @@
 - style : 코드 스타일 혹은 포맷 등에 관한 커밋
 - refactor :  코드 리팩토링에 대한 커밋
 - test : 테스트 코드 수정에 대한 커밋
+
+## 유용한  링크
+
+### termios 관련
+- [termios 구조체 사용 방법](https://wiki.ubuntu-kr.org/index.php/Terminal_Programming)
