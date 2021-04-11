@@ -26,3 +26,11 @@
 
 ### termcap 관련
 - [termcap library document](https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html)
+
+#### Termcap 에서의 capability 관련
+- [string capability](http://www.xevious7.com/linux/lpg_8_22_3.html)
+- [num capability](http://www.xevious7.com/linux/lpg_8_22_2.html)
+- [boolean capability](http://www.xevious7.com/linux/lpg_8_22_1.html)
+
+#### ESCAPE TABLE
+![escape table](https://cdn.discordapp.com/attachments/790600784110813264/830787115209719888/escape_table.png =400x300)
