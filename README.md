@@ -20,8 +20,10 @@
 
 ## 유용한  링크
 
+### 정리글 모음(42 슬랙 글)
+- [여러 minishell 자료 링크](https://42born2code.slack.com/archives/CU6MTFBNH/p1618270936120400) - <21.04.13 추가> 
+
 ### bash script 관련 (중요!!)
-- [bash script](https://42born2code.slack.com/archives/CU6MTFBNH/p1618270936120400) - <21.04.13 추가> 
 - [bash script](https://mug896.github.io/bash-shell/index.html) - <21.04.13 추가> 
 
 ### termios 관련
@@ -147,4 +149,17 @@
 	```
 	- 위와 같이 기존 터미널의 설정을 저장해두었다가 Ctrl + C 등으로 새로운 터미널 설정을 적용한 작업들이 끝나면 기존 터미널의 설정들로 다시 설정을 세팅해주어야 한다.
 
+### 21.04.14(수) 학습내용
+1. shell 의 버퍼관리
+|![shell의 버퍼관리](https://cdn.discordapp.com/attachments/790600784110813264/831784772870864906/IMG_0872.PNG)| ![shell에서 버퍼가 넘어갔을 때](https://cdn.discordapp.com/attachments/790600784110813264/831784764356165642/IMG_0873.PNG)|
+2. history
+- history 명령어를 통해 이전 command를 볼 수 있다.
+	- 방향키 위, 아래키로 이 전 history와 후 history를 볼 수 있다.
+	- ~/.bash_history 파일에 저장된다.
+	- 정상적으로 exit이 되었을 때에만 history에 저장이 된다.
+	**내부 매커니즘**
+	```
+	1. 먼저 프로세스(shell) 내부에서 메모리에 저장시킨다.
+	2. 그 이후에 ~/.bash_hitory 파일에 저장한다.
+	```
 
