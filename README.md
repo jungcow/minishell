@@ -151,13 +151,14 @@
 
 ### 21.04.14(수) 학습내용
 1. shell 의 버퍼관리
-|![shell의 버퍼관리](https://cdn.discordapp.com/attachments/790600784110813264/831784772870864906/IMG_0872.PNG)| ![shell에서 버퍼가 넘어갔을 때](https://cdn.discordapp.com/attachments/790600784110813264/831784764356165642/IMG_0873.PNG)|
+
+| ![shell의 버퍼관리](https://cdn.discordapp.com/attachments/790600784110813264/831784772870864906/IMG_0872.PNG)| ![shell에서 버퍼가 넘어갔을 때](https://cdn.discordapp.com/attachments/790600784110813264/831784764356165642/IMG_0873.PNG)|
 2. history
 - history 명령어를 통해 이전 command를 볼 수 있다.
 	- 방향키 위, 아래키로 이 전 history와 후 history를 볼 수 있다.
 	- ~/.bash_history 파일에 저장된다.
 	- 정상적으로 exit이 되었을 때에만 history에 저장이 된다.
-	**내부 매커니즘**
+	- **내부 매커니즘**
 	```
 	1. 먼저 프로세스(shell) 내부에서 메모리에 저장시킨다.
 	2. 그 이후에 ~/.bash_hitory 파일에 저장한다.
