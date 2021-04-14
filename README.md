@@ -99,60 +99,62 @@
 	- Enter 키 입력 없이 문자 입력과 동시에 옵션 값 출력하는 에제
 		1. 입력모드 : 비정규모드(Noncanonical Mode)
 		2. ~ECHO	: 입력버퍼의 내용을 바로 출력버퍼로 복사하는 ECHO 기능을 비활성화
-	```c
-	#include <stdio.h>
-	#include <termios.h>
-	#include <unistd.h>
+```c
+#include <stdio.h>
+#include <termios.h>
+#include <unistd.h>
 
-	typedef enum {FALSE, TRUE} bool;
+typedef enum {FALSE, TRUE} bool;
 
-	int getch(void)
+int getch(void)
+{
+	int ch;
+	struct termios buf;
+	struct termios save;
+
+	tcgetattr(0, &save);
+	buf = save;
+	buf.c_lflag &= ~(ICANON|ECHO);
+	buf.c_cc[VMIN] = 1;
+	buf.c_cc[VTIME] = 0;
+	tcsetattr(0, TCSAFLUSH, &buf);
+	ch = getchar();
+	tcsetattr(0, TCSAFLUSH, &save);
+
+	return ch;
+}
+
+int main(int argc, char *argv[])
+{
+	char ch;
+	bool exit;
+
+	printf("Insert Option \n");
+
+	do
 	{
-		int ch;
-		struct termios buf;
-		struct termios save;
+		ch = getch();
 
-		tcgetattr(0, &save);
-		buf = save;
-		buf.c_lflag &= ~(ICANON|ECHO);
-		buf.c_cc[VMIN] = 1;
-		buf.c_cc[VTIME] = 0;
-		tcsetattr(0, TCSAFLUSH, &buf);
-		ch = getchar();
-		tcsetattr(0, TCSAFLUSH, &save);
+		if(ch == 'q')
+			exit = FALSE;
 
-		return ch;
+		printf("ch = %c \n", ch);
+
 	}
+	while(exit);
 
-	int main(int argc, char *argv[])
-	{
-		char ch;
-		bool exit;
-
-		printf("Insert Option \n");
-
-		do
-		{
-			ch = getch();
-
-			if(ch == 'q')
-				exit = FALSE;
-
-			printf("ch = %c \n", ch);
-
-		}
-		while(exit);
-
-		return 0;
-	}
-	출처: https://chipmaker.tistory.com/entry/터미널 [CHIPMAKER]
-	```
+	return 0;
+}
+출처: https://chipmaker.tistory.com/entry/터미널 [CHIPMAKER]
+```
 	- 위와 같이 기존 터미널의 설정을 저장해두었다가 Ctrl + C 등으로 새로운 터미널 설정을 적용한 작업들이 끝나면 기존 터미널의 설정들로 다시 설정을 세팅해주어야 한다.
 
 ### 21.04.14(수) 학습내용
 1. shell 의 버퍼관리
 
-| ![shell의 버퍼관리](https://cdn.discordapp.com/attachments/790600784110813264/831784772870864906/IMG_0872.PNG)| ![shell에서 버퍼가 넘어갔을 때](https://cdn.discordapp.com/attachments/790600784110813264/831784764356165642/IMG_0873.PNG)|
+|![shell의 버퍼관리](https://cdn.discordapp.com/attachments/790600784110813264/831784772870864906/IMG_0872.PNG)| ![shell에서 버퍼가 넘어갔을 때](https://cdn.discordapp.com/attachments/790600784110813264/831784764356165642/IMG_0873.PNG)|
+|--|--|
+
 2. history
 - history 명령어를 통해 이전 command를 볼 수 있다.
 	- 방향키 위, 아래키로 이 전 history와 후 history를 볼 수 있다.
