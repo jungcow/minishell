@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/15 21:35:57 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/15 21:56:09 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	run_minishell()
 {
 	t_command	command;
 	
+	init_minishell();
 	// error
 	if (!init_command(&command))
 		return ;
