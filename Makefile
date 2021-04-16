@@ -2,11 +2,14 @@ NAME = minishell
 CC = gcc
 CURSES = -lncurses
 INC = -I ./includes -I ./libft
-CFLAGS = -Wall -Werror -Wextra $(CURSES)
-LIB = -L./libft -lft
+CFLAGS = -Wall -Werror -Wextra
+LIB = -L./libft -lft $(CURSES)
 
 COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				command.c \
+				cursor.c \
+				general.c \
+				end.c \
 				)
 
 SRCS = ./srcs/minishell.c \

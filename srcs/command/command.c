@@ -6,18 +6,14 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/15 21:58:06 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:31:12 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include <stdbool.h>
 #include "libft.h"
 #include "command/command.h"
-
-# define LEFT_ARROW 4479771
-# define RIGHT_ARROW 4414235
 
 bool	init_command(t_command *command)
 {
@@ -26,6 +22,7 @@ bool	init_command(t_command *command)
 	command->keywords = NULL;
 	command->keywords_size = 0;
 	command->cursor = 0;
+	command->length = 0;
 	flag = true;
 	flag = flag && init_string(&command->line);
 	flag = flag && init_string(&command->temp);
@@ -36,27 +33,50 @@ bool	init_command(t_command *command)
 
 int		read_command(t_command *command)
 {
-	char	ch;
-	int		a;
+	int		key;
+	int		flag;
 	(void) command;
 
-	while(1)
+	while(42)
 	{
-		read(0, &ch, 1);
-		if (ch == 27)
-		{
-			read(0, &ch, 1);
-			read(0, &ch, 1);
-			a = LEFT_ARROW;
-			write(1, &a, 3);
-		}
-		else
-		{
-			write(1, &ch, 1);
-		}
+		key = 0;
+		flag = read(0, &key, sizeof(key));
+
+		if (flag == -1)
+			return (0);
+		flag = switch_command(command, key);
+		if (flag == -1)
+			return (0);
+		else if (flag == 0)
+			break ;
 	}
 	return (1);
 }
+
+int		switch_command(t_command *command, int key)
+{
+	int		flag;
+
+	if (key == BACK_SPACE ||
+		key == LEFT_ARROW ||
+		key == RIGHT_ARROW)
+		flag = apply_cursor_key(command, key);
+	else if (key == UP_ARROW ||
+			key == DOWN_ARROW)
+		// apply history
+		flag = 1;
+	else if (key == QUOTE ||
+			key == DOUBLE_QUOTE)
+		flag = 1;
+		// apply quate key
+	else if (key == CTRL_D ||
+			key == ENTER)
+		flag = apply_end_key(command, key);
+	else
+		flag = apply_general_key(command, key);
+	return (flag);
+}
+
 
 void	clear_command(t_command *command)
 {
@@ -72,6 +92,7 @@ void	clear_command(t_command *command)
 	command->keywords = NULL;
 	command->keywords_size = 0;
 	command->cursor = 0;
+	command->length = 0;
 	clear_string(&command->line);
 	clear_string(&command->temp);
 }
