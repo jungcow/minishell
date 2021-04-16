@@ -6,11 +6,12 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:50:41 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/16 17:00:56 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/16 18:12:19 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <termcap.h>
 #include "command/command.h"
 
 int		apply_cursor_key(t_command *command, int key)
@@ -33,5 +34,19 @@ int		apply_cursor_key(t_command *command, int key)
 		command->cursor++;
 		write(1, &key, sizeof(key));
 	}
+	return (1);
+}
+
+int		apply_delete_key(t_command *command, int key)
+{
+	char	*dc;
+	char	ch;
+
+	// should fix
+	key++;
+	apply_cursor_key(command, LEFT_ARROW);
+	delete_string(&command->temp, 0, &ch);
+	dc = tgetstr("dc", NULL);
+	tputs(dc, 1, tputs_wrapper);
 	return (1);
 }
