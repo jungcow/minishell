@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 03:47:22 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/15 20:46:19 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:54:55 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_string
 }				t_string;
 
 bool    init_string(t_string *string);
-bool    add_string(t_string *string, char ch);
+bool    add_string(t_string *string, int index, char ch);
+bool	delete_string(t_string *string, int index, char *ch);
 void    clear_string(t_string *string);
 #endif

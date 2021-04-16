@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 03:47:09 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/15 20:26:25 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/16 17:00:20 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ bool	init_string(t_string *string)
 	return (true);
 }
 
-bool	add_string(t_string *string, char ch)
+bool	add_string(t_string *string, int index, char ch)
 {
 	char	*temp;
+	int		i;
 
+	if (index < 0 || index > string->length)
+		return (false);
 	if (string->length == string->capacity)
 	{
 		temp = (char *)malloc(sizeof(char) * (string->capacity + STRING_SIZE));
@@ -40,7 +43,25 @@ bool	add_string(t_string *string, char ch)
 		string->content = temp;
 		string->capacity += STRING_SIZE;
 	}
-	string->content[string->length++] = ch;
+	i = string->length + 1;
+	while (--i > index)
+		string->content[i] = string->content[i - 1];
+	string->content[index] = ch;
+	string->length++;
+	return (true);
+}
+
+bool	delete_string(t_string *string, int index, char *ch)
+{
+	if (index < 0 || index >= string->length)
+		return (false);
+	*ch = string->content[index];
+	while (index + 1 < string->length)
+	{
+		string->content[index] = string->content[index + 1];
+		index++;
+	}
+	string->length--;
 	return (true);
 }
 
