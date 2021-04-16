@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:26:27 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/16 17:35:25 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/17 02:55:07 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int		apply_end_key(t_command *command, int key)
 		printf("]\n\n\n");
 		//command->cursor = 0;
 		//command->length = 0;
+		if (!add_history(command))
+		{
+			clear_history(command->head);
+			return (-1);
+		}
 		return (0);
 	}
 	return (1);

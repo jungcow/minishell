@@ -10,6 +10,8 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				cursor.c \
 				general.c \
 				end.c \
+				history.c \
+				command_utils.c \
 				)
 
 SRCS = ./srcs/minishell.c \
@@ -24,7 +26,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	make build_libft
-	$(CC) $(OBJS) $(LIB) -o $(NAME)
+	$(CC) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
 
 build_libft :
 	make -C ./libft

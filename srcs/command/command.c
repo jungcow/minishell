@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/16 17:44:16 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/17 02:31:19 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 #include <stdbool.h>
 #include "libft.h"
 #include "command/command.h"
+#include <stdio.h>
 
-bool	init_command(t_command *command)
+bool	init_command(t_command *command, t_history **head)
 {
-	bool	flag;
+	bool		flag;
 
 	command->keywords = NULL;
 	command->keywords_size = 0;
@@ -26,8 +27,10 @@ bool	init_command(t_command *command)
 	flag = true;
 	flag = flag && init_string(&command->line);
 	flag = flag && init_string(&command->temp);
+	flag = flag && parse_history(&command->history_fd, head);
 	if (flag == false)
 		clear_command(command);
+	command->head = head;
 	return (flag);
 }
 
@@ -35,7 +38,7 @@ int		read_command(t_command *command)
 {
 	int		key;
 	int		flag;
-	(void) command;
+	(void)	command;
 
 	while(42)
 	{
@@ -64,15 +67,16 @@ int		switch_command(t_command *command, int key)
 		flag = apply_delete_key(command, key);
 	else if (key == UP_ARROW ||
 			key == DOWN_ARROW)
-		// apply history
-		flag = 1;
+		flag = apply_history_key(command, key);
 	else if (key == QUOTE ||
 			key == DOUBLE_QUOTE)
 		flag = 1;
 		// apply quate key
 	else if (key == CTRL_D ||
 			key == ENTER)
+	{
 		flag = apply_end_key(command, key);
+	}
 	else
 		flag = apply_general_key(command, key);
 	return (flag);
@@ -94,6 +98,8 @@ void	clear_command(t_command *command)
 	command->keywords_size = 0;
 	command->cursor = 0;
 	command->length = 0;
+	close(command->history_fd);
 	clear_string(&command->line);
 	clear_string(&command->temp);
+	clear_history(command->head);
 }

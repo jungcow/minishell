@@ -3,7 +3,16 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
 SRCS = string.c \
-	   ft_strncpy.c
+	   ft_strncpy.c \
+	   ft_strlen.c \
+	   ft_split.c \
+	   ft_strdup.c \
+	   ft_atoi.c \
+	   ft_itoa.c \
+	   ft_isspace.c \
+	   ft_isdigit.c \
+	   get_next_line.c \
+	   get_next_line_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 
