@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/16 17:14:59 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/16 18:02:28 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "libft.h"
 #include "command/command.h"
 
-static int		putchar_tc(int tc)
+int		tputs_wrapper(int tc)
 {
 	write(1, &tc, 1);
 	return (0);
@@ -36,7 +36,7 @@ void	init_minishell()
     tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	tgetent(NULL, "xterm");
 	im = tgetstr("im", NULL);
-	tputs(im, 1, putchar_tc);
+	tputs(im, 1, tputs_wrapper);
 }
 
 void	run_minishell()
@@ -49,6 +49,7 @@ void	run_minishell()
 		return ;
 	read_command(&command);
 	clear_command(&command);
+	tputs(tgetstr("ei", NULL), 1, tputs_wrapper);
 }
 
 int		main()
