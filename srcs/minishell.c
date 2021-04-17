@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/17 05:46:55 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/17 17:35:18 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <termios.h>
 #include <termcap.h>
 #include <curses.h>
+#include <stdlib.h>
 #include "libft.h"
 #include "command/command.h"
 
@@ -23,34 +24,54 @@ int		tputs_wrapper(int tc)
 	return (0);
 }
 
-void	init_minishell()
+int		init_termcap(t_cap *capability)
 {
-	struct termios	term;
-	char			*im;
-	
-    tcgetattr(STDIN_FILENO, &term);
-    term.c_lflag &= ~ICANON;
-    term.c_lflag &= ~ECHO;
-    term.c_cc[VMIN] = 1;
-    term.c_cc[VTIME] = 0;
-    tcsetattr(STDIN_FILENO, TCSANOW, &term);
-	tgetent(NULL, "xterm");
-	im = tgetstr("im", NULL);
-	tputs(im, 1, tputs_wrapper);
+	char	*termtype;
+
+	termtype = getenv("TERM");
+	if (termtype == NULL)
+		return (0);
+	tgetent(NULL, termtype);
+	capability->cm = tgetstr("cm", NULL);
+	capability->im = tgetstr("im", NULL);
+	capability->ei = tgetstr("ei", NULL);
+	capability->cd = tgetstr("cd", NULL);
+	capability->ce = tgetstr("ce", NULL);
+	capability->dc = tgetstr("dc", NULL);
+	tputs(capability->im, 1, tputs_wrapper);
+	return (1);
+}
+
+int		init_minishell(t_term *term)
+{
+	struct termios	new_term;
+
+	if (!init_termcap(&term->cap))
+		return (0);
+    tcgetattr(STDIN_FILENO, &term->save_term);
+	new_term = term->save_term;
+    new_term.c_lflag &= ~ICANON;
+    new_term.c_lflag &= ~ECHO;
+    new_term.c_cc[VMIN] = 1;
+    new_term.c_cc[VTIME] = 0;
+    tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
+	return (1);
 }
 
 void	run_minishell()
 {
+	t_term		term;
 	t_command	command;
 	t_history	*head;
 	
-	init_minishell();
+	if (!init_minishell(&term))
+		return ;
 	// error
 	if (!init_command(&command, &head))
 		return ;
 	read_command(&command);
 	clear_command(&command);
-	tputs(tgetstr("ei", NULL), 1, tputs_wrapper);
+	tputs(term.cap.ei, 1, tputs_wrapper);
 }
 
 int		main()

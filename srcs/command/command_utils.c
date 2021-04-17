@@ -6,23 +6,30 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 21:03:59 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/17 05:46:37 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/17 17:37:10 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command/command.h"
 #include <termcap.h>
 
-void	write_historyfile(t_command *command, char *num_str)
+int		write_historyfile(t_command *command, t_history *new)
 {
+	char	*num_str;
+
+	num_str = ft_itoa(new->num);
+	if (num_str == NULL)
+		return (0);
 	write(command->history_fd, "  ", 2);
 	write(command->history_fd, num_str, ft_strlen(num_str));
 	write(command->history_fd, "  ", 2);
 	write(command->history_fd, command->line.content, command->line.length);
 	write(command->history_fd, "\n", 1);
+	free(num_str);
+	return (1);
 }
 
-void	show_history(t_command *command, char *str, int flag)
+void	write_historyline(t_command *command, char *str, int flag)
 {
 	tputs(tgetstr("ce", NULL), 1, tputs_wrapper);
 	if (flag)

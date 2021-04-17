@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:50:41 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/16 18:12:19 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/17 17:36:24 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,24 @@ int		apply_cursor_key(t_command *command, int key)
 			return (-1);
 		command->cursor++;
 		write(1, &key, sizeof(key));
+	}
+	return (1);
+}
+
+int		apply_history_key(t_command *command, int key)
+{
+	static t_history	**ptr;
+	static int			bottom;
+	int					flag;
+
+	ptr = command->head;
+	flag = 0;
+	if (*(command->head) == NULL)
+		write_historyline(command, "", 2);
+	else
+	{
+		get_history(ptr, &bottom, &flag, key);
+		write_historyline(command, (*ptr)->str, flag);
 	}
 	return (1);
 }

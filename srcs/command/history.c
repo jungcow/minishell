@@ -6,36 +6,24 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 18:12:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/17 06:05:15 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/17 17:12:28 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command/command.h"
 #include <fcntl.h>
 #include <unistd.h>
-#include <stdio.h>
-
-int		apply_history_key(t_command *command, int key)
+// cursor.c 에서 호출함
+void	get_history(t_history **ptr, int *bottom, int *flag, int key)
 {
-	static t_history	**ptr;
-	static int			bottom = 1;
-	int					flag;
-
-	ptr = command->head;
-	if (*(command->head) == NULL)
-	{
-		show_history(command, "", 2);
-		return (1);
-	}
-	flag = 0;
 	if (key == UP_ARROW)
 	{
-		if (bottom)
-			bottom--;
-		else if ((*ptr)->before && !bottom)
+		if (!(*bottom))
+			*bottom += 1;
+		else if ((*ptr)->before && *bottom)
 			(*ptr) = (*ptr)->before;
 		else
-			flag = 1;
+			*flag = 1;
 	}
 	else if (key == DOWN_ARROW)
 	{
@@ -43,13 +31,11 @@ int		apply_history_key(t_command *command, int key)
 			(*ptr) = (*ptr)->next;
 		else
 		{
-			if (!bottom)
-				bottom += 1;
-			flag = 2;
+			if (*bottom)
+				*bottom -= 1;
+			*flag = 2;
 		}
 	}
-	show_history(command, (*ptr)->str, flag);
-	return (1);
 }
 
 int		init_history(t_history **head, t_history **new, char *line)
@@ -119,11 +105,9 @@ int		parse_history(int *history_fd, t_history **head)
 	return (1);
 }
 
-//어떻게 줄이지,,,?
 int		add_history(t_command *command)
 {
 	t_history	*new;
-	char		*num_str;
 
 	if (*(command->head) != NULL && ((*(command->head))->str == NULL
 				|| *(*(command->head))->str == '\0'))
@@ -144,10 +128,7 @@ int		add_history(t_command *command)
 		(*(command->head))->next = new;
 	}
 	*(command->head) = new;
-	num_str = ft_itoa(new->num);
-	if (num_str == NULL)
+	if (!write_historyfile(command, new))
 		return (0);
-	write_historyfile(command, num_str);
-	free(num_str);
 	return (1);
 }

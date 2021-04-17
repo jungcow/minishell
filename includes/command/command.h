@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/17 06:09:48 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/17 17:37:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int					apply_history_key(t_command *command, int key);
 int					tputs_wrapper(int tc);
 
 int					add_history(t_command *command);
-void				write_historyfile(t_command *command, char *num_str);
-void				show_history(t_command *command, char *str, int flag);
+int					write_historyfile(t_command *command, t_history *new);
+void				write_historyline(t_command *command, char *str, int flag);
 
 #endif
