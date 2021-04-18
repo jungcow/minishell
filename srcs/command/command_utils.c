@@ -5,44 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 21:03:59 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/17 17:37:10 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
+/*   Updated: 2021/04/19 00:15:17 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/ioctl.h>
+#include <unistd.h>
 #include "command/command.h"
-#include <termcap.h>
 
-int		write_historyfile(t_command *command, t_history *new)
+static int	ft_nbrlen(int num)
 {
-	char	*num_str;
+	int		i;
 
-	num_str = ft_itoa(new->num);
-	if (num_str == NULL)
-		return (0);
-	write(command->history_fd, "  ", 2);
-	write(command->history_fd, num_str, ft_strlen(num_str));
-	write(command->history_fd, "  ", 2);
-	write(command->history_fd, command->line.content, command->line.length);
-	write(command->history_fd, "\n", 1);
-	free(num_str);
+	i = 1;
+	while (num >= 10)
+	{
+		num /= 10;
+		i++;
+	}
+	return (i);
+}
+
+int			get_cursor_pos(t_term *term)
+{
+	int		a;
+	int		i;
+	int		ret;
+	int		temp;
+	char	buf[16];
+
+	a = 0;
+	i = 0;
+	temp = 0;
+	write(STDIN_FILENO, "\033[6n", 4);
+	ret = read(0, buf, 16);
+	buf[ret] = '\0';
+	while (buf[++i])
+		if (buf[i] >= '0' && buf[i] <= '9')
+		{
+			if (a++ == 0)
+				term->pos.cur_row = ft_atoi(&buf[i]) - 1;
+			else
+			{
+				temp = ft_atoi(&buf[i]);
+				term->pos.cur_col = temp - 1;
+			}
+			i += ft_nbrlen(temp) - 1;
+		}
 	return (1);
 }
 
-void	write_historyline(t_command *command, char *str, int flag)
+void		init_term_size(t_command *command, t_term *term)
 {
-	tputs(tgetstr("ce", NULL), 1, tputs_wrapper);
-	if (flag)
-	{
-		write(1, "\a", 1); //write bell sound
-		if (flag == 2)
-		{
-			write(1, command->line.content, command->line.length);
-			write(1, command->temp.content, command->temp.length);
-		}
-		else
-			write(1, str, ft_strlen(str));
-	}
-	else
-		write(1, str, ft_strlen(str));
+	struct winsize	win;
+
+	(void)command;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
+	term->pos.col = win.ws_col;
+	term->pos.row = 1;
+	get_cursor_pos(term);
 }

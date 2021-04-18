@@ -160,9 +160,12 @@ int main(int argc, char *argv[])
 	- 방향키 위, 아래키로 이 전 history와 후 history를 볼 수 있다.
 	- ~/.bash_history 파일에 저장된다.
 	- 정상적으로 exit이 되었을 때에만 history에 저장이 된다.
-	- **내부 매커니즘**
-	```
-	1. 먼저 프로세스(shell) 내부에서 메모리에 저장시킨다.
-	2. 그 이후에 ~/.bash_hitory 파일에 저장한다.
-	```
+**내부 매커니즘**
+```
+1. 먼저 프로세스(shell) 내부에서 메모리에 저장시킨다.
+2. 그 이후에 ~/.bash_hitory 파일에 저장한다.
+```
 
+### 21.04.17(토) 학습내용
+1. 현재 터미널의 col값과 row값을 가져오는 방법
+: [Get Terminal Width in C](https://stackoverflow.com/questions/1022957/getting-terminal-width-in-c)

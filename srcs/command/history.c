@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 18:12:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/17 17:12:28 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/18 00:18:31 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,5 @@ int		add_history(t_command *command)
 		(*(command->head))->next = new;
 	}
 	*(command->head) = new;
-	if (!write_historyfile(command, new))
-		return (0);
 	return (1);
 }

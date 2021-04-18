@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/17 17:35:18 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/18 02:09:54 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,17 @@ void	run_minishell()
 	t_command	command;
 	t_history	*head;
 	
+	term.name = "seung-jung$>";
 	if (!init_minishell(&term))
 		return ;
 	// error
 	if (!init_command(&command, &head))
 		return ;
-	read_command(&command);
+	read_command(&command, &term);
+	save_command(&command);
 	clear_command(&command);
 	tputs(term.cap.ei, 1, tputs_wrapper);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }
 
 int		main()

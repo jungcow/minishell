@@ -7,11 +7,12 @@ LIB = -L./libft -lft $(CURSES)
 
 COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				command.c \
+				command_utils.c \
 				cursor.c \
 				general.c \
 				end.c \
 				history.c \
-				command_utils.c \
+				history_utils.c \
 				)
 
 SRCS = ./srcs/minishell.c \
