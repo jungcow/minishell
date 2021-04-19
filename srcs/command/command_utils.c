@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 18:13:16 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:52:38 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,13 @@ void	refresh_command(t_command *command, t_term *term)
 	if (command->temp.length != 0)
 	{
 		tputs(term->cap.cd, 1, tputs_wrapper);
-		write(1, command->temp.content, command->temp.length);
+		while (i < command->temp.length)
+		{
+			if (command->temp.content[i] != '\n')
+				write(1, command->temp.content + i, 1);
+			i++;
+		}
+		i = 0;
 		while (i < command->temp.length)
 		{
 			key = LEFT_ARROW;

@@ -6,10 +6,11 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 13:12:08 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:31:37 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <unistd.h>
 #include <termios.h>
 #include <termcap.h>
@@ -73,6 +74,12 @@ void	run_minishell()
 		return ;
 	read_command(&command, &term);
 	save_command(&command);
+	
+	printf("\n\nResult : [");
+	for(int i=0; i < command.line.length; ++i)
+		printf("%c", command.line.content[i]);
+	printf("]\n\n\n");
+	
 	clear_command(&command);
 	tputs(term.cap.ei, 1, tputs_wrapper);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);

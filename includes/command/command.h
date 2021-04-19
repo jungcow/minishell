@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 16:12:06 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:58:11 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ENTER 10
 # define CTRL_D 4
 
+# include <stdbool.h>
 # include "libft.h"
 # include "terminal.h"
 # include "command/history.h"
@@ -37,6 +38,7 @@ typedef struct		s_command
 	t_string		temp;
 	int				cursor;
 	int				length;
+	bool			quote_status;
 }					t_command;
 
 bool			    init_command(t_command *command, t_history **head);
@@ -47,9 +49,9 @@ int					save_command(t_command *command);
 void				refresh_command(t_command *command, t_term *term);
 int					apply_delete_key(t_command *command, t_term *term);
 int					apply_cursor_key(t_command *command, t_term *term, int key);
-int					apply_quote_key(t_command *command, int key);
+int					apply_quote_key(t_command *command, t_term *term, int key);
 int					apply_general_key(t_command *command, t_term *term, int key);
-int					apply_end_key(t_command *command, int key);
+int					apply_end_key(t_command *command, t_term *term, int key);
 int					apply_history_key(t_command *command, t_term *term, int key);
 int					add_history(t_command *command);
 int					write_historyfile(t_command *command, t_history *new);

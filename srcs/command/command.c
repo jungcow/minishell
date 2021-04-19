@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 16:23:36 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:58:33 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	init_command(t_command *command, t_history **head)
 	command->keywords_size = 0;
 	command->cursor = 0;
 	command->length = 0;
+	command->quote_status = false;
 	flag = true;
 	flag = flag && init_string(&command->line);
 	flag = flag && init_string(&command->temp);
@@ -71,10 +72,10 @@ int		switch_command(t_command *command, t_term *term, int key)
 		flag = apply_history_key(command, term, key);
 	else if (key == QUOTE ||
 			key == DOUBLE_QUOTE)
-		flag = apply_quote_key(command,key);
+		flag = apply_quote_key(command, term, key);
 	else if (key == CTRL_D ||
 			key == ENTER)
-		flag = apply_end_key(command, key);
+		flag = apply_end_key(command, term, key);
 	else
 		flag = apply_general_key(command, term, key);
 	return (flag);

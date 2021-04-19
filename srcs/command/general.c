@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:10:56 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 16:04:31 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:58:54 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int		apply_general_key(t_command *command, t_term *term, int key)
 {
-	if (key >= 32 && key <= 127)
+	if ((key >= 32 && key <= 127) || key == '\n')
 	{
 		if (!add_string(&command->line, command->line.length, key))
 			return (-1);
@@ -28,9 +28,8 @@ int		apply_general_key(t_command *command, t_term *term, int key)
 	return (1);
 }
 
-int		apply_quote_key(t_command *command, int key)
+int		apply_quote_key(t_command *command, t_term *term, int key)
 {
-	(void) command;
-	key++;
-	return (1);
+	command->quote_status = !command->quote_status;
+	return (apply_general_key(command, term, key));
 }
