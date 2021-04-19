@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 00:16:51 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:53:44 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define CTRL_D 4
 
 # include "libft.h"
+# include "terminal.h"
 # include "command/history.h"
-# include "command/terminal.h"
 
 typedef struct		s_command
 {
