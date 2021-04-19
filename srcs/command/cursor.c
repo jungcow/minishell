@@ -6,7 +6,11 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:50:41 by seunghoh          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/04/19 16:19:58 by seunghoh         ###   ########.fr       */
+=======
+/*   Updated: 2021/04/19 16:13:53 by jungwkim         ###   ########.fr       */
+>>>>>>> eca360b0ea77af1befb5580067efc03ed1801b05
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +22,9 @@
 int		apply_cursor_key(t_command *command, t_term *term, int key)
 {
 	char	ch;
-	(void)term;
 
+	init_term_size(command, term);
+	get_cursor_pos(term);
 	if ((command->cursor > 0) && key == LEFT_ARROW)
 	{
 		delete_string(&command->line, command->line.length - 1, &ch);
@@ -34,6 +39,11 @@ int		apply_cursor_key(t_command *command, t_term *term, int key)
 		if (!add_string(&command->line, command->line.length, ch))
 			return (-1);
 		command->cursor++;
+		if (term->pos.cur_col == term->pos.col - 1)
+		{
+			term->pos.cur_row += 1;
+			tputs(tgoto(term->cap.cm, 0, term->pos.cur_row), 1, tputs_wrapper);
+		}
 		write(1, &key, sizeof(key));
 	}
 	return (1);
