@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 15:52:56 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:15:02 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		switch_command(t_command *command, t_term *term, int key)
 		key == RIGHT_ARROW)
 		flag = apply_cursor_key(command, term, key);
 	else if (key == BACK_SPACE)
-		flag = apply_delete_key(command, term, key);
+		flag = apply_delete_key(command, term);
 	else if (key == UP_ARROW ||
 			key == DOWN_ARROW)
 		flag = apply_history_key(command, term, key);
