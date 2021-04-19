@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 16:02:53 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:13:16 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ void		init_term_size(t_command *command, t_term *term)
 {
 	struct winsize	win;
 
-	(void)command;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
 	term->pos.col = win.ws_col;
-	term->pos.row = 1;
+	term->pos.row = (command->line.length + ft_strlen(term->name)) / term->pos.col;
 	get_cursor_pos(term);
 }
 

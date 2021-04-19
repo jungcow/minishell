@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_utils.c                                    :+:      :+:    :+:   */
+/*   history_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 21:03:59 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 00:09:12 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:37:36 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int			write_historyfile(t_command *command, t_history *new)
 		write(command->history_fd, " ", 1);
 	write(command->history_fd, num_str, ft_strlen(num_str));
 	write(command->history_fd, "  ", 2);
-//	write(command->history_fd, command->line.content, command->line.length);
 	write(command->history_fd, new->str, ft_strlen(new->str));
 	write(command->history_fd, "\n", 1);
 	free(num_str);
@@ -36,6 +35,7 @@ int			write_historyfile(t_command *command, t_history *new)
 static void	get_command_lines(t_command *command, t_term *term,
 					char *prev_str, int prev_flag)
 {
+	init_term_size(command, term);
 	if (!prev_flag)
 		term->pos.row = (command->line.length + ft_strlen(term->name))
 						/ term->pos.col;
@@ -64,7 +64,7 @@ void		write_historyline(t_command *command, t_term *term,
 	static int	prev_flag;
 	static char *prev_str;
 
-	get_command_lines(command, term, str, flag);
+	get_command_lines(command, term, prev_str, prev_flag);
 	get_cursor_pos(term);
 	term->pos.cur_row = term->pos.cur_row - term->pos.row;
 	tputs(tgoto(term->cap.cm, ft_strlen(term->name), term->pos.cur_row),

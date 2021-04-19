@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 06:05:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 16:11:56 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:10:11 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct		s_cap
 	char			*im; //turn on insert mode
 	char			*ei; //turn off insert mode (actually, it is switch)
 	char			*cd; // delete all lines below the cursor
-	char			*ce; // delete all characters before cursor
+	char			*ce; // delete all characters before cursor(one line)
 	char			*dc; // delete one characters at cursors
 }					t_cap;
 
