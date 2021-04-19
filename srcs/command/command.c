@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 00:18:06 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/19 12:11:07 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		read_command(t_command *command, t_term *term)
 	int		key;
 	int		flag;
 
-	(void)command; // 이건 먼가용??
 	write(1, term->name, ft_strlen(term->name));
 	init_term_size(command, term);
 	while(42)

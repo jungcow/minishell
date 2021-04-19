@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 11:46:37 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 13:12:08 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		init_termcap(t_cap *capability)
 	capability->cd = tgetstr("cd", NULL);
 	capability->ce = tgetstr("ce", NULL);
 	capability->dc = tgetstr("dc", NULL);
-	tputs(capability->im, 1000, tputs_wrapper);
+	tputs(capability->im, 1, tputs_wrapper);
 	return (1);
 }
 
