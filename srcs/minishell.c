@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/18 02:09:54 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:46:37 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <curses.h>
 #include <stdlib.h>
 #include "libft.h"
+#include "terminal.h"
 #include "command/command.h"
 
 int		tputs_wrapper(int tc)
@@ -38,7 +39,7 @@ int		init_termcap(t_cap *capability)
 	capability->cd = tgetstr("cd", NULL);
 	capability->ce = tgetstr("ce", NULL);
 	capability->dc = tgetstr("dc", NULL);
-	tputs(capability->im, 1, tputs_wrapper);
+	tputs(capability->im, 1000, tputs_wrapper);
 	return (1);
 }
 
