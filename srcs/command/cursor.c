@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:50:41 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 16:24:55 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:54:33 by jungwkim         ###   ########.fr       */
 /*   Updated: 2021/04/19 16:13:53 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -37,11 +37,10 @@ int		apply_cursor_key(t_command *command, t_term *term, int key)
 			return (-1);
 		command->cursor++;
 		if (term->pos.cur_col == term->pos.col - 1)
-		{
-			term->pos.cur_row += 1;
-			tputs(tgoto(term->cap.cm, 0, term->pos.cur_row), 1, tputs_wrapper);
-		}
-		write(1, &key, sizeof(key));
+			tputs(tgoto(term->cap.cm, 0, ++term->pos.cur_row),
+													1, tputs_wrapper);
+		else
+			write(1, &key, sizeof(key));
 	}
 	return (1);
 }
