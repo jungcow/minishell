@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 14:50:41 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 16:04:18 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:19:58 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ int		apply_history_key(t_command *command, t_term *term, int key)
 
 int		apply_delete_key(t_command *command, t_term *term)
 {
-	char	ch;
+	char	dump;
 
-	// should fix
-	apply_cursor_key(command, term, LEFT_ARROW);
-	delete_string(&command->temp, 0, &ch);
+	if (command->length <= 0)
+		return (1);
+	if (apply_cursor_key(command, term, LEFT_ARROW) == -1)
+		return (-1);
+	delete_string(&command->temp, 0, &dump);
 	tputs(term->cap.dc, 1, tputs_wrapper);
-	command->length--;
 	refresh_command(command, term);
+	command->length--;
 	return (1);
 }

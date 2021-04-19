@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 06:05:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 11:46:45 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:11:56 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_term
 	const char		*name;
 }					t_term;
 
+int					tputs_wrapper(int tc);
 int					get_cursor_pos(t_term *term);
 
 #endif
