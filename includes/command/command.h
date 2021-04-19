@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 11:53:44 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:04:55 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int					read_command(t_command *command, t_term *term);
 int					switch_command(t_command *command, t_term *term, int key);
 void				clear_command(t_command *command);
 int					save_command(t_command *command);
-int					apply_delete_key(t_command *command, t_term *term, int key);
+void				refresh_command(t_command *command, t_term *term);
+int					apply_delete_key(t_command *command, t_term *term);
 int					apply_cursor_key(t_command *command, t_term *term, int key);
 int					apply_quote_key(t_command *command, int key);
 int					apply_general_key(t_command *command, t_term *term, int key);

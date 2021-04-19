@@ -6,12 +6,11 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 12:11:07 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 15:52:56 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include <stdio.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <termcap.h>
@@ -62,7 +61,6 @@ int		switch_command(t_command *command, t_term *term, int key)
 {
 	int		flag;
 
-	(void)term;
 	if (key == LEFT_ARROW ||
 		key == RIGHT_ARROW)
 		flag = apply_cursor_key(command, term, key);
@@ -73,8 +71,7 @@ int		switch_command(t_command *command, t_term *term, int key)
 		flag = apply_history_key(command, term, key);
 	else if (key == QUOTE ||
 			key == DOUBLE_QUOTE)
-		flag = 1;
-		// apply quate key
+		flag = apply_quote_key(command,key);
 	else if (key == CTRL_D ||
 			key == ENTER)
 		flag = apply_end_key(command, key);

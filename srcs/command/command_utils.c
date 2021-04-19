@@ -6,10 +6,11 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 00:15:17 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:02:53 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <termcap.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include "command/command.h"
@@ -65,4 +66,23 @@ void		init_term_size(t_command *command, t_term *term)
 	term->pos.col = win.ws_col;
 	term->pos.row = 1;
 	get_cursor_pos(term);
+}
+
+void	refresh_command(t_command *command, t_term *term)
+{
+	int		i;
+	int		key;
+
+	i = 0;
+	if (command->temp.length != 0)
+	{
+		tputs(term->cap.cd, 1, tputs_wrapper);
+		write(1, command->temp.content, command->temp.length);
+		while (i < command->temp.length)
+		{
+			key = LEFT_ARROW;
+			write(1, &key, sizeof(key));
+			++i;
+		}
+	}
 }
