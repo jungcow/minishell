@@ -6,14 +6,14 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 18:12:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/20 22:48:35 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 23:25:28 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command/command.h"
 #include <fcntl.h>
 #include <unistd.h>
-// cursor.c 에서 호출함
+
 void	get_history(t_history **ptr, int *bottom, int *flag, int key)
 {
 	if (key == UP_ARROW)
@@ -47,7 +47,7 @@ int		init_history(t_history **head, t_history **new, char *line)
 		return (0);
 	init_string(&(*new)->line);
 	init_string(&(*new)->temp);
-	ft_strncpy((*new)->line.content, line, ft_strlen(line)); //history contents
+	ft_strncpy((*new)->line.content, line, ft_strlen(line));
 	(*new)->line.length = ft_strlen(line);
 	(*new)->length = ft_strlen(line);
 	(*new)->cursor = ft_strlen(line);
@@ -103,20 +103,17 @@ int		parse_history(int *history_fd, t_history **head)
 int		add_history(t_command *command)
 {
 	t_history	*new;
-	int			flag;
 
-	if (*(command->head) != NULL && ((*command->command_line)->line.content == NULL
+	if (*(command->head) != NULL && (!((*command->command_line)->line.content)
 				|| *(*command->command_line)->line.content == '\0'))
 		return (1); // 아무 입력 없이 enter 쳤을 시 저장 안함.
 	new = (t_history *)malloc(sizeof(t_history));
 	if (new == NULL)
 		return (0);
-	flag = 1;
-	flag = flag && init_string(&new->line);
-	flag = flag && init_string(&new->temp);
-	if (!flag)
+	if (!init_string(&new->line) || !init_string(&new->temp))
 		return (0);
-	ft_strncpy(new->line.content, (*command->command_line)->line.content, (*command->command_line)->line.length);
+	ft_strncpy(new->line.content, (*command->command_line)->line.content,
+								(*command->command_line)->line.length);
 	new->line.length = (*command->command_line)->line.length;
 	new->length = (*command->command_line)->line.length;
 	new->cursor = (*command->command_line)->line.length;

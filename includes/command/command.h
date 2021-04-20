@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/20 22:40:17 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 23:30:08 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct		s_command
 	int				keywords_size;
 }					t_command;
 
-bool			    init_command(t_command *command, t_history **head);
+bool				init_command(t_command *command, t_history **head);
 int					read_command(t_command *command, t_term *term);
 int					switch_command(t_command *command, t_term *term, int key);
 void				clear_command(t_command *command);
@@ -45,12 +45,15 @@ void				refresh_command(t_command *command, t_term *term);
 int					apply_delete_key(t_command *command, t_term *term);
 int					apply_cursor_key(t_command *command, t_term *term, int key);
 int					apply_quote_key(t_command *command, int key);
-int					apply_general_key(t_command *command, t_term *term, int key);
+int					apply_general_key(t_command *command, t_term *term,
+																	int key);
 int					apply_end_key(t_command *command, int key);
-int					apply_history_key(t_command *command, t_term *term, int key);
+int					apply_history_key(t_command *command, t_term *term,
+																	int key);
 int					add_history(t_command *command);
 void				write_historyfd(t_history *new, int fd);
-void				write_historyline(t_command *command, t_term *term, t_history *history, int flag);
+void				write_historyline(t_command *command, t_term *term,
+												t_history *history, int flag);
 void				init_term_size(t_command *command, t_term *term);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/20 22:00:53 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 23:18:29 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		read_command(t_command *command, t_term *term)
 
 	write(1, term->name, ft_strlen(term->name));
 	init_term_size(command, term);
-	while(42)
+	while (42)
 	{
 		key = 0;
 		flag = read(0, &key, sizeof(key));
@@ -77,7 +77,7 @@ int		switch_command(t_command *command, t_term *term, int key)
 		flag = apply_history_key(command, term, key);
 	else if (key == QUOTE ||
 			key == DOUBLE_QUOTE)
-		flag = apply_quote_key(command,key);
+		flag = apply_quote_key(command, key);
 	else if (key == CTRL_D ||
 			key == ENTER)
 		flag = apply_end_key(command, key);

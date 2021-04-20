@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/20 15:15:18 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 23:17:16 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,13 @@ void		init_term_size(t_command *command, t_term *term)
 
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
 	term->pos.col = win.ws_col;
-	term->pos.row = ((*command->command_line)->line.length + ft_strlen(term->name)) / term->pos.col;
+	term->pos.row = ((*command->command_line)->line.length
+			+ ft_strlen(term->name))
+			/ term->pos.col;
 	get_cursor_pos(term);
 }
 
-void	refresh_command(t_command *command, t_term *term)
+void		refresh_command(t_command *command, t_term *term)
 {
 	int		i;
 	int		key;
@@ -75,8 +77,9 @@ void	refresh_command(t_command *command, t_term *term)
 	i = 0;
 	if ((*command->command_line)->temp.length != 0)
 	{
-		tputs(term->cap.cd, 1, tputs_wrapper);
-		write(1, (*command->command_line)->temp.content, (*command->command_line)->temp.length);
+		tputs(term->cp.cd, 1, tputs_wrapper);
+		write(1, (*command->command_line)->temp.content,
+					(*command->command_line)->temp.length);
 		while (i < (*command->command_line)->temp.length)
 		{
 			key = LEFT_ARROW;
