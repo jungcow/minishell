@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:26:27 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 19:24:57 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/20 23:54:52 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ static int	quote_on(t_command *command, t_term *term)
 {
 	char	ch;
 
-	while (delete_string(&command->temp, 0, &ch))
-		if (!add_string(&command->line, command->line.length, ch))
-			return (-1);
+	while (delete_string(&(*command->command_line)->temp, 0, &ch))
+		add_string(&(*command->command_line)->line,
+				(*command->command_line)->line.length, ch);
+		return (-1);
 	if (apply_general_key(command, term, '\n') == -1)
 		return (-1);
 	command->length = 0;
@@ -32,12 +33,13 @@ static int	quote_off(t_command *command)
 {
 	char	ch;
 
-	while (delete_string(&command->temp, 0, &ch))
-		if (!add_string(&command->line, command->line.length, ch))
-			return (-1);
+	while (delete_string(&(*command->command_line)->temp, 0, &ch))
+		add_string(&(*command->command_line)->line,
+				(*command->command_line)->line.length, ch);
+		return (-1);
 	if (!add_history(command))
 	{
-		clear_history(command->head);
+		clear_historylist(command->head);
 		return (-1);
 	}
 	return (0);

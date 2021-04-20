@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 14:50:41 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 16:54:33 by jungwkim         ###   ########.fr       */
-/*   Updated: 2021/04/19 16:13:53 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
+/*   Updated: 2021/04/20 23:17:50 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +17,27 @@
 
 int		apply_cursor_key(t_command *command, t_term *term, int key)
 {
-	char	ch;
+	char		ch;
+	t_history	*ptr;
 
+	ptr = *command->command_line;
 	init_term_size(command, term);
-	get_cursor_pos(term);
-	if ((command->cursor > 0) && key == LEFT_ARROW)
+	if ((ptr->cursor > 0) && key == LEFT_ARROW)
 	{
-		delete_string(&command->line, command->line.length - 1, &ch);
-		if (!add_string(&command->temp, 0, ch))
+		delete_string(&ptr->line, ptr->line.length - 1, &ch);
+		if (!add_string(&ptr->temp, 0, ch))
 			return (-1);
-		command->cursor--;
+		ptr->cursor--;
 		write(1, &key, sizeof(key));
 	}
-	else if ((command->cursor < command->length) && key == RIGHT_ARROW)
+	else if ((ptr->cursor < ptr->length) && key == RIGHT_ARROW)
 	{
-		delete_string(&command->temp, 0, &ch);
-		if (!add_string(&command->line, command->line.length, ch))
+		delete_string(&ptr->temp, 0, &ch);
+		if (!add_string(&ptr->line, ptr->line.length, ch))
 			return (-1);
-		command->cursor++;
+		ptr->cursor++;
 		if (term->pos.cur_col == term->pos.col - 1)
-			tputs(tgoto(term->cap.cm, 0, ++term->pos.cur_row),
-													1, tputs_wrapper);
+			tputs(tgoto(term->cp.cm, 0, ++term->pos.cur_row), 1, tputs_wrapper);
 		else
 			write(1, &key, sizeof(key));
 	}
@@ -54,11 +53,15 @@ int		apply_history_key(t_command *command, t_term *term, int key)
 	ptr = command->head;
 	flag = 0;
 	if (*(command->head) == NULL)
-		write_historyline(command, term, "", 2);
+		write_historyline(command, term, NULL, 2);
 	else
 	{
 		get_history(ptr, &bottom, &flag, key);
-		write_historyline(command, term, (*ptr)->str, flag);
+		write_historyline(command, term, (*ptr), flag);
+		if (flag == 2)
+			command->command_line = &command->present;
+		else
+			command->command_line = ptr;
 	}
 	return (1);
 }
@@ -67,13 +70,13 @@ int		apply_delete_key(t_command *command, t_term *term)
 {
 	char	dump;
 
-	if (command->length <= 0)
+	if ((*command->command_line)->length <= 0)
 		return (1);
 	if (apply_cursor_key(command, term, LEFT_ARROW) == -1)
 		return (-1);
-	delete_string(&command->temp, 0, &dump);
-	tputs(term->cap.dc, 1, tputs_wrapper);
+	delete_string(&(*command->command_line)->temp, 0, &dump);
+	tputs(term->cp.dc, 1, tputs_wrapper);
 	refresh_command(command, term);
-	command->length--;
+	(*command->command_line)->length--;
 	return (1);
 }

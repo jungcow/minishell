@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 18:31:37 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/20 23:54:25 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		tputs_wrapper(int tc)
 	return (0);
 }
 
-int		init_termcap(t_cap *capability)
+int		init_termcap(t_cp *capability)
 {
 	char	*termtype;
 
@@ -48,24 +48,24 @@ int		init_minishell(t_term *term)
 {
 	struct termios	new_term;
 
-	if (!init_termcap(&term->cap))
+	if (!init_termcap(&term->cp))
 		return (0);
-    tcgetattr(STDIN_FILENO, &term->save_term);
+	tcgetattr(STDIN_FILENO, &term->save_term);
 	new_term = term->save_term;
-    new_term.c_lflag &= ~ICANON;
-    new_term.c_lflag &= ~ECHO;
-    new_term.c_cc[VMIN] = 1;
-    new_term.c_cc[VTIME] = 0;
-    tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
+	new_term.c_lflag &= ~ICANON;
+	new_term.c_lflag &= ~ECHO;
+	new_term.c_cc[VMIN] = 1;
+	new_term.c_cc[VTIME] = 0;
+	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 	return (1);
 }
 
-void	run_minishell()
+void	run_minishell(void)
 {
 	t_term		term;
 	t_command	command;
 	t_history	*head;
-	
+
 	term.name = "seung-jung$>";
 	if (!init_minishell(&term))
 		return ;
@@ -73,19 +73,18 @@ void	run_minishell()
 	if (!init_command(&command, &head))
 		return ;
 	read_command(&command, &term);
-	save_command(&command);
 	
 	printf("\n\nResult : [");
-	for(int i=0; i < command.line.length; ++i)
-		printf("%c", command.line.content[i]);
+	for(int i=0; i < (*command.command_line)->line.length; ++i)
+		printf("%c", (*command.command_line)->line.content[i]);
 	printf("]\n\n\n");
 	
 	clear_command(&command);
-	tputs(term.cap.ei, 1, tputs_wrapper);
+	tputs(term.cp.ei, 1, tputs_wrapper);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }
 
-int		main()
+int		main(void)
 {
 	run_minishell();
 	system("leaks minishell");

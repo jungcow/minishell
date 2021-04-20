@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 06:05:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 18:10:11 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 23:06:37 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct		s_pos
 	int				cur_row;
 }					t_pos;
 
-typedef struct		s_cap
+typedef struct		s_cp
 {
 	char			*cm; //move curser
 	char			*im; //turn on insert mode
@@ -32,14 +32,14 @@ typedef struct		s_cap
 	char			*cd; // delete all lines below the cursor
 	char			*ce; // delete all characters before cursor(one line)
 	char			*dc; // delete one characters at cursors
-}					t_cap;
+}					t_cp;
 
 typedef struct		s_term
 {
-	struct termios	save_term;
-	t_cap			cap;
-	t_pos			pos;
 	const char		*name;
+	struct termios	save_term;
+	t_cp			cp;
+	t_pos			pos;
 }					t_term;
 
 int					tputs_wrapper(int tc);

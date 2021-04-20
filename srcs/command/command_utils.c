@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 18:52:38 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/20 23:55:12 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,29 @@ void		init_term_size(t_command *command, t_term *term)
 
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
 	term->pos.col = win.ws_col;
-	term->pos.row = (command->line.length + ft_strlen(term->name)) / term->pos.col;
+	term->pos.row = ((*command->command_line)->line.length
+			+ ft_strlen(term->name))
+			/ term->pos.col;
 	get_cursor_pos(term);
 }
 
-void	refresh_command(t_command *command, t_term *term)
+void		refresh_command(t_command *command, t_term *term)
 {
 	int		i;
 	int		key;
 
 	i = 0;
-	if (command->temp.length != 0)
+	if ((*command->command_line)->temp.length != 0)
 	{
 		tputs(term->cap.cd, 1, tputs_wrapper);
-		while (i < command->temp.length)
+		while (i < (*command->command_line)->temp.length)
 		{
-			if (command->temp.content[i] != '\n')
-				write(1, command->temp.content + i, 1);
+			if ((*command->command_line)->temp.content[i] != '\n')
+				write(1, (*command->command_line)->temp.content + i, 1);
 			i++;
 		}
 		i = 0;
-		while (i < command->temp.length)
+		while (i < (*command->command_line)->temp.length)
 		{
 			key = LEFT_ARROW;
 			write(1, &key, sizeof(key));

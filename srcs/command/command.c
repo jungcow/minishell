@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 18:58:33 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/20 23:55:33 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,22 @@ bool	init_command(t_command *command, t_history **head)
 
 	command->keywords = NULL;
 	command->keywords_size = 0;
-	command->cursor = 0;
-	command->length = 0;
 	command->quote_status = false;
 	flag = true;
-	flag = flag && init_string(&command->line);
-	flag = flag && init_string(&command->temp);
+	command->present = (t_history *)malloc(sizeof(t_history));
+	if (command->present == NULL)
+		return (false);
+	command->present->length = 0;
+	command->present->cursor = 0;
+	command->present->next = NULL;
+	command->present->before = NULL;
+	flag = flag && init_string(&command->present->line);
+	flag = flag && init_string(&command->present->temp);
 	flag = flag && parse_history(&command->history_fd, head);
 	if (flag == false)
 		clear_command(command);
 	command->head = head;
+	command->command_line = &command->present;
 	return (flag);
 }
 
@@ -43,7 +49,7 @@ int		read_command(t_command *command, t_term *term)
 
 	write(1, term->name, ft_strlen(term->name));
 	init_term_size(command, term);
-	while(42)
+	while (42)
 	{
 		key = 0;
 		flag = read(0, &key, sizeof(key));
@@ -73,6 +79,7 @@ int		switch_command(t_command *command, t_term *term, int key)
 	else if (key == QUOTE ||
 			key == DOUBLE_QUOTE)
 		flag = apply_quote_key(command, term, key);
+		flag = apply_quote_key(command, key);
 	else if (key == CTRL_D ||
 			key == ENTER)
 		flag = apply_end_key(command, term, key);
@@ -94,34 +101,8 @@ void	clear_command(t_command *command)
 	}
 	command->keywords = NULL;
 	command->keywords_size = 0;
-	command->cursor = 0;
-	command->length = 0;
+	command->command_line = NULL;
+	clear_history(&command->present);
+	clear_historylist(command->head);
 	close(command->history_fd);
-	clear_string(&command->line);
-	clear_string(&command->temp);
-	clear_history(command->head);
-}
-
-int		save_command(t_command *command)
-{
-	t_history	*ptr;
-	int			fd;
-	int			index;
-
-	fd = open("./.minish_history", O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (fd < 0)
-		return (0);
-	command->history_fd = fd;
-	ptr = *(command->head);
-	while (ptr->before)
-		ptr = ptr->before;
-	index = 1;
-	while (ptr)
-	{
-		ptr->num = index++;
-		if (!write_historyfile(command, ptr))
-			return (0);
-		ptr = ptr->next;
-	}
-	return (1);
 }
