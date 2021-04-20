@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 18:12:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/20 23:25:28 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/21 00:29:24 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		add_history(t_command *command)
 
 	if (*(command->head) != NULL && (!((*command->command_line)->line.content)
 				|| *(*command->command_line)->line.content == '\0'))
-		return (1); // 아무 입력 없이 enter 쳤을 시 저장 안함.
+		return (1);
 	new = (t_history *)malloc(sizeof(t_history));
 	if (new == NULL)
 		return (0);

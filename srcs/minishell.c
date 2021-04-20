@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/20 23:54:25 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/21 00:31:55 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,10 @@ void	run_minishell(void)
 	if (!init_command(&command, &head))
 		return ;
 	read_command(&command, &term);
-	
 	printf("\n\nResult : [");
 	for(int i=0; i < (*command.command_line)->line.length; ++i)
 		printf("%c", (*command.command_line)->line.content[i]);
 	printf("]\n\n\n");
-	
 	clear_command(&command);
 	tputs(term.cp.ei, 1, tputs_wrapper);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);

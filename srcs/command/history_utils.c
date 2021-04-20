@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 21:03:59 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/20 23:19:37 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/21 00:29:11 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		write_historyline(t_command *command, t_term *term,
 	tputs(term->cp.cd, 1, tputs_wrapper);
 	if (flag)
 	{
-		write(1, "\a", 1); //write bell sound
+		write(1, "\a", 1);
 		if (flag == 2)
 			write_historyfd(command->present, 1);
 		else

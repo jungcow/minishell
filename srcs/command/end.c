@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:26:27 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/20 23:54:52 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/21 00:28:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ static int	quote_on(t_command *command, t_term *term)
 	while (delete_string(&(*command->command_line)->temp, 0, &ch))
 		add_string(&(*command->command_line)->line,
 				(*command->command_line)->line.length, ch);
-		return (-1);
 	if (apply_general_key(command, term, '\n') == -1)
 		return (-1);
-	command->length = 0;
-	command->cursor = 0;
+	(*command->command_line)->length = 0;
+	(*command->command_line)->cursor = 0;
 	write(1, ">", 1);
 	return (1);
 }
@@ -36,7 +35,6 @@ static int	quote_off(t_command *command)
 	while (delete_string(&(*command->command_line)->temp, 0, &ch))
 		add_string(&(*command->command_line)->line,
 				(*command->command_line)->line.length, ch);
-		return (-1);
 	if (!add_history(command))
 	{
 		clear_historylist(command->head);
