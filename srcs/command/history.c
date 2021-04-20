@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 18:12:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/20 22:41:37 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 22:48:35 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	clear_history(t_history **contents)
 	(*contents)->cursor = 0;
 	(*contents)->next = NULL;
 	(*contents)->before = NULL;
+	free(*contents);
 }
 
 int		parse_history(int *history_fd, t_history **head)
