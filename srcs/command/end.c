@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:26:27 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 12:46:35 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/20 15:22:00 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int		apply_end_key(t_command *command, int key)
 
 	if (key == ENTER)
 	{
-		while (delete_string(&command->temp, 0, &ch))
-			add_string(&command->line, command->line.length, ch);
+		while (delete_string(&(*command->command_line)->temp, 0, &ch))
+			add_string(&(*command->command_line)->line, (*command->command_line)->line.length, ch);
 		printf("\n\nResult : [");
-		for(int i=0; i < command->line.length; ++i)
-			printf("%c", command->line.content[i]);
+		for(int i=0; i < (*command->command_line)->line.length; ++i)
+			printf("%c", (*command->command_line)->line.content[i]);
 		printf("]\n\n\n");
-		//command->cursor = 0;
-		//command->length = 0;
+		//(*command->command_line)->cursor = 0;
+		//(*command->command_line)->length = 0;
 		if (!add_history(command))
 		{
 			clear_history(command->head);

@@ -6,65 +6,54 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 21:03:59 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 18:37:36 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 22:41:20 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command/command.h"
 #include <termcap.h>
 
-int			write_historyfile(t_command *command, t_history *new)
+void	write_historyfd(t_history *new, int fd)
 {
-	char	*num_str;
-	int		num;
-
-	num_str = ft_itoa(new->num);
-	if (num_str == NULL)
-		return (0);
-	num = 5 - ft_strlen(num_str);
-	while (num--)
-		write(command->history_fd, " ", 1);
-	write(command->history_fd, num_str, ft_strlen(num_str));
-	write(command->history_fd, "  ", 2);
-	write(command->history_fd, new->str, ft_strlen(new->str));
-	write(command->history_fd, "\n", 1);
-	free(num_str);
-	return (1);
+	write(fd, new->line.content, new->line.length);
+	write(fd, new->temp.content, new->temp.length);
+	if (fd > 2)
+		write(fd, "\n", 1);
 }
 
 static void	get_command_lines(t_command *command, t_term *term,
-					char *prev_str, int prev_flag)
+					t_history *prev_history, int prev_flag)
 {
 	init_term_size(command, term);
 	if (!prev_flag)
-		term->pos.row = (command->line.length + ft_strlen(term->name))
+		term->pos.row = (command->present->line.length + ft_strlen(term->name))
 						/ term->pos.col;
 	else
-		term->pos.row = (ft_strlen(prev_str) + ft_strlen(term->name))
+		term->pos.row = (prev_history->line.length + ft_strlen(term->name))
 						/ term->pos.col;
 }
 
-static void	save_prev(char *str, char **prev_str, int flag, int *prev_flag)
+static void	save_prev(t_history *history, t_history **prev_history, int flag, int *prev_flag)
 {
 	if (flag == 2)
 	{
 		*prev_flag = 0;
-		(void)prev_str;
+		(void)prev_history;
 	}
 	else
 	{
 		*prev_flag = 1;
-		*prev_str = str;
+		*prev_history = history;
 	}
 }
 
 void		write_historyline(t_command *command, t_term *term,
-							char *str, int flag)
+							t_history *history, int flag)
 {
 	static int	prev_flag;
-	static char *prev_str;
+	static t_history *prev_history;
 
-	get_command_lines(command, term, prev_str, prev_flag);
+	get_command_lines(command, term, prev_history, prev_flag);
 	get_cursor_pos(term);
 	term->pos.cur_row = term->pos.cur_row - term->pos.row;
 	tputs(tgoto(term->cap.cm, ft_strlen(term->name), term->pos.cur_row),
@@ -75,13 +64,35 @@ void		write_historyline(t_command *command, t_term *term,
 		write(1, "\a", 1); //write bell sound
 		if (flag == 2)
 		{
-			write(1, command->line.content, command->line.length);
-			write(1, command->temp.content, command->temp.length);
+			write_historyfd(command->present, 1);
+//			write(1, command->present->line.content, command->present->line.length);
+//			write(1, command->present->temp.content, command->present->temp.length);
 		}
 		else
-			write(1, str, ft_strlen(str));
+		{
+			write_historyfd(history, 1);
+//			write(1, history->line.content, history->line.length);
+//			write(1, history->temp.content, history->temp.length);
+		}
 	}
 	else
-		write(1, str, ft_strlen(str));
-	save_prev(str, &prev_str, flag, &prev_flag);
+	{
+		write_historyfd(history, 1);
+//		write(1, history->line.content, history->line.length);
+//		write(1, history->temp.content, history->temp.length);
+	}
+	save_prev(history, &prev_history, flag, &prev_flag);
+}
+
+void		clear_historylist(t_history **head)
+{
+	t_history	*temp;
+
+	while (*head)
+	{
+		temp = *head;
+		*head = (*head)->before;
+		clear_history(&temp);
+	}
+	head = NULL;
 }

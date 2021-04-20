@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 06:05:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/19 18:10:11 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 15:11:00 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ typedef struct		s_cap
 
 typedef struct		s_term
 {
+	const char		*name;
 	struct termios	save_term;
 	t_cap			cap;
 	t_pos			pos;
-	const char		*name;
 }					t_term;
 
 int					tputs_wrapper(int tc);

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 20:19:53 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 22:06:22 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ void	run_minishell()
 	// error
 	if (!init_command(&command, &head))
 		return ;
-	command->command_line = &command->present;
 	read_command(&command, &term);
-	save_command(&command);
 	clear_command(&command);
 	tputs(term.cap.ei, 1, tputs_wrapper);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);

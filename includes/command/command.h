@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 20:35:19 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 22:40:17 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ typedef struct		s_command
 {
 	t_history		**head;
 	t_history		*present;
-	t_history		*command_line;
+	t_history		**command_line;
 	int				history_fd;
 	char			**keywords;
 	int				keywords_size;
-//	int				cursor;
-//	int				length;
 }					t_command;
 
 bool			    init_command(t_command *command, t_history **head);
@@ -51,8 +49,8 @@ int					apply_general_key(t_command *command, t_term *term, int key);
 int					apply_end_key(t_command *command, int key);
 int					apply_history_key(t_command *command, t_term *term, int key);
 int					add_history(t_command *command);
-int					write_historyfile(t_command *command, t_history *new);
-void				write_historyline(t_command *command, t_term *term, char *str, int flag);
+void				write_historyfd(t_history *new, int fd);
+void				write_historyline(t_command *command, t_term *term, t_history *history, int flag);
 void				init_term_size(t_command *command, t_term *term);
 
 #endif

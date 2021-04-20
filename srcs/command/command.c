@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 20:36:08 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/20 22:00:53 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ bool	init_command(t_command *command, t_history **head)
 		return (false);
 	command->present->length = 0;
 	command->present->cursor = 0;
-	command->present->num = -1;
 	command->present->next = NULL;
 	command->present->before = NULL;
 	flag = flag && init_string(&command->present->line);
@@ -38,6 +37,7 @@ bool	init_command(t_command *command, t_history **head)
 	if (flag == false)
 		clear_command(command);
 	command->head = head;
+	command->command_line = &command->present;
 	return (flag);
 }
 
@@ -99,34 +99,8 @@ void	clear_command(t_command *command)
 	}
 	command->keywords = NULL;
 	command->keywords_size = 0;
-	command->cursor = 0;
-	command->length = 0;
+	command->command_line = NULL;
+	clear_history(&command->present);
+	clear_historylist(command->head);
 	close(command->history_fd);
-	clear_string(&command->line);
-	clear_string(&command->temp);
-	clear_history(command->head);
-}
-
-int		save_command(t_command *command)
-{
-	t_history	*ptr;
-	int			fd;
-	int			index;
-
-	fd = open("./.minish_history", O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (fd < 0)
-		return (0);
-	command->history_fd = fd;
-	ptr = *(command->head);
-	while (ptr->before)
-		ptr = ptr->before;
-	index = 1;
-	while (ptr)
-	{
-		ptr->num = index++;
-		if (!write_historyfile(command, ptr))
-			return (0);
-		ptr = ptr->next;
-	}
-	return (1);
 }
