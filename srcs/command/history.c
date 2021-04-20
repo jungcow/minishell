@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 18:12:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/18 00:18:31 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/19 20:26:03 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	get_history(t_history **ptr, int *bottom, int *flag, int key)
 
 int		init_history(t_history **head, t_history **new, char *line)
 {
-	if (!line || !(*line))
+	if (!line | !(*line))
 		return (1);
 	*new = (t_history *)malloc(sizeof(t_history));
 	if (*new == NULL)
@@ -51,7 +51,10 @@ int		init_history(t_history **head, t_history **new, char *line)
 	while (ft_isdigit(*line))
 		line++;
 	line += 2; // jump two spaces
-	(*new)->str = ft_strdup(line); //history contents
+	init_string(&(*new)->line);
+	init_string(&(*new)->temp);
+	ft_strncpy((*new)->line.content, line, ft_strlen(line)); //history contents
+	(*new)->length = 0;
 	(*new)->before = NULL;
 	(*new)->next = NULL;
 	if (*head != NULL)
@@ -86,7 +89,7 @@ int		parse_history(int *history_fd, t_history **head)
 	t_history	*new;
 
 	line = NULL;
-	*head = NULL;
+//	*head = NULL;
 	fd = open("./.minish_history", O_CREAT | O_RDWR, 0644);
 	if (fd < 0)
 		return (0);

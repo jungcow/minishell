@@ -6,18 +6,23 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 18:39:16 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/17 17:05:17 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/19 20:35:28 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HISTORY_H
 # define HISTORY_H
 
+# include "libft.h"
+
 typedef struct			s_history
 {
-	char				*str;
+	t_string			line;
+	t_string			temp;
+	int					length;
+	int					cursor;
 	int					num;
-	int					fd;
+//	int					fd;
 	struct s_history	*next;
 	struct s_history	*before;
 }						t_history;

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 16:23:36 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 20:36:08 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,17 @@ bool	init_command(t_command *command, t_history **head)
 
 	command->keywords = NULL;
 	command->keywords_size = 0;
-	command->cursor = 0;
-	command->length = 0;
 	flag = true;
-	flag = flag && init_string(&command->line);
-	flag = flag && init_string(&command->temp);
+	command->present = (t_history *)malloc(sizeof(t_history));
+	if (command->present == NULL)
+		return (false);
+	command->present->length = 0;
+	command->present->cursor = 0;
+	command->present->num = -1;
+	command->present->next = NULL;
+	command->present->before = NULL;
+	flag = flag && init_string(&command->present->line);
+	flag = flag && init_string(&command->present->temp);
 	flag = flag && parse_history(&command->history_fd, head);
 	if (flag == false)
 		clear_command(command);

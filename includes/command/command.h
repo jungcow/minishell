@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/19 16:12:06 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/19 20:35:19 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,19 @@
 # define ENTER 10
 # define CTRL_D 4
 
-# include "libft.h"
 # include "terminal.h"
 # include "command/history.h"
 
 typedef struct		s_command
 {
 	t_history		**head;
+	t_history		*present;
+	t_history		*command_line;
 	int				history_fd;
 	char			**keywords;
 	int				keywords_size;
-	t_string		line;
-	t_string		temp;
-	int				cursor;
-	int				length;
+//	int				cursor;
+//	int				length;
 }					t_command;
 
 bool			    init_command(t_command *command, t_history **head);
