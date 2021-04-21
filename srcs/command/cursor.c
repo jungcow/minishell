@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/20 23:17:50 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/21 15:06:57 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,16 @@ int		apply_delete_key(t_command *command, t_term *term)
 {
 	char	dump;
 
-	if ((*command->command_line)->length <= 0)
+	init_term_size(command, term);
+	if ((*command->command_line)->line.length <= 0)
 		return (1);
 	if (apply_cursor_key(command, term, LEFT_ARROW) == -1)
 		return (-1);
 	delete_string(&(*command->command_line)->temp, 0, &dump);
-	tputs(term->cp.dc, 1, tputs_wrapper);
+	if (term->pos.cur_col == 1)
+		tputs(tgoto(term->cp.cm, term->pos.col, --term->pos.cur_row), 1, tputs_wrapper);
+	else
+		tputs(term->cp.dc, 1, tputs_wrapper);
 	refresh_command(command, term);
 	(*command->command_line)->length--;
 	return (1);
