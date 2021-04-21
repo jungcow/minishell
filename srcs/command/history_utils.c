@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 21:03:59 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/21 15:55:36 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 01:29:00 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ void		write_historyfd(t_history *new, int fd)
 static void	get_command_lines(t_command *command, t_term *term,
 					t_history *prev_history, int prev_flag)
 {
-
 	init_term_size(command, term);
 	if (!prev_flag)
-		term->pos.row = (command->present->line.length + ft_strlen(term->name) - 1)
+		term->pos.row = (command->present->line.length
+						+ ft_strlen(term->name) - 1)
 						/ term->pos.col;
 	else
-	{
-		term->pos.row = (prev_history->line.length + ft_strlen(term->name) - 1)
+		term->pos.row = (prev_history->line.length
+						+ ft_strlen(term->name) - 1)
 						/ term->pos.col;
-	}
 }
 
 static void	save_prev(t_history *history, t_history **prev_history,

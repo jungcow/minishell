@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 18:12:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/21 00:29:24 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 01:26:56 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-void	get_history(t_history **ptr, int *bottom, int *flag, int key)
+int		get_history(t_command *command, t_history **ptr, int *bottom, int key)
 {
 	if (key == UP_ARROW)
 	{
 		if (!(*bottom))
+		{
+			*ptr = *command->head;
 			*bottom += 1;
+		}
 		else if ((*ptr)->before && *bottom)
-			(*ptr) = (*ptr)->before;
+			*ptr = (*ptr)->before;
 		else
-			*flag = 1;
+			return (1);
 	}
 	else if (key == DOWN_ARROW)
 	{
@@ -33,9 +36,10 @@ void	get_history(t_history **ptr, int *bottom, int *flag, int key)
 		{
 			if (*bottom)
 				*bottom -= 1;
-			*flag = 2;
+			return (2);
 		}
 	}
+	return (0);
 }
 
 int		init_history(t_history **head, t_history **new, char *line)
@@ -45,8 +49,8 @@ int		init_history(t_history **head, t_history **new, char *line)
 	*new = (t_history *)malloc(sizeof(t_history));
 	if (*new == NULL)
 		return (0);
-	init_string(&(*new)->line);
-	init_string(&(*new)->temp);
+	if (!init_string(&(*new)->line) || !init_string(&(*new)->temp))
+		return (0);
 	ft_strncpy((*new)->line.content, line, ft_strlen(line));
 	(*new)->line.length = ft_strlen(line);
 	(*new)->length = ft_strlen(line);
@@ -60,17 +64,6 @@ int		init_history(t_history **head, t_history **new, char *line)
 	}
 	*head = *new;
 	return (1);
-}
-
-void	clear_history(t_history **contents)
-{
-	clear_string(&(*contents)->line);
-	clear_string(&(*contents)->temp);
-	(*contents)->length = 0;
-	(*contents)->cursor = 0;
-	(*contents)->next = NULL;
-	(*contents)->before = NULL;
-	free(*contents);
 }
 
 int		parse_history(int *history_fd, t_history **head)
@@ -127,4 +120,15 @@ int		add_history(t_command *command)
 	*(command->head) = new;
 	write_historyfd(new, command->history_fd);
 	return (1);
+}
+
+void	clear_history(t_history **contents)
+{
+	clear_string(&(*contents)->line);
+	clear_string(&(*contents)->temp);
+	(*contents)->length = 0;
+	(*contents)->cursor = 0;
+	(*contents)->next = NULL;
+	(*contents)->before = NULL;
+	free(*contents);
 }

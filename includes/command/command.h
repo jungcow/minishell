@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/20 23:54:02 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 01:26:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ void				write_historyfd(t_history *new, int fd);
 void				write_historyline(t_command *command, t_term *term,
 												t_history *history, int flag);
 void				init_term_size(t_command *command, t_term *term);
+int					get_history(t_command *command, t_history **ptr,
+							int *bottom, int key);
 
 #endif

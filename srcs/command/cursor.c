@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/21 23:49:00 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 01:22:14 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,21 @@ int		apply_cursor_key(t_command *command, t_term *term, int key)
 
 int		apply_history_key(t_command *command, t_term *term, int key)
 {
-	static t_history	**ptr;
+	static t_history	*ptr;
 	static int			bottom;
 	int					flag;
 
-	ptr = command->head;
 	flag = 0;
 	if (*(command->head) == NULL)
 		write_historyline(command, term, NULL, 2);
 	else
 	{
-		get_history(ptr, &bottom, &flag, key);
-		write_historyline(command, term, (*ptr), flag);
+		flag = get_history(command, &ptr, &bottom, key);
+		write_historyline(command, term, ptr, flag);
 		if (flag == 2)
 			command->command_line = &command->present;
 		else
-			command->command_line = ptr;
+			command->command_line = &ptr;
 	}
 	return (1);
 }
