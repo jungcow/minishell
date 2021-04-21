@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/21 00:31:55 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 00:02:26 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int		init_termcap(t_cp *capability)
 	capability->cd = tgetstr("cd", NULL);
 	capability->ce = tgetstr("ce", NULL);
 	capability->dc = tgetstr("dc", NULL);
-	tputs(capability->im, 1, tputs_wrapper);
 	return (1);
 }
 
@@ -78,7 +77,6 @@ void	run_minishell(void)
 		printf("%c", (*command.command_line)->line.content[i]);
 	printf("]\n\n\n");
 	clear_command(&command);
-	tputs(term.cp.ei, 1, tputs_wrapper);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }
 
