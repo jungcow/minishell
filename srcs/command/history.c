@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 18:12:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/22 01:26:56 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:26:54 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		get_history(t_command *command, t_history **ptr, int *bottom, int key)
 	}
 	else if (key == DOWN_ARROW)
 	{
-		if ((*ptr)->next)
+		if (*bottom && (*ptr)->next)
 			(*ptr) = (*ptr)->next;
 		else
 		{
