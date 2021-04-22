@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/22 00:22:25 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:32:04 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	init_command(t_command *command, t_history **head)
 	flag = flag && init_string(&command->present->line);
 	flag = flag && init_string(&command->present->temp);
 	flag = flag && parse_history(&command->history_fd, head);
+	flag = flag && add_string(&command->present->temp, 0, ' ');
 	if (flag == false)
 		clear_command(command);
 	command->head = head;

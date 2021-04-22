@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/21 00:26:53 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 17:30:21 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ void		refresh_command(t_command *command, t_term *term)
 	int		key;
 
 	i = 0;
-	if ((*command->command_line)->temp.length != 0)
+	if ((*command->command_line)->temp.length > 0)
 	{
+		key = LEFT_ARROW;
+		write(1, " ", 1);
+		write(1, &key, sizeof(key));
 		tputs(term->cp.cd, 1, tputs_wrapper);
 		while (i < (*command->command_line)->temp.length)
 		{
@@ -87,7 +90,6 @@ void		refresh_command(t_command *command, t_term *term)
 		i = 0;
 		while (i < (*command->command_line)->temp.length)
 		{
-			key = LEFT_ARROW;
 			write(1, &key, sizeof(key));
 			++i;
 		}
