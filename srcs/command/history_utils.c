@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 21:03:59 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/22 03:40:34 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 16:12:55 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	get_command_lines(t_command *command, t_term *term,
 {
 	int		command_line_len;
 	int		name_len;
+
 	init_term_size(command, term);
 	name_len = ft_strlen(term->name);
 	if (!prev_flag)
@@ -33,8 +34,11 @@ static void	get_command_lines(t_command *command, t_term *term,
 	else
 		command_line_len = prev_history->line.length;
 	term->pos.row = (command_line_len + name_len - 1) / term->pos.col;
-//	if ((name_len) / term->pos.col >= 1)
-//		term->pos.row -= (name_len) / term->pos.col; <- 이부분은 name_len이 한 줄이 넘어갈 때에 문제를 해결한 것
+	term->pos.row -= name_len / term->pos.col;
+	if (name_len % term->pos.col == 0)
+		if (command_line_len == 0)
+			if (term->pos.cur_col == 0)
+				term->pos.row += 1;
 }
 
 static void	save_prev(t_history *history, t_history **prev_history,
@@ -57,17 +61,9 @@ void		write_historyline(t_command *command, t_term *term,
 {
 	static int			prev_flag;
 	static t_history	*prev_history;
-//	int					name_col;
 
 	get_command_lines(command, term, prev_history, prev_flag);
-	term->pos.cur_row = term->pos.cur_row - term->pos.row;
-//	if ((ft_strlen(term->name)) % term->pos.col == 0)
-//	{
-//		name_col = 0;
-	//	term->pos.cur_row += 1;
-//	}
-//	else
-//		name_col = ft_strlen(term->name);
+	term->pos.cur_row -= term->pos.row;
 	tputs(tgoto(term->cp.cm, ft_strlen(term->name) % term->pos.col, term->pos.cur_row), 1, tputs_wrapper);
 	tputs(term->cp.cd, 1, tputs_wrapper);
 	if (flag)
