@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:10:56 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/20 23:54:37 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 19:13:43 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int		apply_general_key(t_command *command, t_term *term, int key)
 		(*command->command_line)->length++;
 		(*command->command_line)->cursor++;
 		write(1, &key, 1);
+		key = LEFT_ARROW;
+		write(1, "  ", 1);
+		write(1, &key, sizeof(key));
 		refresh_command(command, term);
 	}
 	return (1);

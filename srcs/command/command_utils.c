@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/21 00:26:53 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/22 19:17:47 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,12 @@ void		refresh_command(t_command *command, t_term *term)
 	int		key;
 
 	i = 0;
-	if ((*command->command_line)->temp.length != 0)
+	if ((*command->command_line)->temp.length > 0)
 	{
 		tputs(term->cp.cd, 1, tputs_wrapper);
 		while (i < (*command->command_line)->temp.length)
 		{
-			if ((*command->command_line)->temp.content[i] != '\n')
-				write(1, (*command->command_line)->temp.content + i, 1);
+			write(1, (*command->command_line)->temp.content + i, 1);
 			i++;
 		}
 		i = 0;

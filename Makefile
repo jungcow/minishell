@@ -5,6 +5,19 @@ INC = -I ./includes -I ./libft
 CFLAGS = -Wall -Werror -Wextra
 LIB = -L./libft -lft $(CURSES)
 
+##########################################################
+# Builtin Part                                           #
+##########################################################
+ECHO = ./srcs/builtin/echo
+ECHO_SRCS = $(addprefix ./srcs/builtin/srcs/echo/, \
+				echo.c \
+			)
+ECHO_OBJS = $(ECHO_SRCS:.c=.o)
+
+
+##########################################################
+# Command Part                                           #
+##########################################################
 COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				command.c \
 				command_utils.c \
@@ -23,21 +36,34 @@ OBJS = $(SRCS:.c=.o)
 %.o : %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
+
+
+##########################################################
+# General Rule                                           #
+##########################################################
+
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(ECHO)
 	make build_libft
 	$(CC) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
 
-build_libft :
+
+$(ECHO) : $(ECHO_OBJS)
+	make build_libft
+	$(CC) $(ECHO_OBJS) $(LIB) $(CFLAGS) -o $(ECHO)
+
+build_libft : 
 	make -C ./libft
 
 clean :
 	make -C ./libft clean
+	rm -rf $(ECHO_OBJS)
 	rm -rf $(OBJS)
 
 fclean : clean
 	make -C ./libft fclean
+	rm -rf $(ECHO)
 	rm -rf $(NAME)
 
 re : fclean all
