@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/24 13:37:13 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 14:28:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include "command/command.h"
 
-int		load_command(t_command *command, char *str, int flag, int bell)
+int			load_command(t_command *command, char *str, int flag, int bell)
 {
 	int		i;
 
@@ -43,7 +43,7 @@ int		load_command(t_command *command, char *str, int flag, int bell)
 	return (1);
 }
 
-int		change_command(t_command *command, int *flag, int key)
+int			change_command(t_command *command, int *flag, int key)
 {
 	if (key == UP_ARROW)
 	{
@@ -68,7 +68,7 @@ int		change_command(t_command *command, int *flag, int key)
 	return (0);
 }
 
-int		save_command(t_command *command, char **str, int flag)
+int			save_command(t_command *command, char **str, int flag)
 {
 	if (flag)
 	{

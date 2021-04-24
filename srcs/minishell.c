@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 03:02:35 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 14:14:08 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	run_minishell(void)
 		printf("%c", command.line.content[i]);
 	printf("]\n\n\n");
 	clear_command(&command);
-	write_historyfile(command.history);
-	clear_history(command.history);
+	write_historyfile(command.history, command.history_fd);
+	clear_history(command.history, command.history_fd);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }
 
