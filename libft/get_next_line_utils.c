@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 01:10:23 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/01/12 02:17:58 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/23 14:40:30 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char		*ft_strndup(char *str, ssize_t idx)
 
 	i = 0;
 	ptr = (char *)malloc(sizeof(char) * (idx + 1));
-	if (str == 0)
+	if (ptr == NULL || str == NULL)
 		return (0);
 	while (idx--)
 	{
@@ -76,7 +76,7 @@ int			check_buffer(char *str, ssize_t len)
 	i = 0;
 	while (i < len)
 	{
-		if (str[i] == '\n')
+		if (str[i] == 0)
 			return (i);
 		i++;
 	}
@@ -88,12 +88,17 @@ int			alloc_line(char **line, t_backup *backup, ssize_t flag)
 	char *ptr;
 
 	backup->sum -= flag + 1;
-	if (!(*line = ft_strndup(backup->str, flag)))
+	*line = ft_strndup(backup->str, flag);
+	if (!(*line))
 		return (0);
-	if (!(ptr = ft_strndup(backup->str + flag + 1, backup->sum)))
+	//if (!(ptr = ft_strndup(backup->str + flag + 1, backup->sum)))
+	ptr = ft_strndup(backup->str + flag + 1, backup->sum);
+	if (!ptr)
 		return (0);
 	free(backup->str);
-	if (!(backup->tmp = (char *)malloc(sizeof(char) * backup->sum)))
+	//if (!(backup->tmp = (char *)malloc(sizeof(char) * backup->sum)))
+	backup->tmp = (char *)malloc(sizeof(char) * backup->sum);
+	if (!backup->tmp)
 		return (0);
 	ft_memcpy(backup->tmp, ptr, backup->sum);
 	free(ptr);

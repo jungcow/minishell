@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/22 19:14:17 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/23 20:28:12 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include "command/command.h"
 
-bool	init_command(t_command *command, t_history **head)
+bool	init_command(t_command *command)
 {
 	bool		flag;
 
@@ -25,20 +25,10 @@ bool	init_command(t_command *command, t_history **head)
 	command->keywords_size = 0;
 	command->quote_status = false;
 	flag = true;
-	command->present = (t_history *)malloc(sizeof(t_history));
-	if (command->present == NULL)
-		return (false);
-	command->present->length = 0;
-	command->present->cursor = 0;
-	command->present->next = NULL;
-	command->present->before = NULL;
-	flag = flag && init_string(&command->present->line);
-	flag = flag && init_string(&command->present->temp);
-	flag = flag && parse_history(&command->history_fd, head);
+	flag = flag && init_string(&command->line);
+	flag = flag && init_string(&command->temp);
 	if (flag == false)
 		clear_command(command);
-	command->head = head;
-	command->command_line = &command->present;
 	return (flag);
 }
 
@@ -48,7 +38,6 @@ int		read_command(t_command *command, t_term *term)
 	int		flag;
 
 	write(1, term->name, ft_strlen(term->name));
-	init_term_size(command, term);
 	while (42)
 	{
 		key = 0;
@@ -100,8 +89,6 @@ void	clear_command(t_command *command)
 	}
 	command->keywords = NULL;
 	command->keywords_size = 0;
-	command->command_line = NULL;
-	clear_history(&command->present);
-	clear_historylist(command->head);
-	close(command->history_fd);
+	clear_string(&command->line);
+	clear_string(&command->temp);
 }

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/22 00:34:31 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 03:02:35 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,23 @@ void	run_minishell(void)
 {
 	t_term		term;
 	t_command	command;
-	t_history	*head;
 
 	term.name = "seung-jung$>";
 	if (!init_minishell(&term))
 		return ;
 	// error
-	if (!init_command(&command, &head))
+	if (!init_history(&command))
+		return ;
+	if (!init_command(&command))
 		return ;
 	read_command(&command, &term);
 	printf("\n\nResult : [");
-	for(int i=0; i < (*command.command_line)->line.length; ++i)
-		printf("%c", (*command.command_line)->line.content[i]);
+	for(int i=0; i < command.line.length; ++i)
+		printf("%c", command.line.content[i]);
 	printf("]\n\n\n");
 	clear_command(&command);
+	write_historyfile(command.history);
+	clear_history(command.history);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }
 

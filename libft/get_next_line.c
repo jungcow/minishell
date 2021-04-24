@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:40:05 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/16 22:59:34 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/23 14:36:55 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int			get_next_line(int fd, char **line)
 	int					flag;
 	int					value;
 
-	if (line == 0 || BUFFER_SIZE == 0 || fd < 0)
+	if (line == 0 || BUFFER_SIZE <= 0 || fd < 0)
 		return (-1);
 	if (!(ptr = find_buffer(fd, &backup)))
 		return (-1);

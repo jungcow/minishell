@@ -25,7 +25,7 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				general.c \
 				end.c \
 				history.c \
-				history_utils.c \
+				term_utils.c \
 				)
 
 SRCS = ./srcs/minishell.c \

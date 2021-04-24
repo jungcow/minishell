@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/22 19:17:47 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:37:13 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,58 +15,77 @@
 #include <unistd.h>
 #include "command/command.h"
 
-static int	ft_nbrlen(int num)
+int		load_command(t_command *command, char *str, int flag, int bell)
 {
 	int		i;
 
-	i = 1;
-	while (num >= 10)
+	if (bell == 1 || bell == 2)
+		write(0, "\a", 1);
+	if (flag == 0 && str == NULL)
+		return (1);
+	i = -1;
+	if (flag == 0)
 	{
-		num /= 10;
-		i++;
+		while (++i < (int)ft_strlen(str))
+			if (!add_string(&command->line, command->line.length, str[i]))
+				return (0);
 	}
-	return (i);
-}
-
-int			get_cursor_pos(t_term *term)
-{
-	int		a;
-	int		i;
-	int		ret;
-	int		temp;
-	char	buf[16];
-
-	a = 0;
-	i = 0;
-	temp = 0;
-	write(STDIN_FILENO, "\033[6n", 4);
-	ret = read(0, buf, 16);
-	buf[ret] = '\0';
-	while (buf[++i])
-		if (buf[i] >= '0' && buf[i] <= '9')
-		{
-			if (a++ == 0)
-				term->pos.cur_row = ft_atoi(&buf[i]) - 1;
-			else
-			{
-				temp = ft_atoi(&buf[i]);
-				term->pos.cur_col = temp - 1;
-			}
-			i += ft_nbrlen(temp) - 1;
-		}
+	else
+	{
+		while (++i < (int)ft_strlen(command->ptr->str))
+			if (!add_string(&command->line, command->line.length,
+											command->ptr->str[i]))
+				return (0);
+	}
+	command->length = command->line.length;
+	command->cursor = command->line.length;
+	write(1, command->line.content, command->line.length);
 	return (1);
 }
 
-void		init_term_size(t_command *command, t_term *term)
+int		change_command(t_command *command, int *flag, int key)
 {
-	struct winsize	win;
+	if (key == UP_ARROW)
+	{
+		if (*flag == 0 && command->ptr)
+			*flag = 1;
+		else if (*flag && command->ptr && command->ptr->before)
+			command->ptr = command->ptr->before;
+		else
+			return (1);
+	}
+	else if (key == DOWN_ARROW)
+	{
+		if (*flag && command->ptr && command->ptr->next)
+			command->ptr = command->ptr->next;
+		else
+		{
+			if (*flag)
+				*flag = 0;
+			return (2);
+		}
+	}
+	return (0);
+}
 
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
-	term->pos.col = win.ws_col;
-	term->pos.row = ((*command->command_line)->line.length
-			+ ft_strlen(term->name))
-			/ term->pos.col;
-	get_cursor_pos(term);
+int		save_command(t_command *command, char **str, int flag)
+{
+	if (flag)
+	{
+		free(command->ptr->str);
+		command->ptr->str = ft_strndup(command->line.content,
+											command->line.length);
+		if (command->ptr->str == NULL)
+			return (0);
+	}
+	else
+	{
+		free(*str);
+		*str = ft_strndup(command->line.content, command->line.length);
+		if (*str == NULL)
+			return (0);
+	}
+	return (1);
 }
 
 void		refresh_command(t_command *command, t_term *term)
@@ -75,16 +94,16 @@ void		refresh_command(t_command *command, t_term *term)
 	int		key;
 
 	i = 0;
-	if ((*command->command_line)->temp.length > 0)
+	if (command->temp.length > 0)
 	{
 		tputs(term->cp.cd, 1, tputs_wrapper);
-		while (i < (*command->command_line)->temp.length)
+		while (i < command->temp.length)
 		{
-			write(1, (*command->command_line)->temp.content + i, 1);
+			write(1, command->temp.content + i, 1);
 			i++;
 		}
 		i = 0;
-		while (i < (*command->command_line)->temp.length)
+		while (i < command->temp.length)
 		{
 			key = LEFT_ARROW;
 			write(1, &key, sizeof(key));

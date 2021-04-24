@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/22 01:26:46 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:27:57 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,36 @@
 
 typedef struct		s_command
 {
-	t_history		**head;
-	t_history		*present;
-	t_history		**command_line;
-	int				history_fd;
+	t_history		*history;
+	t_history		*ptr;
+	t_string		line;
+	t_string		temp;
+	int				cursor;
+	int				length;
 	char			**keywords;
 	int				keywords_size;
 	bool			quote_status;
 }					t_command;
 
-bool				init_command(t_command *command, t_history **head);
+/*
+**	control_command
+*/
+bool				init_command(t_command *command);
 int					read_command(t_command *command, t_term *term);
 int					switch_command(t_command *command, t_term *term, int key);
 void				clear_command(t_command *command);
-int					save_command(t_command *command);
+
+/*
+**	command_utils
+*/
 void				refresh_command(t_command *command, t_term *term);
+int					save_command(t_command *command, char **str, int flag);
+int					change_command(t_command *command, int *flag, int key);
+int					load_command(t_command *command, char *str,
+															int flag, int bell);
+/*
+**	control_key
+*/
 int					apply_delete_key(t_command *command, t_term *term);
 int					apply_cursor_key(t_command *command, t_term *term, int key);
 int					apply_quote_key(t_command *command, t_term *term, int key);
@@ -53,12 +68,15 @@ int					apply_general_key(t_command *command, t_term *term,
 																	int key);
 int					apply_history_key(t_command *command, t_term *term,
 																	int key);
-int					add_history(t_command *command);
-void				write_historyfd(t_history *new, int fd);
-void				write_historyline(t_command *command, t_term *term,
-												t_history *history, int flag);
+/*
+**	control_history
+*/
+int					init_history(t_command *command);
+int					add_history(t_command *command, char *line, size_t len);
+
+/*
+**	control_term
+*/
 void				init_term_size(t_command *command, t_term *term);
-int					get_history(t_command *command, t_history **ptr,
-							int *bottom, int key);
 
 #endif

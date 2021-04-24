@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:10:56 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/22 19:13:43 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/23 18:23:14 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ int		apply_general_key(t_command *command, t_term *term, int key)
 {
 	if ((key >= 32 && key <= 127) || key == '\n')
 	{
-		if (!add_string(&(*command->command_line)->line,
-					(*command->command_line)->line.length, key))
+		if (!add_string(&command->line, command->line.length, key))
 			return (-1);
-		(*command->command_line)->length++;
-		(*command->command_line)->cursor++;
+		command->length++;
+		command->cursor++;
 		write(1, &key, 1);
 		key = LEFT_ARROW;
 		write(1, "  ", 1);

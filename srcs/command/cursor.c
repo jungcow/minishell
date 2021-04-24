@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/22 20:14:43 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:27:09 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,22 @@
 int		apply_cursor_key(t_command *command, t_term *term, int key)
 {
 	char		ch;
-	t_history	*ptr;
 
-	ptr = *command->command_line;
 	init_term_size(command, term);
-	if ((ptr->cursor > 0) && key == LEFT_ARROW)
+	if ((command->cursor > 0) && key == LEFT_ARROW)
 	{
-		delete_string(&ptr->line, ptr->line.length - 1, &ch);
-		if (!add_string(&ptr->temp, 0, ch))
+		delete_string(&command->line, command->line.length - 1, &ch);
+		if (!add_string(&command->temp, 0, ch))
 			return (-1);
-		ptr->cursor--;
+		command->cursor--;
 		write(1, &key, sizeof(key));
 	}
-	else if ((ptr->cursor < ptr->length) && key == RIGHT_ARROW)
+	else if ((command->cursor < command->length) && key == RIGHT_ARROW)
 	{
-		delete_string(&ptr->temp, 0, &ch);
-		if (!add_string(&ptr->line, ptr->line.length, ch))
+		delete_string(&command->temp, 0, &ch);
+		if (!add_string(&command->line, command->line.length, ch))
 			return (-1);
-		ptr->cursor++;
+		command->cursor++;
 		if (term->pos.cur_col == term->pos.col - 1)
 			tputs(tgoto(term->cp.cm, 0, ++term->pos.cur_row), 1, tputs_wrapper);
 		else
@@ -46,22 +44,28 @@ int		apply_cursor_key(t_command *command, t_term *term, int key)
 
 int		apply_history_key(t_command *command, t_term *term, int key)
 {
-	static t_history	*ptr;
-	static int			bottom;
-	int					flag;
+	static char	*str;
+	static int	flag;
+	int			bell;
+	int			len;
 
-	flag = 0;
-	if (*(command->head) == NULL)
-		write_historyline(command, term, NULL, 2);
-	else
-	{
-		flag = get_history(command, &ptr, &bottom, key);
-		write_historyline(command, term, ptr, flag);
-		if (flag == 2)
-			command->command_line = &command->present;
-		else
-			command->command_line = &ptr;
-	}
+	len = command->temp.length;
+	while (len--)
+		if (apply_cursor_key(command, term, RIGHT_ARROW) == -1)
+			return (-1);
+	if (!save_command(command, &str, flag))
+		return (-1);
+	len = command->line.length;
+	while (len--)
+		if (apply_delete_key(command, term) == -1)
+			return (-1);
+	bell = change_command(command, &flag, key);
+	command->line.length = 0;
+	command->temp.length = 0;
+	command->length = 0;
+	command->cursor = 0;
+	if (!load_command(command, str, flag, bell))
+		return (-1);
 	return (1);
 }
 
@@ -70,13 +74,13 @@ int		apply_delete_key(t_command *command, t_term *term)
 	char	dump;
 
 	init_term_size(command, term);
-	if ((*command->command_line)->line.length <= 0)
+	if (command->line.length <= 0)
 		return (1);
 	if (apply_cursor_key(command, term, LEFT_ARROW) == -1)
 		return (-1);
-	delete_string(&(*command->command_line)->temp, 0, &dump);
+	delete_string(&command->temp, 0, &dump);
 	tputs(term->cp.dc, 1, tputs_wrapper);
 	refresh_command(command, term);
-	(*command->command_line)->length--;
+	command->length--;
 	return (1);
 }
