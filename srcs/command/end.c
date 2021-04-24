@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:26:27 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 14:14:29 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:38:04 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,21 @@ static int	quote_on(t_command *command, t_term *term)
 static int	quote_off(t_command *command)
 {
 	char	ch;
+	char	ret;
 
 	while (delete_string(&command->temp, 0, &ch))
 		add_string(&command->line, command->line.length, ch);
-	if (!add_history(command, command->line.content, command->line.length))
+	ret = add_history(command, command->line.content, command->line.length);
+	if (ret == 0)
 	{
 		clear_history(command->history, command->history_fd);
 		return (-1);
+	}
+	if (ret == 1)
+	{
+		write(command->history_fd, command->history->str,
+									ft_strlen(command->history->str));
+		write(command->history_fd, "\0", 1);
 	}
 	return (0);
 }

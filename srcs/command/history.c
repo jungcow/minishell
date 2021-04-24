@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:42:02 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/24 14:50:36 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:35:05 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		add_history(t_command *command, char *line, size_t len)
 	t_history	*new;
 
 	if (!(*line))
-		return (1);
+		return (-1);
 	new = (t_history *)malloc(sizeof(t_history));
 	if (new == NULL)
 		return (0);
@@ -65,7 +65,7 @@ int		add_history(t_command *command, char *line, size_t len)
 	return (1);
 }
 
-void	write_historyfile(t_history *history, int fd)
+void	write_history(t_history *history, int fd)
 {
 	write(fd, history->str, ft_strlen(history->str));
 	write(fd, "\0", 1);
