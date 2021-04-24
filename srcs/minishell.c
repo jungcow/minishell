@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 16:36:24 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:09:26 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ void	run_minishell(void)
 
 int		main(void)
 {
-	run_minishell();
+	while (42)
+	{
+		run_minishell();
+	}
 	system("leaks minishell");
 	return (0);
 }
