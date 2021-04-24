@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:42:02 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/24 14:18:02 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 14:50:36 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		init_history(t_command *command)
 
 	line = NULL;
 	command->history = NULL;
+	command->ptr = NULL;
 	fd = open("./.minish_history", O_CREAT | O_RDWR, 0644);
 	if (fd < 0)
 		return (0);
