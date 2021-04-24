@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 21:10:29 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 22:40:18 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define DOUBLE_QUOTE 34
 # define ENTER 10
 # define CTRL_D 4
+# define HOME 88627995
+# define END 88496923
 
 # include <stdbool.h>
 # include "libft.h"

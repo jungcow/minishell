@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:26:27 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 16:38:04 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 22:48:33 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,7 @@ static int	quote_off(t_command *command)
 		return (-1);
 	}
 	if (ret == 1)
-	{
-		write(command->history_fd, command->history->str,
-									ft_strlen(command->history->str));
-		write(command->history_fd, "\0", 1);
-	}
+		write_history(command->history, command->history_fd);
 	return (0);
 }
 
