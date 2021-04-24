@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/24 14:34:34 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 14:56:18 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		apply_history_key(t_command *command, t_term *term, int key)
 	while (len--)
 		if (apply_delete_key(command, term) == -1)
 			return (-1);
+	tputs(term->cp.cd, 1, tputs_wrapper);
 	bell = change_command(command, &flag, key);
 	command->line.length = 0;
 	command->temp.length = 0;
