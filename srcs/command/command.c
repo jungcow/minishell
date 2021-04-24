@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 15:31:18 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/24 21:06:36 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ bool	init_command(t_command *command)
 	command->keywords = NULL;
 	command->keywords_size = 0;
 	command->quote_status = false;
+	command->command_status = false;
 	command->cursor = 0;
 	command->length = 0;
 	flag = true;

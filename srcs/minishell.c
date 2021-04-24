@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 18:09:26 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/24 22:20:21 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,24 @@ void	run_minishell(void)
 	// error
 	if (!init_history(&command))
 		return ;
-	if (!init_command(&command))
-		return ;
-	read_command(&command, &term);
-	printf("\n\nResult : [");
-	for(int i=0; i < command.line.length; ++i)
-		printf("%c", command.line.content[i]);
-	printf("]\n\n\n");
-	clear_command(&command);
+	while (42)
+	{
+		if (!init_command(&command))
+			return ;
+		read_command(&command, &term);
+		printf("\n\nResult : [");
+		for(int i=0; i < command.line.length; ++i)
+			printf("%c", command.line.content[i]);
+		printf("]\n\n\n");
+		clear_command(&command);
+	}
 	clear_history(command.history, command.history_fd);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }
 
 int		main(void)
 {
-	while (42)
-	{
-		run_minishell();
-	}
+	run_minishell();
 	system("leaks minishell");
 	return (0);
 }

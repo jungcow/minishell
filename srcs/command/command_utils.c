@@ -6,25 +6,26 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 00:12:35 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/24 15:34:52 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/24 21:24:38 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <termcap.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include "command/command.h"
 
-int			load_command(t_command *command, char *str, int flag, int bell)
+int			load_command(t_command *command, char *str, int bell)
 {
 	int		i;
 
 	if (bell == 1 || bell == 2)
 		write(0, "\a", 1);
-	if (flag == 0 && str == NULL)
+	if (command->command_status == false && str == NULL)
 		return (1);
 	i = -1;
-	if (flag == 0)
+	if (command->command_status == false)
 	{
 		while (++i < (int)ft_strlen(str))
 			if (!add_string(&command->line, command->line.length, str[i]))
@@ -43,34 +44,35 @@ int			load_command(t_command *command, char *str, int flag, int bell)
 	return (1);
 }
 
-int			change_command(t_command *command, int *flag, int key)
+int			change_command(t_command *command, int key)
 {
 	if (key == UP_ARROW)
 	{
-		if (*flag == 0 && command->ptr)
-			*flag = 1;
-		else if (*flag && command->ptr && command->ptr->before)
+		if (command->command_status == false && command->ptr)
+			command->command_status = true;
+		else if (command->command_status && command->ptr
+										&& command->ptr->before)
 			command->ptr = command->ptr->before;
 		else
 			return (1);
 	}
 	else if (key == DOWN_ARROW)
 	{
-		if (*flag && command->ptr && command->ptr->next)
+		if (command->command_status && command->ptr && command->ptr->next)
 			command->ptr = command->ptr->next;
 		else
 		{
-			if (*flag)
-				*flag = 0;
+			if (command->command_status)
+				command->command_status = false;
 			return (2);
 		}
 	}
 	return (0);
 }
 
-int			save_command(t_command *command, char **str, int flag)
+int			save_command(t_command *command, char **str)
 {
-	if (flag)
+	if (command->command_status == true)
 	{
 		free(command->ptr->str);
 		command->ptr->str = ft_strndup(command->line.content,

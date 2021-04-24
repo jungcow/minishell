@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 14:15:23 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/24 21:10:29 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct		s_command
 	char			**keywords;
 	int				keywords_size;
 	bool			quote_status;
+	bool			command_status;
 }					t_command;
 
 /*
@@ -54,10 +55,10 @@ void				clear_command(t_command *command);
 **	command_utils
 */
 void				refresh_command(t_command *command, t_term *term);
-int					save_command(t_command *command, char **str, int flag);
-int					change_command(t_command *command, int *flag, int key);
+int					save_command(t_command *command, char **str);
+int					change_command(t_command *command, int key);
 int					load_command(t_command *command, char *str,
-															int flag, int bell);
+													int bell);
 /*
 **	control_key
 */
