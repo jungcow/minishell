@@ -4,3 +4,4 @@
 *.a
 /minishell
 .minish_history
+/srcs/builtin/echo
