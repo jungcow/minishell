@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 22:40:18 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/26 02:15:30 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 # define DOUBLE_QUOTE 34
 # define ENTER 10
 # define CTRL_D 4
-# define HOME 88627995
-# define END 88496923
+# define HOME 4741915
+# define END 4610843
+//# define CTRL_LEFT 1146821403
+//# define CTRL_RIGHT 1130044187
 
 # include <stdbool.h>
 # include "libft.h"
@@ -66,6 +68,7 @@ int					load_command(t_command *command, char *str,
 */
 int					apply_delete_key(t_command *command, t_term *term);
 int					apply_cursor_key(t_command *command, t_term *term, int key);
+int					apply_multicursor_key(t_command *command, t_term *term, int key);
 int					apply_quote_key(t_command *command, t_term *term, int key);
 int					apply_end_key(t_command *command, t_term *term, int key);
 int					apply_general_key(t_command *command, t_term *term,

@@ -6,13 +6,34 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/24 22:22:51 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/26 02:17:30 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <termcap.h>
 #include "command/command.h"
+
+int		apply_multicursor_key(t_command *command, t_term *term, int key)
+{
+	int		len;
+
+	if ((command->cursor > 0) && key == HOME)
+	{
+		len = command->line.length;
+		while (len--)
+			if (apply_cursor_key(command, term, LEFT_ARROW) == -1)
+				return (-1);
+	}
+	else if ((command->cursor < command->length) && key == END)
+	{
+		len = command->temp.length;
+		while (len--)
+			if (apply_cursor_key(command, term, RIGHT_ARROW) == -1)
+				return (-1);
+	}
+	return (1);
+}
 
 int		apply_cursor_key(t_command *command, t_term *term, int key)
 {
