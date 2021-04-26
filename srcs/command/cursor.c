@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/26 02:17:30 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/26 02:31:28 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int		apply_multicursor_key(t_command *command, t_term *term, int key)
 {
 	int		len;
 
-	if ((command->cursor > 0) && key == HOME)
+	if ((command->cursor > 0) && (key == HOME || key == CTRL_LEFT))
 	{
 		len = command->line.length;
 		while (len--)
 			if (apply_cursor_key(command, term, LEFT_ARROW) == -1)
 				return (-1);
 	}
-	else if ((command->cursor < command->length) && key == END)
+	else if ((command->cursor < command->length) && (key == END || key == CTRL_RIGHT))
 	{
 		len = command->temp.length;
 		while (len--)

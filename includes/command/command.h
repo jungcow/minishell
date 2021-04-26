@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/26 02:15:30 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/26 03:09:44 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # define CTRL_D 4
 # define HOME 4741915
 # define END 4610843
-//# define CTRL_LEFT 1146821403
-//# define CTRL_RIGHT 1130044187
+# define CTRL_LEFT 74995417045787
+# define CTRL_RIGHT 73895905418011
+# define CTRL_UP 71696882162459
+# define CTRL_DOWN 72796393790235
 
 # include <stdbool.h>
 # include "libft.h"

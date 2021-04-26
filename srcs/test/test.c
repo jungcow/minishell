@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <termcap.h>
+#include <math.h>
 
 # define BACKSPACE 127
 # define LEFT_ARROW 4479771
@@ -122,6 +123,7 @@ int		main(void)
 	char *ce = tgetstr("ce", NULL); //clear line from cursor
 	char *im = tgetstr("im", NULL);
 	int c = 0;
+	long long int d;
 	int row;
 	int col;
 
@@ -142,7 +144,16 @@ int		main(void)
 		{
 			col++;
 			tputs(tgoto(im, col, row), 1, putchar_tc);
-			write(1, &c, 1);
+			if (c == 59 * 256 * 256 * 256 + 256 * 49 + 91 * 256 + 27)
+			{
+				c = 0;
+				read(0, &c, sizeof(c));
+				printf("num: %d\n", c);
+				c = 0;
+				continue;
+			}
+//			printf("num: %d\n", c);
+		//	write(1, &c, 1);
 		}
 		c = 0; //flush buffer
 	}
