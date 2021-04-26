@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/26 19:41:58 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:14:55 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ int					apply_general_key(t_command *command, t_term *term,
 																	int key);
 int					apply_history_key(t_command *command, t_term *term,
 																	int key);
+/*
+**	cursor_utils
+*/
+int					move_cursor_wordby(t_command *command, t_term *term, int key);
+int					move_cursor_lineby(t_command *command, t_term *term, int key);
+
 /*
 **	control_history
 */

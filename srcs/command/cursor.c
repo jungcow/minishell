@@ -6,49 +6,13 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/26 19:58:20 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:11:45 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <termcap.h>
 #include "command/command.h"
-
-static int	init_flag(char *str, int index)
-{
-	if (ft_isalnum(str[index]))
-		return (1);
-	else
-		return (0);
-}
-
-int		move_cursor_wordby(t_command *command, t_term *term, int key)
-{
-	int		flag;
-	
-	flag = -1;
-	if (key == CTRL_LEFT)
-	{
-		while (command->cursor > 0 && !(flag == 1 &&
-			!ft_isalnum(command->line.content[command->line.length - 1])))
-		{
-			flag = init_flag(command->line.content, command->line.length - 1);
-			if (apply_cursor_key(command, term, LEFT_ARROW) == -1)
-				return (-1);
-		}
-	}
-	else if (key == CTRL_RIGHT)
-	{
-		while ((command->cursor < command->length) && !(flag == 0 &&
-			ft_isalnum(command->temp.content[1])))
-		{
-			flag = init_flag(command->temp.content, 1);
-			if (apply_cursor_key(command, term, RIGHT_ARROW) == -1)
-				return (-1);
-		}
-	}
-	return (1);
-}
 
 int		apply_ctrlcursor_key(t_command *command, t_term *term, int key)
 {
@@ -60,11 +24,10 @@ int		apply_ctrlcursor_key(t_command *command, t_term *term, int key)
 		flag = move_cursor_wordby(command, term, key);
 	else if ((command->cursor < command->length) && key == CTRL_RIGHT)
 		flag = move_cursor_wordby(command, term, key);
-/*	else if ((command->line.length / term->pos.col) && key == CTRL_UP)
+	else if ((command->line.length / term->pos.col) && key == CTRL_UP)
 		flag = move_cursor_lineby(command, term, key);
 	else if ((command->temp.length / term->pos.col) && key == CTRL_DOWN)
 		flag = move_cursor_lineby(command, term, key);
-		*/
 	return (flag);
 }
 

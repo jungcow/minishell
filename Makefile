@@ -22,6 +22,7 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				command.c \
 				command_utils.c \
 				cursor.c \
+				cursor_utils.c \
 				general.c \
 				end.c \
 				history.c \
