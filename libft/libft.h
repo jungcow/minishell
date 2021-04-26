@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 03:51:30 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/16 22:57:23 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/26 19:41:18 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
 int		ft_isspace(int c);
 int		ft_isdigit(int c);
+int		ft_isalpha(int c);
+int		ft_isalnum(int c);
 
 #endif

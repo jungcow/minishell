@@ -123,39 +123,22 @@ int		main(void)
 	char *ce = tgetstr("ce", NULL); //clear line from cursor
 	char *im = tgetstr("im", NULL);
 	int c = 0;
-	long long int d;
+	int d = 0;
 	int row;
 	int col;
 
 	while (read(0, &c, sizeof(c)) > 0)
 	{
-		get_cursor_position(&col, &row);
-		if (c == LEFT_ARROW)
-			move_cursor_left(&col, &row, cm);
-		else if (c == RIGHT_ARROW)
-			move_cursor_right(&col, &row, cm);
-		else if (c == UP_ARROW)
-			move_cursor_up(&col, &row, cm);
-		else if (c == DOWN_ARROW)
-			move_cursor_down(&col, &row, cm);
-		else if (c == BACKSPACE)
-			delete_end(&col, &row, cm, ce);
-		else
+		if (c == 27 + 91 * 256 + 49 * 256 * 256 + 59 * 256*256*256)
 		{
-			col++;
-			tputs(tgoto(im, col, row), 1, putchar_tc);
-			if (c == 59 * 256 * 256 * 256 + 256 * 49 + 91 * 256 + 27)
-			{
-				c = 0;
-				read(0, &c, sizeof(c));
-				printf("num: %d\n", c);
-				c = 0;
-				continue;
-			}
-//			printf("num: %d\n", c);
-		//	write(1, &c, 1);
+			printf("first ctrl: %d\n", c);
+			c = 0;
+			read(0, &c, sizeof(c));
+			printf("ctrl num: %d\n", c);
+			c = 0;
 		}
-		c = 0; //flush buffer
+		else
+			printf("num: %d\n", c);
 	}
 }
 

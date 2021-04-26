@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/26 03:09:44 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/26 19:41:58 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@
 # define CTRL_D 4
 # define HOME 4741915
 # define END 4610843
-# define CTRL_LEFT 74995417045787
-# define CTRL_RIGHT 73895905418011
-# define CTRL_UP 71696882162459
-# define CTRL_DOWN 72796393790235
+# define CTRL_ARROW 993090331
+# define CTRL_LEFT 17461
+# define CTRL_RIGHT 17205
+# define CTRL_UP 16693
+# define CTRL_DOWN 16949
 
 # include <stdbool.h>
 # include "libft.h"
@@ -71,6 +72,7 @@ int					load_command(t_command *command, char *str,
 int					apply_delete_key(t_command *command, t_term *term);
 int					apply_cursor_key(t_command *command, t_term *term, int key);
 int					apply_multicursor_key(t_command *command, t_term *term, int key);
+int					apply_ctrlcursor_key(t_command *command, t_term *term, int key);
 int					apply_quote_key(t_command *command, t_term *term, int key);
 int					apply_end_key(t_command *command, t_term *term, int key);
 int					apply_general_key(t_command *command, t_term *term,

@@ -11,6 +11,8 @@ SRCS = string.c \
 	   ft_itoa.c \
 	   ft_isspace.c \
 	   ft_isdigit.c \
+	   ft_isalpha.c \
+	   ft_isalnum.c \
 	   get_next_line.c \
 	   get_next_line_utils.c \
 
