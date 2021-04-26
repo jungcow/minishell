@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/26 19:58:22 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/26 23:12:24 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ bool	init_command(t_command *command)
 {
 	bool		flag;
 
-	command->keywords = NULL;
-	command->keywords_size = 0;
 	command->quote_status = false;
 	command->command_status = false;
 	command->cursor = 0;
@@ -86,17 +84,6 @@ int		switch_command(t_command *command, t_term *term, int key)
 
 void	clear_command(t_command *command)
 {
-	int		i;
-
-	i = 0;
-	if (command->keywords != NULL)
-	{
-		while (i < command->keywords_size)
-			free(command->keywords[i++]);
-		free(command->keywords);
-	}
-	command->keywords = NULL;
-	command->keywords_size = 0;
 	clear_string(&command->line);
 	clear_string(&command->temp);
 }
