@@ -6,13 +6,13 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 03:47:22 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/16 16:54:55 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/26 23:24:35 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRING_H
 # define STRING_H
-# define STRING_SIZE 1024
+# define STRING_SIZE 128
 
 # include <stdbool.h>
 
