@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.h                                             :+:      :+:    :+:   */
+/*   pipeline.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 16:25:50 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/27 16:29:02 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/28 00:45:24 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef PIPELINE_H
+# define PIPELINE_H
+
+# include <stdbool.h>
+# include "libft.h"
 
 typedef struct	s_redirect
 {
 	int			from;
-	char		*to;
-}				t_redirect
+	t_string	to;
+}				t_redirect;
 
 typedef struct	s_operation
 {
 	t_string	name;
 	t_redirect	*redirects;
-	t_string	*args;
+	int			len_redirects;
+	t_string	*argv;
+	int			argc;
 }				t_operation;
 
 typedef	struct	s_pipeline
@@ -28,3 +36,11 @@ typedef	struct	s_pipeline
 	t_operation	*operations;
 	int			length;
 }				t_pipeline;
+
+void			init_pipeline(t_pipeline *pipeline);
+void			clear_pipeline(t_pipeline *pipeline);
+bool			init_operation(t_operation *operation);
+void			clear_operation(t_operation *operation);
+
+int				parse_pipeline(char *token);
+#endif

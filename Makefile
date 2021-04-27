@@ -27,21 +27,33 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				end.c \
 				history.c \
 				term_utils.c \
+				validate.c \
+				split.c \
 				)
 
+
+##########################################################
+# PipeLine Part                                          #
+##########################################################
+
+PIPELINE_SRCS = $(addprefix ./srcs/pipeline/, \
+				pipeline.c \
+				operation.c \
+				parse/parse.c \
+				)
+
+##########################################################
+# General Rule                                           #
+##########################################################
+
 SRCS = ./srcs/minishell.c \
-		$(COMMAND_SRCS)
+		$(COMMAND_SRCS) \
+		$(PIPELINE_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 
 %.o : %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-
-
-##########################################################
-# General Rule                                           #
-##########################################################
 
 all : $(NAME)
 
