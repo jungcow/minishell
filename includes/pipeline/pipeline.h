@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.h                                             :+:      :+:    :+:   */
+/*   pipeline.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 16:25:50 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/27 16:29:02 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:42:51 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef PIPE_H
+# define PIPE_H
 
 typedef struct	s_redirect
 {
@@ -28,3 +31,5 @@ typedef	struct	s_pipeline
 	t_operation	*operations;
 	int			length;
 }				t_pipeline;
+
+#endif
