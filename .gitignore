@@ -5,3 +5,4 @@
 /minishell
 .minish_history
 /srcs/builtin/echo
+/srcs/test
