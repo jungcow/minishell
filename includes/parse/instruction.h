@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipeline.c                                         :+:      :+:    :+:   */
+/*   instruction.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 17:13:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/27 23:41:47 by seunghoh         ###   ########.fr       */
+/*   Created: 2021/04/27 16:25:50 by seunghoh          #+#    #+#             */
+/*   Updated: 2021/04/28 19:08:21 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "pipeline/pipeline.h"
+#ifndef INSTRUCTION_H
+# define INSTRUCTION_H
 
-void		init_pipeline(t_pipeline *pipeline)
+# include <stdbool.h>
+# include "parse/pipeline.h"
+
+typedef struct	s_instruction
 {
-	pipeline->operations = NULL;
-	pipeline->length = 0;
-}
+	t_pipeline	*pipelines;
+	int			length;
+}				t_instruction;
 
-void		clear_pipeline(t_pipeline *pipeline)
-{
-	int		i;
-
-	i = 0;
-	while (i < pipeline->length)
-		clear_operation(&pipeline->operations[i++]);
-	free(pipeline->operations);
-	pipeline->operations = NULL;
-	pipeline->length = 0;
-}
+void			init_instruction(t_instruction *instruction);
+int				parse_instruction(t_instruction *instruction,
+									t_string *command);
+void			clear_instruction(t_instruction *instruction);
+#endif

@@ -6,13 +6,13 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 19:33:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/27 19:55:48 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:26:48 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include "libft.h"
-#include "pipeline/pipeline.h"
+#include "parse/operation.h"
 
 bool	init_operation(t_operation *operation)
 {

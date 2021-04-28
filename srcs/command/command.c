@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 00:45:54 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:07:58 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <termcap.h>
 #include <fcntl.h>
 #include "command/command.h"
-#include "pipeline/pipeline.h"
+#include "parse/instruction.h"
 
 bool	init_command(t_command *command)
 {
@@ -85,25 +85,20 @@ int		switch_command(t_command *command, t_term *term, int key)
 
 int		run_command(t_command *command)
 {
-	t_pipeline		pipeline;
-	char			**tokens;
-	int				i;
+	t_instruction	instruction;
+	int				flag;
 
-	if (!validate_command(command))
-		return (0);
-	tokens = split_command(&command->line);
-	if (tokens == NULL)
-		return (-1);
-	i = -1;
-	while (tokens[++i] != NULL)
+	init_instruction(&instruction);
+	flag = parse_instruction(&instruction, &command->line);
+	if (flag == -1)
 	{
-		init_pipeline(&pipeline);
-		if (parse_pipeline(tokens[i]) == -1)
-			break ;
-		// run pipeline
-		clear_pipeline(&pipeline);
+		clear_instruction(&instruction);
+		return (-1);
 	}
-	clear_tokens(tokens);
+	else if (flag == 0)
+		return (0);
+	// execute instruction gogo
+	clear_instruction(&instruction);
 	return (1);
 }
 

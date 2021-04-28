@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 00:48:12 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:06:31 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ int		init_termcap(t_cp *capability)
 	return (1);
 }
 
-int		init_minishell(t_term *term)
+int		init_minishell(t_term *term, t_command *command)
 {
 	struct termios	new_term;
 
-	if (!init_termcap(&term->cp))
+	if (!init_termcap(&term->cp) ||
+		!init_history(command))
 		return (0);
 	tcgetattr(STDIN_FILENO, &term->save_term);
 	new_term = term->save_term;
@@ -64,22 +65,20 @@ void	run_minishell(void)
 	t_command	command;
 
 	term.name = "seung-jung$>";
-	if (!init_minishell(&term))
-		// error
-		return ;
-	if (!init_history(&command))
-		// error
+	if (!init_minishell(&term, &command))
 		return ;
 	while (42)
 	{
 		if (!init_command(&command))
-			return ;
+			break ;
 		if (!read_command(&command, &term))
-			return ;
-		run_command(&command);
+			break ;
+		if (!run_command(&command))
+			break ;
 		clear_command(&command);
 		system("leaks minishell");
 	}
+	clear_command(&command);
 	clear_history(command.history, command.history_fd);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }

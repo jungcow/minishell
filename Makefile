@@ -27,19 +27,17 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				end.c \
 				history.c \
 				term_utils.c \
-				validate.c \
-				split.c \
 				)
 
 
 ##########################################################
-# PipeLine Part                                          #
+# Parse Part                                             #
 ##########################################################
 
-PIPELINE_SRCS = $(addprefix ./srcs/pipeline/, \
+PARSE_SRCS = $(addprefix ./srcs/parse/, \
+				instruction.c \
 				pipeline.c \
 				operation.c \
-				parse/parse.c \
 				)
 
 ##########################################################
@@ -48,7 +46,7 @@ PIPELINE_SRCS = $(addprefix ./srcs/pipeline/, \
 
 SRCS = ./srcs/minishell.c \
 		$(COMMAND_SRCS) \
-		$(PIPELINE_SRCS)
+		$(PARSE_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 

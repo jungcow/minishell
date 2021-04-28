@@ -5,31 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 16:25:50 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 00:45:24 by seunghoh         ###   ########.fr       */
+/*   Created: 2021/04/28 18:10:59 by seunghoh          #+#    #+#             */
+/*   Updated: 2021/04/28 18:20:52 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPELINE_H
 # define PIPELINE_H
 
-# include <stdbool.h>
-# include "libft.h"
-
-typedef struct	s_redirect
-{
-	int			from;
-	t_string	to;
-}				t_redirect;
-
-typedef struct	s_operation
-{
-	t_string	name;
-	t_redirect	*redirects;
-	int			len_redirects;
-	t_string	*argv;
-	int			argc;
-}				t_operation;
+# include "parse/operation.h"
 
 typedef	struct	s_pipeline
 {
@@ -37,10 +21,8 @@ typedef	struct	s_pipeline
 	int			length;
 }				t_pipeline;
 
+
 void			init_pipeline(t_pipeline *pipeline);
 void			clear_pipeline(t_pipeline *pipeline);
-bool			init_operation(t_operation *operation);
-void			clear_operation(t_operation *operation);
 
-int				parse_pipeline(char *token);
 #endif
