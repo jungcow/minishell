@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 22:51:16 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/29 01:24:04 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct		s_command
 	t_string		temp;
 	int				cursor;
 	int				length;
-	bool			quote_status;
+	int				quote_status;
 	bool			command_status;
 }					t_command;
 
