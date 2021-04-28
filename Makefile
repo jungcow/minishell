@@ -36,8 +36,11 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 
 PARSE_SRCS = $(addprefix ./srcs/parse/, \
 				instruction.c \
+				instruction_util.c \
 				pipeline.c \
 				operation.c \
+				parse_util.c \
+				split.c \
 				)
 
 ##########################################################

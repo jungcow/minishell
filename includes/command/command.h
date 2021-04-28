@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 00:43:04 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/28 22:51:16 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int					save_command(t_command *command, char **str);
 int					change_command(t_command *command, int key);
 int					load_command(t_command *command, char *str,
 													int bell);
+
 /*
 **	control_key
 */
@@ -82,6 +83,8 @@ int					apply_general_key(t_command *command, t_term *term,
 																	int key);
 int					apply_history_key(t_command *command, t_term *term,
 																	int key);
+int					empty_command(t_command *command);
+
 /*
 **	cursor_utils
 */

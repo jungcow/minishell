@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation.h                                        :+:      :+:    :+:   */
+/*   parse_util.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 18:20:57 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 23:22:38 by seunghoh         ###   ########.fr       */
+/*   Created: 2021/04/28 19:56:31 by seunghoh          #+#    #+#             */
+/*   Updated: 2021/04/28 22:00:49 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPERATION_H
-# define OPERATION_H
+#ifndef PARSE_UTIL_H
+# define PARSE_UTIL_H
 
-# include "libft.h"
+#include <stdbool.h>
+#include "libft.h"
 
-typedef struct	s_redirect
-{
-	int			from;
-	char		*to;
-}				t_redirect;
-
-typedef struct	s_operation
-{
-	int			argc;
-	char		**argv;
-	t_redirect	*redirects;
-	int			len_redirects;
-}				t_operation;
-
-void			init_operation(t_operation *operation);
-void			clear_operation(t_operation *operation);
+int		skip_quote(char *str, int length, int start);
+int		skip_dquote(char *str, int length, int start);
+int		skip_space(char *str, int length, int start);
+int		skip_space_quote(t_string *command, int i, bool *is_space);
+char	**split_tokens(char *line, int length);
+void	clear_tokens(char **tokens);
 
 #endif

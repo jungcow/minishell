@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 18:20:57 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 23:22:38 by seunghoh         ###   ########.fr       */
+/*   Created: 2021/04/28 22:55:41 by seunghoh          #+#    #+#             */
+/*   Updated: 2021/04/28 23:27:41 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPERATION_H
-# define OPERATION_H
+#include "libft.h"
 
-# include "libft.h"
-
-typedef struct	s_redirect
+char	*ft_strchr(const char *s, int c)
 {
-	int			from;
-	char		*to;
-}				t_redirect;
+	size_t	idx;
 
-typedef struct	s_operation
-{
-	int			argc;
-	char		**argv;
-	t_redirect	*redirects;
-	int			len_redirects;
-}				t_operation;
-
-void			init_operation(t_operation *operation);
-void			clear_operation(t_operation *operation);
-
-#endif
+	idx = 0;
+	while (s[idx])
+	{
+		if (s[idx] == (char)c)
+			return ((char *)s + idx);
+		idx++;
+	}
+	return (NULL);
+}

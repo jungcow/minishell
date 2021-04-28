@@ -13,6 +13,7 @@ SRCS = string.c \
 	   ft_isdigit.c \
 	   ft_isalpha.c \
 	   ft_isalnum.c \
+	   ft_strchr.c \
 	   get_next_line.c \
 	   get_next_line_utils.c \
 

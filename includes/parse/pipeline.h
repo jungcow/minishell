@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:10:59 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 18:20:52 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/28 22:11:55 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef	struct	s_pipeline
 
 
 void			init_pipeline(t_pipeline *pipeline);
+int				parse_pipeline(t_pipeline *pipeline, char **tokens);
 void			clear_pipeline(t_pipeline *pipeline);
 
 #endif

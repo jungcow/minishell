@@ -6,48 +6,48 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 23:41:57 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 00:46:49 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/28 21:48:39 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-#include "command/command.h"
+#include "parse/parse_util.h"
 
-static int	count_token(t_string *line)
+static int	count_token(char *line, int length)
 {
 	int		i;
 	int		count;
 
 	i = 0;
 	count = 0;
-	while (i < line->length)
+	while (i < length)
 	{
-		if (line->content[i] == '\0')
+		if (line[i] == '\0')
 			count++;
 		i++;
 	}
 	return (count);
 }
 
-static bool	split_token(char **tokens, t_string *line)
+static bool	split_token(char **tokens, char *line, int length)
 {
 	int		i;
 	int		count;
 
 	i = 0;
 	count = 0;
-	while (i < line->length)
+	while (i < length)
 	{
-		if (line->content[i] != '\0')
+		if (line[i] != '\0')
 		{
-			tokens[count++] = ft_strdup(line->content + i);
+			tokens[count++] = ft_strdup(line + i);
 			if (tokens[count - 1] == NULL)
 			{
 				clear_tokens(tokens);
 				return (false);
 			}
-			while (line->content[i] != '\0')
+			while (line[i] != '\0')
 				i++;
 		}
 		i++;
@@ -55,18 +55,18 @@ static bool	split_token(char **tokens, t_string *line)
 	return (true);
 }
 
-char		**split_command(t_string *line)
+char		**split_tokens(char *line, int length)
 {
 	char		**tokens;
 	int			count;
 
-	count = count_token(line);
+	count = count_token(line, length);
 	tokens = (char **)malloc(sizeof(char *) * (count + 1));
 	if (tokens == NULL)
 		return (NULL);
 	while (count >= 0)
 		tokens[count--] = NULL;
-	if (!split_token(tokens, line))
+	if (!split_token(tokens, line, length))
 		return (NULL);
 	return (tokens);
 }
