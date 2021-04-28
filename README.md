@@ -188,3 +188,8 @@ int main(int argc, char *argv[])
 ### 21.04.17(토) 학습내용
 1. 현재 터미널의 col값과 row값을 가져오는 방법
 : [Get Terminal Width in C](https://stackoverflow.com/questions/1022957/getting-terminal-width-in-c)
+
+### 21.04.28(수) 학습내용
+1. multi pipeline 의 구현 과정을 학습
+	- [multi pipeline 참고자료1](https://stackoverflow.com/questions/916900/having-trouble-with-fork-pipe-dup2-and-exec-in-c/)
+	- [multi pipeline 참고자료2](https://stackoverflow.com/questions/17630247/coding-multiple-pipe-in-c)
