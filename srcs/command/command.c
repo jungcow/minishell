@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/26 23:12:24 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/28 00:45:54 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <termcap.h>
 #include <fcntl.h>
 #include "command/command.h"
+#include "pipeline/pipeline.h"
 
 bool	init_command(t_command *command)
 {
@@ -80,6 +81,30 @@ int		switch_command(t_command *command, t_term *term, int key)
 	else
 		flag = apply_general_key(command, term, key);
 	return (flag);
+}
+
+int		run_command(t_command *command)
+{
+	t_pipeline		pipeline;
+	char			**tokens;
+	int				i;
+
+	if (!validate_command(command))
+		return (0);
+	tokens = split_command(&command->line);
+	if (tokens == NULL)
+		return (-1);
+	i = -1;
+	while (tokens[++i] != NULL)
+	{
+		init_pipeline(&pipeline);
+		if (parse_pipeline(tokens[i]) == -1)
+			break ;
+		// run pipeline
+		clear_pipeline(&pipeline);
+	}
+	clear_tokens(tokens);
+	return (1);
 }
 
 void	clear_command(t_command *command)

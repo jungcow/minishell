@@ -6,11 +6,10 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/24 22:20:21 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/28 00:48:12 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include <termios.h>
 #include <termcap.h>
@@ -66,20 +65,20 @@ void	run_minishell(void)
 
 	term.name = "seung-jung$>";
 	if (!init_minishell(&term))
+		// error
 		return ;
-	// error
 	if (!init_history(&command))
+		// error
 		return ;
 	while (42)
 	{
 		if (!init_command(&command))
 			return ;
-		read_command(&command, &term);
-		printf("\n\nResult : [");
-		for(int i=0; i < command.line.length; ++i)
-			printf("%c", command.line.content[i]);
-		printf("]\n\n\n");
+		if (!read_command(&command, &term))
+			return ;
+		run_command(&command);
 		clear_command(&command);
+		system("leaks minishell");
 	}
 	clear_history(command.history, command.history_fd);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
@@ -88,6 +87,5 @@ void	run_minishell(void)
 int		main(void)
 {
 	run_minishell();
-	system("leaks minishell");
 	return (0);
 }

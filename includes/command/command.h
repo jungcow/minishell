@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/26 23:53:52 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/04/28 00:43:04 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,12 @@ typedef struct		s_command
 */
 bool				init_command(t_command *command);
 int					read_command(t_command *command, t_term *term);
+int					run_command(t_command *command);
 int					switch_command(t_command *command, t_term *term, int key);
 void				clear_command(t_command *command);
+bool				validate_command(t_command *command);
+char				**split_command(t_string *line);
+void				clear_tokens(char **tokens);
 
 /*
 **	command_utils

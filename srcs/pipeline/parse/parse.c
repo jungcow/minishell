@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipeline.c                                         :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 17:13:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 14:18:37 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/04/27 17:48:53 by seunghoh          #+#    #+#             */
+/*   Updated: 2021/04/28 00:44:33 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "pipeline/pipeline.h"
+#include "libft.h"
 
-void		init_pipeline(t_pipeline *pipeline)
+int		parse_pipeline(char	*token)
 {
-	pipeline->operations = NULL;
-	pipeline->length = 0;
-}
-
-void		clear_pipeline(t_pipeline *pipeline)
-{
-	int		i;
-
-	i = 0;
-	while (i < pipeline->length)
-		clear_operation(&pipeline->operations[i++]);
-	free(pipeline->operations);
-	pipeline->operations = NULL;
-	pipeline->length = 0;
+    printf("\nToken : [");
+	while (*token != '\0')
+		printf("%c", *token++);
+    printf("]\n");
+	return (0);
 }
