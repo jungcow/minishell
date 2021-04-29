@@ -95,16 +95,25 @@ bool		validate_command(t_command *command)
 	return (true);
 }
 
-bool	validate_newline(char *dump, int i)
+bool	validate_newline(char *dump, int pos)
 {
+	bool	is_space;
+	int		i;
+
+	i = pos - 1;
+	is_space = true;
 	while (i >= 0)
 	{
 		if (ft_strchr("<>|", dump[i]) != NULL)
-		{
-				unexpected_token(NEWLINE);
-				return (false);
-		}
+			break ;
+		if (ft_strchr(" \n", dump[i]) == NULL)
+			is_space = false;
 		i--;
 	}
-	return (true);
+	if (is_space)
+		unexpected_token(NEWLINE);
+	return (!is_space);
 }
+
+
+
