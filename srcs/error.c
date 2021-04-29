@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction.h                                      :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 16:25:50 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/29 23:43:04 by seunghoh         ###   ########.fr       */
+/*   Created: 2021/04/29 23:27:47 by seunghoh          #+#    #+#             */
+/*   Updated: 2021/04/30 00:06:28 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INSTRUCTION_H
-# define INSTRUCTION_H
+#include <unistd.h>
+#include "libft.h"
+#include "error/error.h"
 
-# include <stdbool.h>
-# include "parse/pipeline.h"
-
-typedef struct	s_instruction
+void	unexpected_token(char *token)
 {
-	t_pipeline	*pipelines;
-	int			length;
-}				t_instruction;
-
-void			init_instruction(t_instruction *instruction);
-int				parse_instruction(t_instruction *instruction,
-									t_string *command);
-void			clear_instruction(t_instruction *instruction);
-#endif
+	write(2, TOKEN_ERR, ft_strlen(TOKEN_ERR));
+	write(2, " '", 2);
+	write(2, token, ft_strlen(token));
+	write(2, "'\n", 2);
+}

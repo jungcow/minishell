@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:26:27 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 23:08:50 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/30 00:35:35 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,21 @@ int			empty_command(t_command *command)
 			break ;
 		i++;
 	}
-	if (i == command->line.length - 2)
+	if (i == command->line.length - 1)
 		return (1);
 	return (0);
+}
+
+void		refactor_command(t_command *command)
+{
+	int		i;
+
+	i = 0;
+	while (i < command->line.length)
+	{
+		if (command->line.content[i] == '>')
+			if (command->line.content[i + 1] == '|')
+				command->line.content[i + 1] = ' ';
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:13:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 22:11:20 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/29 02:23:22 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void		init_pipeline(t_pipeline *pipeline)
 
 int			parse_pipeline(t_pipeline *pipeline, char **tokens)
 {
+	if (!validate_pipeline(tokens))
+		return (0);
 	(void)pipeline;
-	(void)tokens;
 	return (1);
 }
 

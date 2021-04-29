@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:26:26 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 23:18:02 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/29 23:42:39 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int			parse_instruction(t_instruction *instruction, t_string *command)
 	char	**tokens;
 	int		flag;
 
-	if (!validate_instruction(command))
-		return (0);
-	if (!validate_newline(command))
-		return (0);
+	//if (!validate_instruction(command))
+	//	return (0);
+	//if (!validate_newline(command))
+	//	return (0);
 	tokens = split_tokens(command->content, command->length);
 	if (tokens == NULL)
 		return (-1);

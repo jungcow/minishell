@@ -27,6 +27,8 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				end.c \
 				history.c \
 				term_utils.c \
+				validate.c \
+				validate_util.c \
 				)
 
 
@@ -36,8 +38,8 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 
 PARSE_SRCS = $(addprefix ./srcs/parse/, \
 				instruction.c \
-				instruction_util.c \
 				pipeline.c \
+				pipeline_util.c \
 				operation.c \
 				parse_util.c \
 				split.c \
@@ -48,6 +50,7 @@ PARSE_SRCS = $(addprefix ./srcs/parse/, \
 ##########################################################
 
 SRCS = ./srcs/minishell.c \
+	   ./srcs/error.c \
 		$(COMMAND_SRCS) \
 		$(PARSE_SRCS)
 

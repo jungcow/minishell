@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/29 01:28:04 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/29 20:25:29 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int		run_command(t_command *command)
 	t_instruction	instruction;
 	int				flag;
 
+	if (command->line.length < 2)
+		return (0);
 	init_instruction(&instruction);
 	flag = parse_instruction(&instruction, &command->line);
 	if (flag == -1)

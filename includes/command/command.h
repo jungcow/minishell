@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/29 01:24:04 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/30 01:07:39 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int					apply_general_key(t_command *command, t_term *term,
 int					apply_history_key(t_command *command, t_term *term,
 																	int key);
 int					empty_command(t_command *command);
+void				refactor_command(t_command *command);
 
 /*
 **	cursor_utils
@@ -101,5 +102,15 @@ int					add_history(t_command *command, char *line, size_t len);
 **	control_term
 */
 void				init_term_size(t_command *command, t_term *term);
+
+/*
+**	validate
+*/
+bool				validate_command(t_command *command);
+bool				validate_semicolon(char *dump, int i);
+bool				validate_pipe(char *dump, int i);
+bool				validate_input_redirect(char *dump, int i);
+bool				validate_output_redirect(char *dump, int i);
+bool				validate_newline(char *dump, int i);
 
 #endif
