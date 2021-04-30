@@ -193,3 +193,7 @@ int main(int argc, char *argv[])
 1. multi pipeline 의 구현 과정을 학습
 	- [multi pipeline 참고자료1](https://stackoverflow.com/questions/916900/having-trouble-with-fork-pipe-dup2-and-exec-in-c/)
 	- [multi pipeline 참고자료2](https://stackoverflow.com/questions/17630247/coding-multiple-pipe-in-c)
+
+### 21.04.30(금) 학습내용
+	- [42 minishell 허용 함수 정리한 블로그](https://42kchoi.tistory.com/259)
+	- [dup2 을 이용한 pipe 설명 중 가장 이해가 쉬웠던 설명들 및 여러 프로세스를 확인하기 위한 리눅스 명령어들을 알려준 블로그](https://codingdog.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-dup2-%ED%95%A8%EC%88%98-%ED%8C%8C%EC%9D%BC-%EB%94%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%84%B0%EB%A5%BC-%EB%B3%B5%EC%82%AC%ED%95%9C%EB%8B%A4)

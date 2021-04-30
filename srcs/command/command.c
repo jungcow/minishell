@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 19:38:27 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 07:08:10 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <fcntl.h>
 #include "command/command.h"
 #include "parse/instruction.h"
+#include "execute/execute.h"
 
 bool	init_command(t_command *command)
 {
@@ -98,6 +99,7 @@ int		run_command(t_command *command)
 		return (-1);
 	}
 	// execute instruction gogo
+	execute_instruction(&instruction); //return int
 	clear_instruction(&instruction);
 	return (1);
 }

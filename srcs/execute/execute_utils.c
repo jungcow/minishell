@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_process.c                                    :+:      :+:    :+:   */
+/*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 19:29:41 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/28 19:30:30 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/05/01 04:51:02 by jungwkim          #+#    #+#             */
+/*   Updated: 2021/05/01 07:16:50 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipeline/pipeline.h"
+#include <sys/stat.h>
+#include <dirent.h>
+#include "execute/execute.h"
 
 int		has_file(char *path, char *filename)
 {
 	DIR				*dir;
 	struct dirent	*entry;
 
-	dir = opendir(path[idx]);
+	dir = opendir(path);
 	if (dir == NULL)
 		return (0);
-	while (entry = readdir(dir))
+	while ((entry = readdir(dir)))
+	{
 		if (ft_strcmp(entry->d_name, filename) == 0)
+		{
+			closedir(dir);
 			return (1);
+		}
+	}
+	closedir(dir);
 	return (0);
 }
 
@@ -30,7 +38,6 @@ int		check_parse_necessary(char *filename)
 {
 	struct stat	dump;
 	char		*command;
-	char		*
 	int			i;
 
 	command = filename;
@@ -40,13 +47,11 @@ int		check_parse_necessary(char *filename)
 		if (command[i] == '/')
 		{
 			command[i] = '\0';
-			if (stat(command, &dump) != -1)
-				if (has_file(command, filename))
-					return (1);
-				else
-					break ;
-			else
-				break ;
+			if (stat(command, &dump) < 0)
+				return (0);
+			if (has_file(command, filename))
+				return (1);
+			break ;
 		}
 	}
 	return (0);
@@ -55,7 +60,7 @@ int		check_parse_necessary(char *filename)
 char	*parse_path(char *filename)
 {
 	char	**path;
-	char	*tmp;
+	char	*dir;
 	int		i;
 
 	path = ft_split(getenv("PATH"), ':');
@@ -65,16 +70,37 @@ char	*parse_path(char *filename)
 		return (ft_strdup(""));
 	i = -1;
 	while (path[++i])
+	{
 		if (has_file(path[i], filename))
 		{
-			tmp = ft_strdup(path[i]);
-			if (tmp == NULL)
+			dir = ft_strdup(path[i]);
+			if (dir == NULL)
 				return (NULL);
-			break;
+			break ;
 		}
+	}
 	i = -1;
 	while (path[++i])
 		free(path[i]);
 	free(path);
-	return (tmp);
+	return (dir);
+}
+
+char	*get_path(t_operation *operation)
+{
+	char	*dir;
+
+	dir = parse_path(operation->argv[0]);
+	if (dir == NULL)
+		return (NULL);
+	dir = ft_strjoin(dir, operation->argv[0]);
+	if (dir == NULL)
+		return (NULL);
+	return (dir);
+}
+
+void	close_fds(int *fd)
+{
+	close(fd[0]);
+	close(fd[1]);
 }

@@ -43,6 +43,15 @@ PARSE_SRCS = $(addprefix ./srcs/parse/, \
 				parse_util.c \
 				split.c \
 				)
+##########################################################
+# Execute Part                                           #
+##########################################################
+EXECUTE_SRCS = $(addprefix ./srcs/execute/, \
+				execute.c \
+				execute_utils.c \
+				process.c \
+				child_process.c \
+				)
 
 ##########################################################
 # General Rule                                           #
@@ -51,7 +60,8 @@ PARSE_SRCS = $(addprefix ./srcs/parse/, \
 SRCS = ./srcs/minishell.c \
 	   ./srcs/error.c \
 		$(COMMAND_SRCS) \
-		$(PARSE_SRCS)
+		$(PARSE_SRCS) \
+		$(EXECUTE_SRCS) \
 
 OBJS = $(SRCS:.c=.o)
 

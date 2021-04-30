@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 03:51:30 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 22:56:14 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 07:15:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strjoin(const char *s1, const char *s2);
 
 #endif
