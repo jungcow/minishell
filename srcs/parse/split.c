@@ -6,10 +6,11 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 23:41:57 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 21:48:39 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/30 22:39:03 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
 #include "parse/parse_util.h"

@@ -6,10 +6,11 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 19:33:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 00:27:43 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/30 22:06:29 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdbool.h>
 #include "libft.h"
 #include "parse/operation.h"
@@ -22,6 +23,17 @@ void	init_operation(t_operation *operation)
 	operation->argv = NULL;
 	operation->redirects = NULL;
 	operation->len_redirects = 0;
+}
+
+bool	parse_operations(t_operation *operations, char **tokens)
+{
+	(void)operations;
+	while (*tokens)
+	{
+		printf("operation : [%s]\n", *tokens);
+		tokens++;
+	}
+	return (true);
 }
 
 void	clear_operation(t_operation *operation)

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/29 20:25:29 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:38:27 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,17 @@ int		switch_command(t_command *command, t_term *term, int key)
 int		run_command(t_command *command)
 {
 	t_instruction	instruction;
-	int				flag;
+	bool			flag;
 
 	if (command->line.length < 2)
 		return (0);
 	init_instruction(&instruction);
 	flag = parse_instruction(&instruction, &command->line);
-	if (flag == -1)
+	if (flag == false)
 	{
 		clear_instruction(&instruction);
 		return (-1);
 	}
-	else if (flag == 0 || empty_command(command))
-		return (0);
 	// execute instruction gogo
 	clear_instruction(&instruction);
 	return (1);

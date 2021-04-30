@@ -6,12 +6,13 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:26:26 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/29 23:42:39 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:41:59 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include "libft.h"
 #include "parse/parse_util.h"
 #include "parse/operation.h"
@@ -44,24 +45,45 @@ bool		create_instruction(t_instruction *instruction, char **tokens)
 	return (true);
 }
 
-int			parse_instruction(t_instruction *instruction, t_string *command)
+void		refactor_instruction(t_string *command)
+{
+	int		i;
+
+	i = 0;
+	while (i < command->length)
+	{
+		if (command->content[i] == 34)
+			i = skip_quote(command->content, command->length, i);
+		else if (command->content[i] == 39)
+			i = skip_dquote(command->content, command->length, i);
+		else if (command->content[i] == ';')
+			command->content[i] = '\0';
+		i++;
+	}
+	--i;
+	while (--i >= 0)
+		if (command->content[i] == ' ' ||
+			command->content[i] == '\n')
+			command->content[i] = '\0';
+		else
+			break ;
+}
+
+bool		parse_instruction(t_instruction *instruction, t_string *command)
 {	
 	char	**tokens;
-	int		flag;
+	bool	flag;
 
-	//if (!validate_instruction(command))
-	//	return (0);
-	//if (!validate_newline(command))
-	//	return (0);
+	refactor_instruction(command);
 	tokens = split_tokens(command->content, command->length);
 	if (tokens == NULL)
-		return (-1);
+		return (false);
 	if (!create_instruction(instruction, tokens))
 	{
 		clear_tokens(tokens);
-		return (-1);
+		return (false);
 	}
-	flag = parse_pipeline(instruction->pipelines, tokens);
+	flag = parse_pipelines(instruction->pipelines, tokens);
 	clear_tokens(tokens);
 	return (flag);
 }

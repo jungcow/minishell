@@ -6,13 +6,14 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:20:57 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/28 23:22:38 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/04/30 22:06:59 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPERATION_H
 # define OPERATION_H
 
+# include <stdbool.h>
 # include "libft.h"
 
 typedef struct	s_redirect
@@ -30,6 +31,7 @@ typedef struct	s_operation
 }				t_operation;
 
 void			init_operation(t_operation *operation);
+bool			parse_operations(t_operation *operation, char **tokens);
 void			clear_operation(t_operation *operation);
 
 #endif
