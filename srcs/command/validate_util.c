@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 23:15:41 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 01:24:06 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 04:03:08 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,3 @@ bool	validate_output_redirect(char *dump, int pos)
 	}
 	return (!is_space);
 }
-

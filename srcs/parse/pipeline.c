@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:13:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 22:42:52 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 03:47:03 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		refactor_pipeline(char *token)
 		else if (token[i] == 39)
 			i = skip_dquote(token, length, i);
 		else if (token[i] == '>' && token[i + 1] == '|')
-		   token[i + 1] = ' ';	
+			token[i + 1] = ' ';
 		else if (token[i] == '|')
 			token[i] = '\0';
 		i++;

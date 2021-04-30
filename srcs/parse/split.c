@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 23:41:57 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 22:39:03 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 03:45:28 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char		**split_tokens(char *line, int length)
 void		clear_tokens(char **tokens)
 {
 	int		i;
-	
+
 	i = 0;
 	while (tokens[i] != NULL)
 		free(tokens[i++]);

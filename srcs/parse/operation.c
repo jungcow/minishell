@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 19:33:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 22:06:29 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 03:45:43 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <stdbool.h>
 #include "libft.h"
 #include "parse/operation.h"
-
-// 매우 중요 >| 이거 그냥 리다이렉션이랑 똑같은표시
 
 void	init_operation(t_operation *operation)
 {

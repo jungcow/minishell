@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:17:01 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/29 23:16:37 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 03:49:47 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +14,6 @@
 #include "libft.h"
 #include "command/command.h"
 #include "error/error.h"
-
 
 static char	*dump_command(t_command *command)
 {
@@ -35,7 +33,7 @@ static char	*dump_command(t_command *command)
 			if (quote_status == 0)
 				quote_status = dump[i];
 			else if (quote_status == dump[i])
-			quote_status = 0;
+				quote_status = 0;
 			dump[i] = '*';
 		}
 		else if (quote_status)
@@ -95,7 +93,7 @@ bool		validate_command(t_command *command)
 	return (true);
 }
 
-bool	validate_newline(char *dump, int pos)
+bool		validate_newline(char *dump, int pos)
 {
 	bool	is_space;
 	int		i;
@@ -114,6 +112,3 @@ bool	validate_newline(char *dump, int pos)
 		unexpected_token(NEWLINE);
 	return (!is_space);
 }
-
-
-

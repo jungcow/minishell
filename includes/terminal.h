@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 06:05:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/20 23:06:37 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/01 04:05:53 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ typedef struct		s_pos
 
 typedef struct		s_cp
 {
-	char			*cm; //move curser
-	char			*im; //turn on insert mode
-	char			*ei; //turn off insert mode (actually, it is switch)
-	char			*cd; // delete all lines below the cursor
-	char			*ce; // delete all characters before cursor(one line)
-	char			*dc; // delete one characters at cursors
+	char			*cm;
+	char			*im;
+	char			*ei;
+	char			*cd;
+	char			*ce;
+	char			*dc;
 }					t_cp;
 
 typedef struct		s_term

@@ -6,15 +6,15 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:56:31 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 17:53:12 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 04:08:18 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_UTIL_H
 # define PARSE_UTIL_H
 
-#include <stdbool.h>
-#include "libft.h"
+# include <stdbool.h>
+# include "libft.h"
 
 int		skip_quote(char *str, int length, int start);
 int		skip_dquote(char *str, int length, int start);

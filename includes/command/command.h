@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 01:07:39 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 04:07:18 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int					apply_delete_key(t_command *command, t_term *term);
 int					apply_cursor_key(t_command *command, t_term *term, int key);
 int					apply_multicursor_key(t_command *command, t_term *term,
 																	int key);
-int					apply_ctrlcursor_key(t_command *command, t_term *term, int key);
+int					apply_ctrlcursor_key(t_command *command,
+											t_term *term, int key);
 int					apply_quote_key(t_command *command, t_term *term, int key);
 int					apply_end_key(t_command *command, t_term *term, int key);
 int					apply_general_key(t_command *command, t_term *term,
@@ -89,8 +90,10 @@ void				refactor_command(t_command *command);
 /*
 **	cursor_utils
 */
-int					move_cursor_wordby(t_command *command, t_term *term, int key);
-int					move_cursor_lineby(t_command *command, t_term *term, int key);
+int					move_cursor_wordby(t_command *command,
+										t_term *term, int key);
+int					move_cursor_lineby(t_command *command,
+										t_term *term, int key);
 
 /*
 **	control_history

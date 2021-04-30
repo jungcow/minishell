@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 01:10:23 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/23 14:40:30 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/01 04:11:02 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,10 @@ int			alloc_line(char **line, t_backup *backup, ssize_t flag)
 	*line = ft_strndup(backup->str, flag);
 	if (!(*line))
 		return (0);
-	//if (!(ptr = ft_strndup(backup->str + flag + 1, backup->sum)))
 	ptr = ft_strndup(backup->str + flag + 1, backup->sum);
 	if (!ptr)
 		return (0);
 	free(backup->str);
-	//if (!(backup->tmp = (char *)malloc(sizeof(char) * backup->sum)))
 	backup->tmp = (char *)malloc(sizeof(char) * backup->sum);
 	if (!backup->tmp)
 		return (0);
