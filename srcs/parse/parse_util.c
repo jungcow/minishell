@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:51:29 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 17:52:58 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 19:13:14 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		skip_space(char *str, int length, int start)
 {
 	while (start < length)
 	{
-		if (str[start] != ' ')
+		if (str[start] != ' ' && str[start] != '\n')
 			return (start - 1);
 		start++;
 	}

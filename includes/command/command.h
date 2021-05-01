@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/01 04:07:18 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 19:09:41 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void				init_term_size(t_command *command, t_term *term);
 bool				validate_command(t_command *command);
 bool				validate_semicolon(char *dump, int i);
 bool				validate_pipe(char *dump, int i);
+bool				validate_redirect(char *dump, int i);
 bool				validate_input_redirect(char *dump, int i);
 bool				validate_output_redirect(char *dump, int i);
 bool				validate_newline(char *dump, int i);

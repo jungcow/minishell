@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:17:01 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/01 03:49:47 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 19:09:23 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,17 @@ static bool	validate_token(char *dump)
 	bool	flag;
 
 	i = 0;
+	flag = true;
 	while (dump[i] != '\0')
 	{
-		flag = true;
 		if (dump[i] == ';')
 			flag = validate_semicolon(dump, i);
 		else if (dump[i] == '|')
 			flag = validate_pipe(dump, i);
-		else if (ft_strchr("<", dump[i]) != NULL)
-			flag = validate_input_redirect(dump, i);
-		else if (dump[i] == '>')
+		else if (dump[i] == '<' || dump[i] == '>')
 		{
-			flag = validate_output_redirect(dump, i);
-			if (dump[i + 1] == '>')
+			flag = validate_redirect(dump, i);
+			if (dump[i] == '>' && dump[i + 1] == '>')
 				i++;
 		}
 		if (flag == false)
