@@ -6,11 +6,10 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 17:13:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/01 03:47:03 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:22:17 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 #include "parse/pipeline.h"
 #include "parse/parse_util.h"
@@ -53,8 +52,8 @@ bool		parse_pipeline(t_pipeline *pipeline, char **tokens)
 	pipeline->operations = (t_operation *)malloc(sizeof(t_operation) * i);
 	if (pipeline->operations == NULL)
 		return (false);
-	i = 0;
 	pipeline->length = i;
+	i = 0;
 	while (i < pipeline->length)
 	{
 		init_operation(&pipeline->operations[i]);
