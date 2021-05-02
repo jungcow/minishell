@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/02 17:04:54 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/02 19:27:37 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int		run_command(t_command *command)
 		clear_instruction(&instruction);
 		return (-1);
 	}
-	// execute instruction gogo
 	execute_instruction(&instruction); //return int
 	clear_instruction(&instruction);
 	return (1);

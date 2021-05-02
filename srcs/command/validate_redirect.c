@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 19:04:16 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/01 19:19:51 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/02 18:02:38 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,38 +72,8 @@ bool	validate_output_redirect(char *dump, int pos)
 	return (!is_space);
 }
 
-bool	validate_fd(char *dump, int i)
-{
-	bool	digit;
-	int		pos;
-
-	pos = i;
-	digit = false;
-	while (--i >=0 && ft_isdigit(dump[i]))
-		digit = true;
-	while (i >=0 && (dump[i] == ' ' || dump[i] == '\n'))
-		i--;
-	if (i >= 0 && digit)
-	{
-		dump[pos] = '\0';
-		if (dump[i] == '>' || dump[i] == '<')
-		{
-			i++;
-			while (dump[i] == ' ' || dump[i] == '\n')
-				i++;
-			while (dump[i] == '0' && dump[i] != '<' && dump[i] != '>')
-				i++;
-			unexpected_token(dump + i);
-			return (false);
-		}
-	}
-	return (true);
-}
-
 bool	validate_redirect(char *dump, int i)
 {
-	if (!validate_fd(dump, i))
-		return (false);
 	if (dump[i] == '<')
 		return (validate_input_redirect(dump, i));
 	else
