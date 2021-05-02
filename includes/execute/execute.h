@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:47:30 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/01 07:17:19 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/02 04:37:15 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,28 @@
 # define HAVE_PIPE 1
 
 # include "parse/instruction.h"
-# include "execute/execute_utils.h"
+# include "execute/process.h"
+# include "environ.h"
+
+extern char **g_environ;
 
 int		execute_instruction(t_instruction *instruction);
 
+/*
+**		process
+*/
 int		execute_process(pid_t *process, t_pipeline *pipelines);
 int		execute_child_process(t_pipeline *pipelines,
 							int *new_fd, int *old_fd, int idx);
-int		create_process(pid_t **process, int num);
-int		wait_process(pid_t *process, int num);
-void	clear_process(pid_t **process);
 
+/*
+**		environ
+*/
+int		check_envset(t_pipeline *pipelines);
+
+/*
+**		path
+*/
 char	*get_path(t_operation *operation);
 
 #endif

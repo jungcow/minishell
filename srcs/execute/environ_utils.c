@@ -1,34 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   environ_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 19:09:36 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 04:00:15 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/05/02 03:51:39 by jungwkim          #+#    #+#             */
+/*   Updated: 2021/05/02 03:56:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "execute/execute.h"
+#include "libft.h"
 
-int		execute_instruction(t_instruction *instruction)
+void	clear_envset(char **envset)
 {
-	pid_t		*process;
-	int			i;
+	int		i;
 
 	i = 0;
-	while (i < instruction->length)
+	while (envset[i])
 	{
-		if (!check_envset(instruction->pipelines))
-			return (0);
-		process = NULL;
-		if (!create_process(&process, instruction->pipelines[i].length))
-			return (0);
-		if (!execute_process(process, &instruction->pipelines[i]))
-			return (0);
-		clear_process(&process);
+		free(envset[i]);
 		i++;
 	}
+	free(envset);
+}
+
+int		dup_envset(char **env, char *str)
+{
+	free(*env);
+	*env = ft_strdup(str);
+	if (*env == NULL)
+		return (0);
 	return (1);
+}
+
+int		count_envset(char *arg)
+{
+	int		i;
+	int		num;
+
+	i = 0;
+	num = 0;
+	while (arg[i])
+	{
+		if (arg[i] == '$' && (arg[i + 1] != '$' && arg[i + 1] != '\0'))
+			num++;
+		i++;
+	}
+	return (num);
 }

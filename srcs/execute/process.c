@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 03:21:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/01 07:19:35 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/02 15:42:22 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int		create_process(pid_t **process, int num)
 {
-	printf("num: %d\n", num);
 	*process = (pid_t *)malloc(sizeof(pid_t) * num);
 	if (*process == NULL)
 		return (0);
@@ -52,22 +51,16 @@ int		execute_process(pid_t *process, t_pipeline *pipelines)
 	i = -1;
 	while (++i < pipelines->length)
 	{
-		if (pipelines->length > 1)
-			if (pipe(new_fd) < 0)
-				return (0);
+		if ((pipelines->length > 1) && (pipe(new_fd) < 0))
+			return (0);
 		process[i] = fork();
 		if (process[i] < 0)
 			return (0);
-		else if (process[i] == 0)
-		{
-			if (!execute_child_process(pipelines, new_fd, old_fd, i))
-				return (0);
-		}
-		else
-		{
-			if ((i > 0) && (pipelines->length > 1))
-				close_fds(old_fd);
-		}
+		if (process[i] == 0 &&
+				!execute_child_process(pipelines, new_fd, old_fd, i))
+			return (0);
+		else if (process[i] > 0 && (i > 0) && (pipelines->length > 1))
+			close_fds(old_fd);
 		old_fd[0] = new_fd[0];
 		old_fd[1] = new_fd[1];
 	}

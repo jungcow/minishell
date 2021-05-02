@@ -35,7 +35,6 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 ##########################################################
 # Parse Part                                             #
 ##########################################################
-
 PARSE_SRCS = $(addprefix ./srcs/parse/, \
 				instruction.c \
 				pipeline.c \
@@ -43,14 +42,17 @@ PARSE_SRCS = $(addprefix ./srcs/parse/, \
 				parse_util.c \
 				split.c \
 				)
+
 ##########################################################
 # Execute Part                                           #
 ##########################################################
 EXECUTE_SRCS = $(addprefix ./srcs/execute/, \
 				execute.c \
-				execute_utils.c \
 				process.c \
 				child_process.c \
+				process_utils.c \
+				environ.c \
+				environ_utils.c \
 				)
 
 ##########################################################

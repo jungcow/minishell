@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils.h                                    :+:      :+:    :+:   */
+/*   process.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/01 07:00:25 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/01 07:16:39 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/05/02 04:18:05 by jungwkim          #+#    #+#             */
+/*   Updated: 2021/05/02 04:25:06 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_UTILS_H
-# define EXECUTE_UTILS_H
+#ifndef PROCESS_H
+# define PROCESS_H
 
-# include "libft.h"
+# include <unistd.h>
+
+int		create_process(pid_t **process, int num);
+int		wait_process(pid_t *process, int num);
+void	clear_process(pid_t **process);
 
 char	*parse_path(char *filename);
 int		check_parse_necessary(char *filename);
