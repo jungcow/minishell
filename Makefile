@@ -29,6 +29,7 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				term_utils.c \
 				validate.c \
 				validate_util.c \
+				validate_redirect.c \
 				)
 
 
@@ -41,6 +42,7 @@ PARSE_SRCS = $(addprefix ./srcs/parse/, \
 				operation.c \
 				parse_util.c \
 				split.c \
+				redirection.c \
 				)
 
 ##########################################################

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:26:27 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 00:35:35 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 03:52:10 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ int			apply_end_key(t_command *command, t_term *term, int key)
 
 int			empty_command(t_command *command)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (command->line.length == 1)
 		return (1);
 	while (i < command->line.length)

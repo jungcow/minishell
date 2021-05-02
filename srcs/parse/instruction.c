@@ -6,13 +6,12 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:26:26 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/30 19:41:59 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:13:13 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include <stdio.h>
 #include "libft.h"
 #include "parse/parse_util.h"
 #include "parse/operation.h"
@@ -70,7 +69,7 @@ void		refactor_instruction(t_string *command)
 }
 
 bool		parse_instruction(t_instruction *instruction, t_string *command)
-{	
+{
 	char	**tokens;
 	bool	flag;
 
