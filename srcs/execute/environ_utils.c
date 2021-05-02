@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:51:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 03:56:46 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/02 22:01:39 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ int		count_envset(char *arg)
 			num++;
 		i++;
 	}
+	if (*arg != '$')
+		num++;
 	return (num);
 }
