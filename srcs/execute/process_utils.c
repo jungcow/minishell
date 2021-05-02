@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 04:51:02 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 04:22:40 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:50:04 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ char	*get_path(t_operation *operation)
 	char	*dir;
 
 	dir = parse_path(operation->argv[0]);
+	if (dir == NULL)
+		return (NULL);
+	dir = ft_strjoin(dir, "/");
 	if (dir == NULL)
 		return (NULL);
 	dir = ft_strjoin(dir, operation->argv[0]);

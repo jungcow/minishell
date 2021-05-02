@@ -6,12 +6,12 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:09:36 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 04:00:15 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:50:51 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute/execute.h"
-
+#include <stdio.h>
 int		execute_instruction(t_instruction *instruction)
 {
 	pid_t		*process;

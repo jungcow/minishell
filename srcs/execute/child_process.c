@@ -6,12 +6,12 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 17:15:37 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:53:52 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute/execute.h"
-
+#include <stdio.h>
 int			execute_child_process(t_pipeline *pipelines,
 								int *new_fd, int *old_fd, int idx)
 {
@@ -35,6 +35,15 @@ int			execute_child_process(t_pipeline *pipelines,
 	{
 		dup2(old_fd[READ], STDIN_FILENO);
 		close_fds(old_fd);
+	}
+	printf("dir: %s\n", dir);
+	int i;
+
+	i = 0;
+	while (operation->argv[i])
+	{
+		printf("argv:%s\n", operation->argv[i]);
+		i++;
 	}
 	if (execve(dir, operation->argv, g_environ) < 0)
 		return (0);
