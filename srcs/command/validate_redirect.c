@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 19:04:16 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/02 18:02:38 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:42:20 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	validate_output_redirect(char *dump, int pos)
 		if (ft_strchr("<>", dump[i]) != NULL)
 		{
 			is_space = true;
-			break;
+			break ;
 		}
 		else if (ft_strchr(" \n", dump[i]) == NULL)
 			break ;

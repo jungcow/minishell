@@ -40,6 +40,7 @@ PARSE_SRCS = $(addprefix ./srcs/parse/, \
 				instruction.c \
 				pipeline.c \
 				operation.c \
+				operation_util.c \
 				parse_util.c \
 				split.c \
 				redirection.c \

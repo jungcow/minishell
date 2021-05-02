@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 19:33:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/02 19:28:54 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:07:15 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ void	init_operation(t_operation *operation)
 
 bool	create_operation(t_operation *operation, int argc)
 {
-	operation->argv = (char **)malloc(sizeof(char *) * argc);
+	operation->argv = (char **)malloc(sizeof(char *) * (argc + 1));
 	if (operation->argv == NULL)
 		return (false);
 	operation->argc = argc;
+	operation->argv[argc] = NULL;
 	while (--argc >= 0)
 		operation->argv[argc] = NULL;
 	return (true);
@@ -38,27 +39,23 @@ bool	create_operation(t_operation *operation, int argc)
 bool	parse_operations(t_operation *operations, char **tokens)
 {
 	int		i;
-	int		argc;
-	int		len_redirects;
 	bool	flag;
 
 	i = 0;
 	while (tokens[i] != NULL)
 	{
-		len_redirects = count_redirection(tokens[i]);
-		flag = create_redirection(operations + i, len_redirects);
+		flag = create_redirection(operations + i, count_redirection(tokens[i]));
 		if (!flag)
 			break ;
 		flag = parse_redirection(operations[i].redirects, tokens[i]);
 		if (!flag)
 			break ;
-		(void)argc;
-		/*argc = count_operation(tokens[i]);
-		if (!create_operation(operations + i, argc))
-		{
-			clear_operation(operations);
-			return (false);
-		}*/
+		flag = create_operation(operations + i, count_operation(tokens[i]));
+		if (!flag)
+			break ;
+		flag = parse_operation(operations[i].argv, tokens[i]);
+		if (!flag)
+			break ;
 		i++;
 	}
 	return (flag);

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:43:22 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/02 19:29:05 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/02 19:54:32 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ bool		parse_redirect_to(t_redirect *redirect, char *token, int *i)
 	start = *i;
 	while (token[*i] != '\0')
 	{
-		if (ft_strchr(";|<> ", token[*i]) != NULL)
+		if (ft_strchr("<> \n", token[*i]) != NULL)
 			break ;
 		else if (token[*i] == 34)
 			*i = skip_quote(token, ft_strlen(token), *i);

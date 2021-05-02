@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:20:57 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/02 19:18:31 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:01:29 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct	s_operation
 
 void			init_operation(t_operation *operation);
 bool			parse_operations(t_operation *operation, char **tokens);
+int				count_operation(char *token);
+bool			parse_operation(char **argv, char *token);
 void			clear_operation(t_operation *operation);
 bool			create_redirection(t_operation *operation, int count);
 int				count_redirection(char *token);
