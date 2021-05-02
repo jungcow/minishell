@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:47:30 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 04:37:15 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/02 17:15:13 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "execute/process.h"
 # include "environ.h"
 
-extern char **g_environ;
+char	**g_environ;
 
 int		execute_instruction(t_instruction *instruction);
 

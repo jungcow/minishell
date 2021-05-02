@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/01 17:23:04 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/02 17:15:20 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "libft.h"
 #include "terminal.h"
 #include "command/command.h"
+#include "execute/execute.h"
 
 int		tputs_wrapper(int tc)
 {
@@ -84,8 +85,11 @@ void	run_minishell(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }
 
-int		main(void)
+int		main(int argc, char **argv, char **env)
 {
+	(void)argc;
+	(void)argv;
+	g_environ = env;
 	run_minishell();
 	return (0);
 }

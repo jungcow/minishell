@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:18:05 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 04:25:06 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/02 17:52:11 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	clear_process(pid_t **process);
 
 char	*parse_path(char *filename);
 int		check_parse_necessary(char *filename);
-int		has_file(char * path, char *filename);
+int		has_file(char *path, char *filename);
 void	close_fds(int *fd);
 
 #endif
