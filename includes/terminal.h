@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 06:05:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/01 04:05:53 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/02 22:15:27 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_term
 {
 	const char		*name;
 	struct termios	save_term;
+	struct termios	new_term;
 	t_cp			cp;
 	t_pos			pos;
 }					t_term;

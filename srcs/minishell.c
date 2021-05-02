@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/02 19:27:21 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/02 22:21:03 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,16 @@ int		init_termcap(t_cp *capability)
 
 int		init_minishell(t_term *term, t_command *command)
 {
-	struct termios	new_term;
-
 	if (!init_termcap(&term->cp) ||
 		!init_history(command))
 		return (0);
 	tcgetattr(STDIN_FILENO, &term->save_term);
-	new_term = term->save_term;
-	new_term.c_lflag &= ~ICANON;
-	new_term.c_lflag &= ~ECHO;
-	new_term.c_cc[VMIN] = 1;
-	new_term.c_cc[VTIME] = 0;
-	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
+	term->new_term = term->save_term;
+	term->new_term.c_lflag &= ~ICANON;
+	term->new_term.c_lflag &= ~ECHO;
+	term->new_term.c_cc[VMIN] = 1;
+	term->new_term.c_cc[VTIME] = 0;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term->new_term);
 	return (1);
 }
 
@@ -70,10 +68,12 @@ void	run_minishell(void)
 		return ;
 	while (42)
 	{
+		tcsetattr(STDIN_FILENO, TCSANOW, &term.new_term);
 		if (!init_command(&command))
 			break ;
 		if (!read_command(&command, &term))
 			break ;
+		tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 		if (!validate_command(&command))
 			break ;
 		if (run_command(&command) == -1)
