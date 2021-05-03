@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/04/28 01:06:51 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/03 22:48:58 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,12 @@ int		apply_delete_key(t_command *command, t_term *term)
 	delete_string(&command->temp, 0, &dump);
 	if (dump == QUOTE ||
 		dump == DOUBLE_QUOTE)
-		command->quote_status = !command->quote_status;
+	{
+		if (command->quote_status == 0)
+			command->quote_status = dump;
+		else if (command->quote_status == dump)
+			command->quote_status = 0;
+	}
 	refresh_command(command, term);
 	command->length--;
 	return (1);
