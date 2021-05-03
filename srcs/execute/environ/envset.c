@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 18:21:37 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/04 00:57:22 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 02:19:00 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int		init_envset(char **envset, char *arg, int flag)
 	num = count_envset(arg);
 	i = -1;
 	while (++i < num)
-		if (!dup_envset(&envset[i], strs[i]))
+		if (dup_str(&envset[i], strs[i]) < 0)
 		{
 			clear_strs(strs);
 			clear_strs(envset);
 			return (-1);
 		}
-	if (flag && !dup_envset(&envset[i], "$"))
+	if (flag && dup_str(&envset[i], "$") < 0)
 	{
 		clear_strs(strs);
 		clear_strs(envset);

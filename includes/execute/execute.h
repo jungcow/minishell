@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:47:30 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/04 00:53:33 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 02:15:10 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	**g_environ;
 
 int		execute_instruction(t_instruction *instruction);
 void	clear_strs(char **strs);
+int		dup_str(char **dst, char *src);
 
 /*
 **		process
@@ -43,6 +44,6 @@ int		check_environ(t_pipeline *pipelines);
 /*
 **		path
 */
-char	*get_path(t_operation *operation);
+int		get_path(t_operation *operation, char **dir);
 
 #endif

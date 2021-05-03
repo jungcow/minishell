@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/04 00:47:16 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 02:13:33 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int			execute_child_process(t_pipeline *pipelines,
 	if (pipelines->length > 1)
 		type = HAVE_PIPE;
 	operation = &pipelines->operations[idx];
-	dir = get_path(operation);
-	if (dir == NULL)
+	if (get_path(operation, &dir) < 0)
 		return (-1);
 	if (type == HAVE_PIPE && (idx + 1 < pipelines->length))
 	{

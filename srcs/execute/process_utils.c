@@ -6,13 +6,14 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 04:51:02 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/04 01:02:41 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 02:16:57 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/stat.h>
 #include <dirent.h>
 #include "execute/execute.h"
+#include "error/error.h"
 #include "libft.h"
 
 int		has_file(char *path, char *filename)
@@ -60,49 +61,51 @@ int		check_parse_necessary(char *filename)
 	return (0);
 }
 
-char	*parse_path(char *filename)
+int		parse_path(char *filename, char **dir)
 {
 	char	**path;
-	char	*dir;
 	int		i;
-	int		ret;
 
+	*dir = NULL;
 	path = ft_split(getenv("PATH"), ':');
 	if (path == NULL)
-		return (NULL);
-	ret = check_parse_necessary(filename);
-	if (ret > 0)
-		return (ft_strdup(""));
-	else if (ret < 0)
-		return (NULL);
+		return (-1);
+	if (check_parse_necessary(filename))
+	{
+		if (dup_str(dir, "") < 0)
+			return (-1);
+		return (0);
+	}
 	i = -1;
-	dir = NULL;
 	while (path[++i])
 		if (has_file(path[i], filename))
 		{
-			dir = ft_strdup(path[i]);
-			if (dir == NULL)
-				return (NULL);
-			break ;
+			if (dup_str(dir, path[i]) < 0)
+				return (-1);
+			clear_strs(path);
+			return (1);
 		}
 	clear_strs(path);
-	return (dir);
+	return (0);
 }
 
-char	*get_path(t_operation *operation)
+int		get_path(t_operation *operation, char **dir)
 {
-	char	*dir;
+	int		ret;
 
-	dir = parse_path(operation->argv[0]);
-	if (dir == NULL)
-		return (NULL);
-	dir = ft_strjoin(dir, "/");
-	if (dir == NULL)
-		return (NULL);
-	dir = ft_strjoin(dir, operation->argv[0]);
-	if (dir == NULL)
-		return (NULL);
-	return (dir);
+	ret = parse_path(operation->argv[0], dir);
+	if (ret == 0)
+	{
+		command_not_found(operation->argv[0]);
+		return (0);
+	}
+	*dir = ft_strjoin(*dir, "/");
+	if (*dir == NULL)
+		return (-1);
+	*dir = ft_strjoin(*dir, operation->argv[0]);
+	if (*dir == NULL)
+		return (-1);
+	return (1);
 }
 
 void	close_fds(int *fd)
