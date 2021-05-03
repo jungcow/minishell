@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environ.c                                          :+:      :+:    :+:   */
+/*   envset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/02 03:46:24 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 15:53:54 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/05/03 18:21:37 by jungwkim          #+#    #+#             */
+/*   Updated: 2021/05/03 21:07:24 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include "execute/execute.h"
 #include "libft.h"
 
-int		create_envset(char ***envset, char *arg, int *flag)
+int		create_envset(char ***envset, char *env, int *flag)
 {
 	int		i;
 	int		j;
 
-	i = count_envset(arg);
-	if (arg[ft_strlen(arg) - 1] == '$')
+	i = count_envset(env);
+	if (env[ft_strlen(env) - 1] == '$')
 		*flag = 1;
 	*envset = (char **)malloc(sizeof(char *) * (i + (*flag) + 1));
 	if (*envset == NULL)
-		return (0);
+		return (-1);
 	j = -1;
 	while (++j < i + *flag)
 		(*envset)[j] = NULL;
@@ -40,7 +40,7 @@ int		init_envset(char **envset, char *arg, int flag)
 
 	strs = ft_split(arg, '$');
 	if (strs == NULL)
-		return (0);
+		return (-1);
 	num = count_envset(arg);
 	i = -1;
 	while (++i < num)
@@ -48,13 +48,13 @@ int		init_envset(char **envset, char *arg, int flag)
 		{
 			clear_envset(strs);
 			clear_envset(envset);
-			return (0);
+			return (-1);
 		}
 	if (flag && !dup_envset(&envset[i], "$"))
 	{
 		clear_envset(strs);
 		clear_envset(envset);
-		return (0);
+		return (-1);
 	}
 	envset[i + flag] = NULL;
 	clear_envset(strs);
@@ -63,7 +63,6 @@ int		init_envset(char **envset, char *arg, int flag)
 
 int		replace_envset(char **envset, char *arg)
 {
-	char	*value;
 	int		i;
 	int		num;
 
@@ -73,17 +72,8 @@ int		replace_envset(char **envset, char *arg)
 	num = count_envset(arg);
 	while (envset[++i] && i < num)
 	{
-		value = getenv(envset[i]);
-		if (!value && !dup_envset(&envset[i], ""))
-		{
-			clear_envset(envset);
-			return (0);
-		}
-		else if (value && !dup_envset(&envset[i], value))
-		{
-			clear_envset(envset);
-			return (0);
-		}
+		if (get_envstr(envset, i) < 0)
+			return (-1);
 	}
 	return (1);
 }
@@ -102,7 +92,7 @@ int		join_envset(char **envset, char **arg)
 	if (str == NULL)
 	{
 		clear_envset(envset);
-		return (0);
+		return (-1);
 	}
 	i = -1;
 	len = 0;
@@ -117,30 +107,22 @@ int		join_envset(char **envset, char **arg)
 	return (1);
 }
 
-int		check_envset(t_pipeline *pipeline)
+int		check_envset(char **env)
 {
-	char		**envset;
-	int			i;
-	int			j;
-	int			flag;
+	char	**envset;
+	int		flag;
+	int		ret;
 
-	i = -1;
-	while (++i < pipeline->length)
-	{
-		j = 0;
-		while (++j < pipeline->operations[i].argc)
-		{
-			flag = 0;
-			if (!create_envset(&envset, pipeline->operations[i].argv[j], &flag))
-				return (0);
-			if (!init_envset(envset, pipeline->operations[i].argv[j], flag))
-				return (0);
-			if (!replace_envset(envset, pipeline->operations[i].argv[j]))
-				return (0);
-			if (!join_envset(envset, &pipeline->operations[i].argv[j]))
-				return (0);
-			clear_envset(envset);
-		}
-	}
+	flag = 0;
+	ret = create_envset(&envset, *env, &flag);
+	if (ret >= 0)
+		ret = init_envset(envset, *env, flag);
+	if (ret >= 0)
+		ret = replace_envset(envset, *env);
+	if (ret >= 0)
+		ret = join_envset(envset, env);
+	clear_envset(envset);
+	if (ret < 0)
+		return (-1);
 	return (1);
 }

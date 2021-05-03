@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:47:30 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 17:15:13 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/03 19:21:56 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		execute_child_process(t_pipeline *pipelines,
 /*
 **		environ
 */
-int		check_envset(t_pipeline *pipelines);
+int		check_environ(t_pipeline *pipelines);
 
 /*
 **		path

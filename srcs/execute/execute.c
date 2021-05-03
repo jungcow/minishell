@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:09:36 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 22:22:03 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/03 18:16:43 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		execute_instruction(t_instruction *instruction)
 	i = 0;
 	while (i < instruction->length)
 	{
-		if (!check_envset(instruction->pipelines))
+		if (!check_environ(instruction->pipelines))
 			return (0);
 		process = NULL;
 		if (!create_process(&process, instruction->pipelines[i].length))

@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 04:51:02 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 20:50:04 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/03 21:17:49 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int		check_parse_necessary(char *filename)
 				return (1);
 			break ;
 		}
+		if (i == 0)
+			break ;
 	}
 	return (0);
 }

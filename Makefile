@@ -54,8 +54,11 @@ EXECUTE_SRCS = $(addprefix ./srcs/execute/, \
 				process.c \
 				child_process.c \
 				process_utils.c \
-				environ.c \
-				environ_utils.c \
+				environ/environ.c \
+				environ/envlist.c \
+				environ/envlist_utils.c \
+				environ/envset.c \
+				environ/envset_utils.c \
 				)
 
 ##########################################################
