@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 04:51:02 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/03 21:17:49 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 01:02:41 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,19 @@ char	*parse_path(char *filename)
 	char	**path;
 	char	*dir;
 	int		i;
+	int		ret;
 
 	path = ft_split(getenv("PATH"), ':');
 	if (path == NULL)
 		return (NULL);
-	if (check_parse_necessary(filename))
+	ret = check_parse_necessary(filename);
+	if (ret > 0)
 		return (ft_strdup(""));
+	else if (ret < 0)
+		return (NULL);
 	i = -1;
+	dir = NULL;
 	while (path[++i])
-	{
 		if (has_file(path[i], filename))
 		{
 			dir = ft_strdup(path[i]);
@@ -81,11 +85,7 @@ char	*parse_path(char *filename)
 				return (NULL);
 			break ;
 		}
-	}
-	i = -1;
-	while (path[++i])
-		free(path[i]);
-	free(path);
+	clear_strs(path);
 	return (dir);
 }
 

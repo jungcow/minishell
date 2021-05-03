@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:25:29 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/03 21:00:35 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 00:52:50 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ char					*get_alnum_envstr(char *env, char **noalnum);
 int						get_envstr(char **envset, int idx);
 int						dup_envset(char **env, char *str);
 int						count_envset(char *arg);
-void					clear_envset(char **envset);
 
 #endif

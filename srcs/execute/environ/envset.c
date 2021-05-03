@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 18:21:37 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/03 21:07:24 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 00:57:22 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ int		init_envset(char **envset, char *arg, int flag)
 	while (++i < num)
 		if (!dup_envset(&envset[i], strs[i]))
 		{
-			clear_envset(strs);
-			clear_envset(envset);
+			clear_strs(strs);
+			clear_strs(envset);
 			return (-1);
 		}
 	if (flag && !dup_envset(&envset[i], "$"))
 	{
-		clear_envset(strs);
-		clear_envset(envset);
+		clear_strs(strs);
+		clear_strs(envset);
 		return (-1);
 	}
 	envset[i + flag] = NULL;
-	clear_envset(strs);
+	clear_strs(strs);
 	return (1);
 }
 
@@ -91,7 +91,7 @@ int		join_envset(char **envset, char **arg)
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (str == NULL)
 	{
-		clear_envset(envset);
+		clear_strs(envset);
 		return (-1);
 	}
 	i = -1;
@@ -121,7 +121,7 @@ int		check_envset(char **env)
 		ret = replace_envset(envset, *env);
 	if (ret >= 0)
 		ret = join_envset(envset, env);
-	clear_envset(envset);
+	clear_strs(envset);
 	if (ret < 0)
 		return (-1);
 	return (1);

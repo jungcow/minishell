@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 03:21:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 20:51:09 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 00:54:49 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int		execute_process(pid_t *process, t_pipeline *pipelines)
 		if (process[i] < 0)
 			return (0);
 		if (process[i] == 0 &&
-				!execute_child_process(pipelines, new_fd, old_fd, i))
-			return (0);
+				execute_child_process(pipelines, new_fd, old_fd, i) < 0)
+			return (-1);
 		else if (process[i] > 0 && (i > 0) && (pipelines->length > 1))
 			close_fds(old_fd);
 		old_fd[0] = new_fd[0];
