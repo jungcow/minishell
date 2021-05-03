@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/04 03:16:25 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 03:42:28 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int			treat_pipeline(t_pipeline *pipelines,
 int			treat_redirect(t_operation *operation)
 {
 	int		i;
-	int		fd;
 	int		last_fd;
 
 	i = 0;
@@ -48,21 +47,22 @@ int			treat_redirect(t_operation *operation)
 	{
 		close(last_fd);
 		if (last_fd == STDIN_FILENO)
-			fd = open(operation->redirects[i].to, O_CREAT | O_RDONLY, 0644);
+			last_fd = open(operation->redirects[i].to,
+					O_CREAT | O_RDONLY, 0644);
 		else
 		{
 			if (operation->redirects[i].is_append == true)
-				fd = open(operation->redirects[i].to,
+				last_fd = open(operation->redirects[i].to,
 						O_CREAT | O_WRONLY | O_APPEND, 0644);
 			else
-				fd = open(operation->redirects[i].to, O_CREAT | O_WRONLY, 0644);
+				last_fd = open(operation->redirects[i].to,
+						O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		}
-		if (fd < 0)
+		if (last_fd < 0)
 			return (-1);
-		last_fd = fd;
 		i++;
 	}
-	return (1);
+	return (last_fd);
 }
 
 int			execute_child_process(t_pipeline *pipelines,
@@ -70,6 +70,7 @@ int			execute_child_process(t_pipeline *pipelines,
 {
 	t_operation		*operation;
 	char			*dir;
+	int				redirect_fd;
 
 	operation = &pipelines->operations[idx];
 	if (get_path(operation, &dir) < 0)
@@ -77,9 +78,13 @@ int			execute_child_process(t_pipeline *pipelines,
 	if (treat_pipeline(pipelines, new_fd, old_fd, idx) < 0)
 		return (-1);
 	if (operation->len_redirects)
-		if (treat_redirect(operation) < 0)
+	{
+		redirect_fd = treat_redirect(operation);
+		if (redirect_fd < 0)
 			return (-1);
+	}
 	if (execve(dir, operation->argv, g_environ) < 0)
 		return (0);
+	close(redirect_fd);
 	return (1);
 }
