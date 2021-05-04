@@ -8,12 +8,9 @@ LIB = -L./libft -lft $(CURSES)
 ##########################################################
 # Builtin Part                                           #
 ##########################################################
-ECHO = ./srcs/builtin/echo
-ECHO_SRCS = $(addprefix ./srcs/builtin/srcs/echo/, \
+BUILTIN_SRCS = $(addprefix ./srcs/builtin/, \
 				echo.c \
-			)
-ECHO_OBJS = $(ECHO_SRCS:.c=.o)
-
+				)
 
 ##########################################################
 # Command Part                                           #
@@ -31,7 +28,6 @@ COMMAND_SRCS = $(addprefix ./srcs/command/, \
 				validate_util.c \
 				validate_redirect.c \
 				)
-
 
 ##########################################################
 # Parse Part                                             #
@@ -70,6 +66,7 @@ SRCS = ./srcs/minishell.c \
 		$(COMMAND_SRCS) \
 		$(PARSE_SRCS) \
 		$(EXECUTE_SRCS) \
+		$(BUILTIN_SRCS) 
 
 OBJS = $(SRCS:.c=.o)
 
@@ -77,28 +74,21 @@ OBJS = $(SRCS:.c=.o)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 all : $(NAME)
-	touch .minish_history
 
-$(NAME) : $(OBJS) $(ECHO)
+$(NAME) : $(OBJS)
+	@ touch .minish_history > /dev/null 2>&1
 	make build_libft
 	$(CC) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
-
-
-$(ECHO) : $(ECHO_OBJS)
-	make build_libft
-	$(CC) $(ECHO_OBJS) $(LIB) $(CFLAGS) -o $(ECHO)
 
 build_libft : 
 	make -C ./libft
 
 clean :
 	make -C ./libft clean
-	rm -rf $(ECHO_OBJS)
 	rm -rf $(OBJS)
 
 fclean : clean
 	make -C ./libft fclean
-	rm -rf $(ECHO)
 	rm -rf $(NAME)
 
 re : fclean all

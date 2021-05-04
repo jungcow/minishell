@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:29:31 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/03 17:57:06 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:31:23 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <errno.h>
 #include "libft.h"
 
-int		main(int argc, char **argv)
+int		ft_echo(int argc, char **argv)
 {
 	int		i;
 	bool	new_line;

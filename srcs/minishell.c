@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/03 21:18:11 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:28:44 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include "terminal.h"
 #include "command/command.h"
 #include "execute/execute.h"
+
+int		g_status;
 
 int		tputs_wrapper(int tc)
 {
