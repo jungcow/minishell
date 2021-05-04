@@ -77,6 +77,7 @@ OBJS = $(SRCS:.c=.o)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 all : $(NAME)
+	touch .minish_history
 
 $(NAME) : $(OBJS) $(ECHO)
 	make build_libft
