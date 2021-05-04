@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/03 19:55:01 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/04 18:08:19 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		switch_command(t_command *command, t_term *term, int key)
 	else if (key == QUOTE || key == DOUBLE_QUOTE)
 		flag = apply_quote_key(command, term, key);
 	else if (key == CTRL_D || key == ENTER)
-		flag = apply_end_key(command, term, key);
+		flag = apply_end_key(command);
 	else
 		flag = apply_general_key(command, term, key);
 	return (flag);
