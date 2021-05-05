@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/05 20:28:54 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 21:27:54 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ void	run_minishell(void)
 {
 	t_term		term;
 
-	term.name = "seung-jung$>";
-	ft_pwd();
+	term.name = TERM_NAME;
 	if (!init_minishell(&term, &g_command))
 		return ;
 	while (42)
