@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/05 19:33:37 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:51:56 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "execute/execute.h"
 #include "builtin.h"
 
-int		g_status;
+t_command	g_command;
 
 int		tputs_wrapper(int tc)
 {
@@ -50,7 +50,7 @@ int		init_termcap(t_cp *capability)
 void	init_signal(void)
 {
 	signal(SIGINT, (void *)sigint_handler);
-	signal(SIGQUIT, (void*)sigquit_handler);
+	//signal(SIGQUIT, (void*)sigquit_handler);
 }
 
 int		init_minishell(t_term *term, t_command *command)
@@ -72,27 +72,26 @@ int		init_minishell(t_term *term, t_command *command)
 void	run_minishell(void)
 {
 	t_term		term;
-	t_command	command;
 
 	term.name = "seung-jung$>";
 	ft_pwd();
-	if (!init_minishell(&term, &command))
+	if (!init_minishell(&term, &g_command))
 		return ;
 	while (42)
 	{
 		tcsetattr(STDIN_FILENO, TCSANOW, &term.new_term);
-		if (!init_command(&command))
+		if (!init_command(&g_command))
 			break ;
-		if (!read_command(&command, &term))
+		if (!read_command(&g_command, &term))
 			break ;
 		tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
-		if (!validate_command(&command))
+		if (!validate_command(&g_command))
 			break ;
-		if (run_command(&command) == -1)
+		if (run_command(&g_command) == -1)
 			break ;
-		clear_command(&command);
+		clear_command(&g_command);
 	}
-	clear_command(&command);
-	clear_history(command.history, command.history_fd);
+	clear_command(&g_command);
+	clear_history(g_command.history, g_command.history_fd);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }

@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 06:05:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/02 22:15:27 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:59:36 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct		s_term
 }					t_term;
 
 int					tputs_wrapper(int tc);
-int					get_cursor_pos(t_term *term);
-
+void				run_minishell(void);
+void				sigquit_handler(void);
+void				sigint_handler(void);
 #endif

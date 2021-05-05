@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:10:56 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/04/29 01:28:46 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:01:25 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,5 @@ int		apply_general_key(t_command *command, t_term *term, int key)
 
 int		apply_quote_key(t_command *command, t_term *term, int key)
 {
-	if (command->quote_status == 0)
-		command->quote_status = key;
-	else if (command->quote_status == key)
-		command->quote_status = 0;
 	return (apply_general_key(command, term, key));
 }

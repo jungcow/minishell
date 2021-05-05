@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:39:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/05 19:35:53 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:45:04 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	sigint_handler(void)
 {
 	printf("siginal inturrupt!\n");
-	//ft_exit(1, NULL, NULL);
+	ft_exit(1, NULL, NULL);
 }
 
 void	sigquit_handler(void)

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/04 18:08:19 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:00:51 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ bool	init_command(t_command *command)
 {
 	bool		flag;
 
-	command->quote_status = 0;
 	command->command_status = false;
 	command->cursor = 0;
 	command->length = 0;
@@ -106,7 +105,6 @@ int		run_command(t_command *command)
 
 void	clear_command(t_command *command)
 {
-	command->quote_status = 0;
 	command->command_status = false;
 	command->cursor = 0;
 	command->length = 0;
