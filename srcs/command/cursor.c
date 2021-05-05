@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:17:49 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/05 20:01:12 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:43:12 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int		apply_cursor_key(t_command *command, t_term *term, int key)
 {
 	char		ch;
 
-	init_term_size(command, term);
 	if ((command->cursor > 0) && key == LEFT_ARROW)
 	{
 		delete_string(&command->line, command->line.length - 1, &ch);
@@ -67,6 +66,7 @@ int		apply_cursor_key(t_command *command, t_term *term, int key)
 	}
 	else if ((command->cursor < command->length) && key == RIGHT_ARROW)
 	{
+		init_term_size(command, term);
 		delete_string(&command->temp, 0, &ch);
 		if (!add_string(&command->line, command->line.length, ch))
 			return (-1);
