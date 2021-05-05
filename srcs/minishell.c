@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/04 18:28:44 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:33:37 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 #include <termcap.h>
 #include <curses.h>
 #include <stdlib.h>
+#include <signal.h>
 #include "libft.h"
 #include "terminal.h"
 #include "command/command.h"
 #include "execute/execute.h"
+#include "builtin.h"
 
 int		g_status;
 
@@ -45,11 +47,18 @@ int		init_termcap(t_cp *capability)
 	return (1);
 }
 
+void	init_signal(void)
+{
+	signal(SIGINT, (void *)sigint_handler);
+	signal(SIGQUIT, (void*)sigquit_handler);
+}
+
 int		init_minishell(t_term *term, t_command *command)
 {
 	if (!init_termcap(&term->cp) ||
 		!init_history(command))
 		return (0);
+	init_signal();
 	tcgetattr(STDIN_FILENO, &term->save_term);
 	term->new_term = term->save_term;
 	term->new_term.c_lflag &= ~ICANON;
@@ -66,6 +75,7 @@ void	run_minishell(void)
 	t_command	command;
 
 	term.name = "seung-jung$>";
+	ft_pwd();
 	if (!init_minishell(&term, &command))
 		return ;
 	while (42)
@@ -85,13 +95,4 @@ void	run_minishell(void)
 	clear_command(&command);
 	clear_history(command.history, command.history_fd);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
-}
-
-int		main(int argc, char **argv, char **env)
-{
-	(void)argc;
-	(void)argv;
-	g_environ = env;
-	run_minishell();
-	return (0);
 }

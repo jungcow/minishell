@@ -10,6 +10,8 @@ LIB = -L./libft -lft $(CURSES)
 ##########################################################
 BUILTIN_SRCS = $(addprefix ./srcs/builtin/, \
 				echo.c \
+				pwd.c \
+				exit.c \
 				)
 
 ##########################################################
@@ -61,8 +63,10 @@ EXECUTE_SRCS = $(addprefix ./srcs/execute/, \
 # General Rule                                           #
 ##########################################################
 
-SRCS = ./srcs/minishell.c \
+SRCS = ./srcs/main.c \
+	   ./srcs/minishell.c \
 	   ./srcs/error.c \
+	   ./srcs/signal.c \
 		$(COMMAND_SRCS) \
 		$(PARSE_SRCS) \
 		$(EXECUTE_SRCS) \
