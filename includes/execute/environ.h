@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/02 04:25:29 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/04 02:03:26 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/05/05 23:26:36 by jungwkim          #+#    #+#             */
+/*   Updated: 2021/05/05 23:26:37 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int						join_envset(char **envset, char **arg);
 /*
 **		envset_utils
 */
-char					*get_alnum_envstr(char *env, char **noalnum);
+int						get_alnum_envstr(char *env, char **alnum, char **noalnum);
 int						get_envstr(char **envset, int idx);
 int						count_envset(char *arg);
 

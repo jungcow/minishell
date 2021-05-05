@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:51:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/04 02:19:28 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/05 23:27:11 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,33 @@
 #include "execute/execute.h"
 #include "libft.h"
 
-char	*get_alnum_envstr(char *env, char **noalnum)
+#include <stdio.h>
+int		get_alnum_envstr(char *env, char **alnum, char **noalnum)
 {
-	char	*alnum;
 	int		i;
 	int		len;
+	int		flag;
 
 	i = 0;
+	flag = 1;
 	len = ft_strlen(env);
 	while (ft_isalnum(env[i]))
 		i++;
-	alnum = ft_strndup(env, i);
-	if (alnum == NULL)
-		return (NULL);
+	if (env[0] == '?')
+	{
+		i = 1;
+		flag = 0;
+	}
+	*alnum = ft_strndup(env, i);
+	if (*alnum == NULL)
+		return (-1);
 	*noalnum = ft_strndup(env + i, len - i);
 	if (*noalnum == NULL)
 	{
-		free(alnum);
-		return (NULL);
+		free(*alnum);
+		return (-1);
 	}
-	return (alnum);
+	return (flag);
 }
 
 int		get_envstr(char **envset, int idx)
@@ -41,16 +48,19 @@ int		get_envstr(char **envset, int idx)
 	char	*rest;
 	char	*env;
 	char	*value;
+	int		flag;
 
 	rest = NULL;
 	env = NULL;
-	env = get_alnum_envstr(envset[idx], &rest);
-	if (env == NULL)
+	flag = get_alnum_envstr(envset[idx], &env, &rest);
+	if (flag == -1)
 		return (-1);
 	value = getenv(env);
-	if (!value && !dup_str(&env, ""))
+//	if (flag == 0 && dup_str(&value, ft_itoa(err)) < 0)
+//		return (-1);
+	if (!value && dup_str(&env, "") < 0)
 		return (-1);
-	else if (value && !dup_str(&env, value))
+	else if (value && dup_str(&env, value) < 0)
 		return (-1);
 	free(envset[idx]);
 	envset[idx] = ft_strjoin(env, rest);

@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/04 03:42:28 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/05 23:39:15 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ int			execute_child_process(t_pipeline *pipelines,
 			return (-1);
 	}
 	if (execve(dir, operation->argv, g_environ) < 0)
+	{
+		exit(EXIT_FAILURE);
 		return (0);
+	}
 	close(redirect_fd);
-	return (1);
+	exit(EXIT_SUCCESS);
 }
