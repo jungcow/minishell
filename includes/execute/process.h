@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:18:05 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 03:32:55 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 04:44:31 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 int		create_process(pid_t **process, int num);
 int		wait_process(pid_t *process, int num);
 void	clear_process(pid_t **process);
+
+/*
+**		builtin
+*/
+int		ft_execve(char *command, char **argv, char **env);
+int		is_builtin(char *command);
 
 /*
 **		utils

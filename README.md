@@ -65,7 +65,15 @@ OK
 $ { echo $( expr a + 2 ) ;} 2> /dev/null
 OK
 ```
-4. 
+4. 명령어의 옵션은 여러번 와도 괜찮다.
+```
+echo -nnnnnnnnnnnn "hello"
+=> hello$
+
+** 다만 아래와 같은 경우는 다음과 같이 나온다.
+echo -nnnnn -n-n-n-n-n "hello"
+=> -n-n-n-n-n hello$
+```
 
 ## 학습 내용
 ### 21.04.12(월)

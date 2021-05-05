@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:32:32 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 03:33:29 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 05:13:54 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@ int		check_path_type(char *command)
 int		check_path_env(char *filename, char **dir)
 {
 	char	**path;
-	char	**ptr;
+	int		i;
 
 	path = ft_split(getenv("PATH"), ':');
 	if (path == NULL)
 		return (-1);
-	ptr = path;
-	while (path)
-	{
-		if (has_file(*path, filename))
+	i = -1;
+	while (path[++i])
+		if (has_file(path[i], filename))
 			break ;
-		path++;
+	if (path[i] == NULL)
+	{
+		clear_strs(path);
+		return (0);
 	}
-	if (path == NULL)
-		clear_strs(ptr);
-	if (dup_str(dir, *path) < 0)
+	if (dup_str(dir, path[i]) < 0)
 		return (-1);
-	clear_strs(ptr);
+	clear_strs(path);
 	*dir = ft_strjoin(*dir, "/");
 	if (*dir == NULL)
 		return (-1);

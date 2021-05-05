@@ -50,6 +50,8 @@ PARSE_SRCS = $(addprefix ./srcs/parse/, \
 EXECUTE_SRCS = $(addprefix ./srcs/execute/, \
 				execute.c \
 				process.c \
+				unit_process.c \
+				builtin_process.c \
 				child_process.c \
 				command_path.c \
 				command_path_utils.c \
@@ -69,6 +71,7 @@ SRCS = ./srcs/main.c \
 	   ./srcs/minishell.c \
 	   ./srcs/error.c \
 	   ./srcs/signal.c \
+	   ./srcs/among_us.c \
 		$(COMMAND_SRCS) \
 		$(PARSE_SRCS) \
 		$(EXECUTE_SRCS) \

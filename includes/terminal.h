@@ -6,14 +6,14 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 06:05:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/05 23:41:23 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 06:47:21 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TERMINAL_H
 # define TERMINAL_H
 
-# define TERM_NAME "jungcow-1.0$ "
+# define TERM_NAME "imposter-1.0$ "
 
 # include <termios.h>
 # include <curses.h>
@@ -49,4 +49,5 @@ int					tputs_wrapper(int tc);
 void				run_minishell(void);
 void				sigquit_handler(void);
 void				sigint_handler(void);
+void				print_ascii_art(void);
 #endif

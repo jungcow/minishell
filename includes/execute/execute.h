@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:47:30 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/05 23:24:32 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 04:06:42 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		dup_str(char **dst, char *src);
 **		process
 */
 int		execute_process(pid_t *process, t_pipeline *pipelines);
+int		execute_unit_process(pid_t *process, t_pipeline *pipeline);
 int		execute_child_process(t_pipeline *pipelines,
 							int *new_fd, int *old_fd, int idx);
 
