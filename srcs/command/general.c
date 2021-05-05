@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:10:56 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/05 20:01:25 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:23:02 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,4 @@ int		apply_general_key(t_command *command, t_term *term, int key)
 		refresh_command(command, term);
 	}
 	return (1);
-}
-
-int		apply_quote_key(t_command *command, t_term *term, int key)
-{
-	return (apply_general_key(command, term, key));
 }

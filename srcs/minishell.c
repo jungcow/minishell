@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/05 19:51:56 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:28:54 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		init_termcap(t_cp *capability)
 void	init_signal(void)
 {
 	signal(SIGINT, (void *)sigint_handler);
-	//signal(SIGQUIT, (void*)sigquit_handler);
+	signal(SIGQUIT, (void*)sigquit_handler);
 }
 
 int		init_minishell(t_term *term, t_command *command)

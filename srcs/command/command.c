@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/05 20:20:03 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:35:05 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ int		switch_command(t_command *command, t_term *term, int key)
 		flag = apply_delete_key(command, term);
 	else if (key == UP_ARROW || key == DOWN_ARROW)
 		flag = apply_history_key(command, term, key);
-	else if (key == QUOTE || key == DOUBLE_QUOTE)
-		flag = apply_quote_key(command, term, key);
-	else if (key == CTRL_D || key == ENTER)
+	else if (key == ENTER)
 		flag = apply_end_key(command);
+	else if (key == CTRL_D)
+		flag = apply_exit_key(command, term);
 	else
 		flag = apply_general_key(command, term, key);
 	return (flag);

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/05 20:05:59 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:34:43 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int					apply_multicursor_key(t_command *command, t_term *term,
 																	int key);
 int					apply_ctrlcursor_key(t_command *command,
 											t_term *term, int key);
-int					apply_quote_key(t_command *command, t_term *term, int key);
 int					apply_end_key(t_command *command);
+int					apply_exit_key(t_command *command, t_term *term);
 int					apply_general_key(t_command *command, t_term *term,
 																	int key);
 int					apply_history_key(t_command *command, t_term *term,

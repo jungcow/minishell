@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 16:26:27 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/04 17:51:23 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/05 20:34:49 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ int			apply_end_key(t_command *command)
 	if (ret == 1)
 		write_history(command->history, command->history_fd);
 	return (0);
+}
+
+int			apply_exit_key(t_command *command, t_term *term)
+{
+	if (command->length == 0)
+	{
+		write(1, "exit\n", 5);
+		return (-1);
+	}
+	else if (command->temp.length > 0)
+	{
+		if (apply_cursor_key(command, term, RIGHT_ARROW) == -1)
+			return (-1);
+		if (apply_delete_key(command, term) == -1)
+			return (-1);
+	}
+	return (1);
 }
 
 int			empty_command(t_command *command)
