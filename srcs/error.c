@@ -6,19 +6,27 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 23:27:47 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/04 01:49:10 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 02:17:15 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
 #include "error/error.h"
+#include "execute/execute.h"
 
-void	command_not_found(char *command)
+void	command_error(char *command, int err_type)
 {
-	write(2, COMMAND_ERR_FRONT, ft_strlen(COMMAND_ERR_FRONT));
+	write(2, MINISH_ERR, ft_strlen(MINISH_ERR));
 	write(2, command, ft_strlen(command));
-	write(2, COMMAND_ERR_BACK, ft_strlen(COMMAND_ERR_BACK));
+	if (err_type == 0)
+		write(2, COMMAND_ERR, ft_strlen(COMMAND_ERR));
+	else if (err_type == DIRECTORY)
+		write(2, DIRECTORY_ERR, ft_strlen(DIRECTORY_ERR));
+	else if (err_type == PERMISSION)
+		write(2, PERMISSION_ERR, ft_strlen(PERMISSION_ERR));
+	else if (err_type == NO_SUCH)
+		write(2, NO_SUCH_ERR, ft_strlen(NO_SUCH_ERR));
 	write(1, "\n", 1);
 }
 
