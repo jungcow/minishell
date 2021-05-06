@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 03:21:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 20:22:33 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/06 23:37:26 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int		wait_process(pid_t *process, int num)
 	{
 		waitpid(process[i], &status, 0);
 //		printf("child[%d] (PID=%d) finished; ", i, process[i]);
-/*		if (WIFEXITED(status))
-			printf("Exit, status=%d\n", WEXITSTATUS(status));
-		else if (WIFSIGNALED(status))
-			printf("Signal, sig=%d\n", WTERMSIG(status));
-		else
-			printf("Abnormal exit\n");
-			*/
+		if (WIFEXITED(status))
+		{
+//			printf("Exit, status=%d\n", WEXITSTATUS(status));
+			g_command.exit_status = WEXITSTATUS(status);
+		}
+//		else if (WIFSIGNALED(status))
+//			printf("Signal, sig=%d\n", WTERMSIG(status));
 		i++;
 	}
 	g_command.pid = 0;

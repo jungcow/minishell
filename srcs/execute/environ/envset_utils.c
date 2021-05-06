@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:51:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 07:44:39 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 22:25:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		get_envstr(char **envset, int idx)
 	if (flag == -1)
 		return (-1);
 	value = getenv(env);
-	if (flag == 0 && dup_str(&value, ft_itoa(g_command.exit_status)) < 0)
+	if (flag == 0 && dup_str(&value, ft_itoa(g_command.prev_exit_status)) < 0)
 		return (-1);
 	if (!value && dup_str(&env, "") < 0)
 		return (-1);

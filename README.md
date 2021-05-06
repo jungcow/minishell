@@ -74,6 +74,7 @@ echo -nnnnnnnnnnnn "hello"
 echo -nnnnn -n-n-n-n-n "hello"
 => -n-n-n-n-n hello$
 ```
+5. .sh 확장자 실행파일이 올 때 bash를 앞에 붙여주어 실행시켜준다.
 
 ## 학습 내용
 ### 21.04.12(월)
