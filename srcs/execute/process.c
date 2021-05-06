@@ -6,12 +6,15 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 03:21:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 03:56:57 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 20:22:33 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "execute/execute.h"
+#include "command/command.h"
+
+extern t_command	g_command;
 
 int		create_process(pid_t **process, int num)
 {
@@ -40,6 +43,7 @@ int		wait_process(pid_t *process, int num)
 			*/
 		i++;
 	}
+	g_command.pid = 0;
 	return (0);
 }
 
@@ -57,6 +61,8 @@ int		execute_process(pid_t *process, t_pipeline *pipelines)
 		process[i] = fork();
 		if (process[i] < 0)
 			return (0);
+		if (process[i] > 0)
+			g_command.pid = 1;
 		if (process[i] == 0 &&
 				execute_child_process(pipelines, new_fd, old_fd, i) < 0)
 			return (-1);

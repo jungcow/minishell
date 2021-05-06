@@ -6,12 +6,15 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 09:22:53 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 20:13:26 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "execute/execute.h"
+#include "command/command.h"
+
+extern t_command	g_command;
 
 int			treat_pipeline(t_pipeline *pipelines,
 								int *new_fd, int *old_fd, int idx)
@@ -85,9 +88,9 @@ int			execute_child_process(t_pipeline *pipelines,
 			return (-1);
 	}
 	ret = is_builtin(operation->argv[0]);
-	if (ret && ft_execve(operation->argv[0], operation->argv, g_environ) < 0)
+	if (ret && ft_execve(operation->argv[0], operation->argv, g_command.env) < 0)
 		exit(EXIT_FAILURE);
-	else if (!ret && execve(dir, operation->argv, g_environ) < 0)
+	else if (!ret && execve(dir, operation->argv, g_command.env) < 0)
 		exit(EXIT_FAILURE);
 	close(redirect_fd);
 	exit(EXIT_SUCCESS);

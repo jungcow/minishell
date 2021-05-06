@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:39:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/05 21:29:45 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/06 20:23:01 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ extern t_command	g_command;
 
 void	sigint_handler(void)
 {
-	clear_command(&g_command);
-	if (!init_command(&g_command))
-		exit(1);
-	write(1, "\n", 1);
-	write(1, TERM_NAME, ft_strlen(TERM_NAME)); 
-	g_command.exit_status = 1;
+	if (g_command.pid == 0)
+	{
+		clear_command(&g_command);
+		if (!init_command(&g_command))
+			exit(1);
+		write(1, "\n", 1);
+		write(1, TERM_NAME, ft_strlen(TERM_NAME)); 
+		g_command.exit_status = 1;
+	}
 }
 
 void	sigquit_handler(void)

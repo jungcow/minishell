@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:47:30 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 04:06:42 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 20:11:21 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include "parse/instruction.h"
 # include "execute/process.h"
 # include "environ.h"
-
-char	**g_environ;
 
 int		execute_instruction(t_instruction *instruction);
 void	clear_strs(char **strs);
