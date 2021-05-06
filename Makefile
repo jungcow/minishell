@@ -10,6 +10,7 @@ LIB = -L./libft -lft $(CURSES)
 ##########################################################
 BUILTIN_SRCS = $(addprefix ./srcs/builtin/, \
 				echo.c \
+				cd.c \
 				pwd.c \
 				exit.c \
 				)

@@ -6,15 +6,17 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:51:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 03:30:25 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 07:44:39 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "command/command.h"
 #include "execute/execute.h"
 #include "libft.h"
 
-#include <stdio.h>
+extern t_command	g_command;
+
 int		get_alnum_envstr(char *env, char **alnum, char **noalnum)
 {
 	int		i;
@@ -56,8 +58,8 @@ int		get_envstr(char **envset, int idx)
 	if (flag == -1)
 		return (-1);
 	value = getenv(env);
-//	if (flag == 0 && dup_str(&value, ft_itoa(err)) < 0)
-//		return (-1);
+	if (flag == 0 && dup_str(&value, ft_itoa(g_command.exit_status)) < 0)
+		return (-1);
 	if (!value && dup_str(&env, "") < 0)
 		return (-1);
 	else if (value && dup_str(&env, value) < 0)
