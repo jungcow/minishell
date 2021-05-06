@@ -6,12 +6,11 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:12:19 by jungwkim          #+#    #+#             */
-/*   Updated: 2020/12/31 02:36:59 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/06 09:31:18 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
 
 static char		**create_sentences(char *s, char c)
 {
