@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:51:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 22:25:46 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 19:32:40 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		get_alnum_envstr(char *env, char **alnum, char **noalnum)
 	i = 0;
 	flag = 1;
 	len = ft_strlen(env);
-	while (ft_isalnum(env[i]))
+	while (ft_isalnum(env[i]) || env[i] == '_')
 		i++;
 	if (env[0] == '?')
 	{

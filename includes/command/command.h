@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/06 23:37:45 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 19:49:28 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct		s_command
 	bool			command_status;
 	unsigned char	exit_status;
 	unsigned char	prev_exit_status;
+	char			*pwd;
 	int				pid;
 }					t_command;
 

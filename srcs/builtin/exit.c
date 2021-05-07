@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:48:48 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/07 18:47:01 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/07 21:59:45 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	check_numeric(char *arg)
 	write(2, arg, ft_strlen(arg));
 	write(2, ": ", 2);
 	write(2, EXIT_NUMERIC_ERR, ft_strlen(EXIT_NUMERIC_ERR));
-	write(1, "\n", 1);
+	write(2, "\n", 1);
 	exit(255);
 }
 

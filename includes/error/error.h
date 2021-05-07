@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 21:24:19 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/07 18:34:19 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/07 21:11:59 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # define ERR_HEAD "imposter: "
 # define SEMICOLON ";"
 # define EXIT_ERR "exit: "
+# define CD_HOME_ERR "HOME not set"
+# define CD_ERR "cd : "
+# define CD_CWD_ERR "error retrieving current directory : getcwd: cannot access parent directories : No such file or directory"
 # define EXIT_NUMERIC_ERR "numeric argument required"
 # define EXIT_ARGV_ERR "too many arguments"
 # define D_SEMICOLON ";;"
