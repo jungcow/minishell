@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 18:35:17 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/05 18:28:04 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/07 17:00:03 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ int		ft_cd(int argc, char **argv, char **env);
 int		ft_export(int argc, char **argv, char **env);
 int		ft_unset(int argc, char **argv, char **env);
 int		ft_env(int argc, char **argv, char **env);
-int		ft_exit(int argc, char **argv, char **env);
+int		ft_exit(int argc, char **argv);
 
 #endif

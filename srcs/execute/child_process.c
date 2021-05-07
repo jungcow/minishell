@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 20:13:26 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/07 18:02:51 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			execute_child_process(t_pipeline *pipelines,
 	int				ret;
 
 	operation = &pipelines->operations[idx];
-	if (get_path(operation, &dir) < 0)
+	if (!is_builtin(operation->argv[0]) && get_path(operation, &dir) < 0)
 		return (-1);
 	if (treat_pipeline(pipelines, new_fd, old_fd, idx) < 0)
 		return (-1);

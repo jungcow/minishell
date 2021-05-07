@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:39:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/06 23:38:14 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 18:44:50 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sigint_handler(void)
 		write(1, "\n", 1);
 		write(1, TERM_NAME, ft_strlen(TERM_NAME));
 	}
-	g_command.exit_status = 130;
+	g_command.exit_status = 1;
 }
 
 void	sigquit_handler(void)
