@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 20:13:26 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:02:37 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,33 @@ int			treat_redirect(t_operation *operation)
 	return (last_fd);
 }
 
+int			list_to_char_env(t_environ *environ, char ***env)
+{
+	t_environ	*tmp;
+	int			len;
+	int			i;
+
+	*env = NULL;
+	len = 0;
+	tmp = environ;
+	while (tmp && (len++) + 1)
+		tmp = tmp->next;
+	*env = (char **)malloc(sizeof(char *) * (len + 1));
+	if (*env == NULL)
+		return (-1);
+	i = 0;
+	while (environ)
+	{
+		(*env)[i] = ft_strdup(environ->env);
+		if ((*env)[i] == NULL)
+			return (-1);
+		environ = environ->next;
+		i++;
+	}
+	(*env)[i] = NULL;
+	return (1);
+}
+
 int			execute_child_process(t_pipeline *pipelines,
 								int *new_fd, int *old_fd, int idx)
 {
@@ -75,6 +102,7 @@ int			execute_child_process(t_pipeline *pipelines,
 	char			*dir;
 	int				redirect_fd;
 	int				ret;
+	char			**env;
 
 	operation = &pipelines->operations[idx];
 	if (get_path(operation, &dir) < 0)
@@ -88,9 +116,11 @@ int			execute_child_process(t_pipeline *pipelines,
 			return (-1);
 	}
 	ret = is_builtin(operation->argv[0]);
-	if (ret && ft_execve(operation->argv[0], operation->argv, g_command.env) < 0)
+	if (list_to_char_env(g_command.environ, &env) < 0)
+		return (-1);
+	if (ret && ft_execve(operation->argv[0], operation->argv, g_command.environ) < 0)
 		exit(EXIT_FAILURE);
-	else if (!ret && execve(dir, operation->argv, g_command.env) < 0)
+	else if (!ret && execve(dir, operation->argv, env) < 0)
 		exit(EXIT_FAILURE);
 	close(redirect_fd);
 	exit(EXIT_SUCCESS);

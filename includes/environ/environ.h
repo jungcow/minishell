@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 23:26:36 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/05 23:26:37 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/05/07 17:39:05 by jungwkim          #+#    #+#             */
+/*   Updated: 2021/05/07 20:54:45 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,26 @@
 # define DOUBLE_QUOTE	34
 # define NONE_QUOTE		0
 
+typedef struct			s_environ
+{
+	char				*env;
+	struct s_environ	*next;	
+}						t_environ;
+
 typedef struct			s_envlist
 {
 	char				*env;
 	int					flag;
 	struct s_envlist	*next;
 }						t_envlist;
+
+/*
+**		environ
+*/
+int						init_environ(t_environ **environ, char **env);
+int						alloc_environ(t_environ **environ, char *env);
+int						dealloc_environ(t_environ *environ, char **argv);
+void					clear_environ(t_environ *environ);
 
 /*
 **		envlist

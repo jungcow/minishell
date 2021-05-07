@@ -59,11 +59,17 @@ EXECUTE_SRCS = $(addprefix ./srcs/execute/, \
 				command_path.c \
 				command_path_utils.c \
 				process_utils.c \
-				environ/environ.c \
-				environ/envlist.c \
-				environ/envlist_utils.c \
-				environ/envset.c \
-				environ/envset_utils.c \
+				)
+
+##########################################################
+# Environ Part                                           #
+##########################################################
+ENVIRON_SRCS = $(addprefix ./srcs/environ/, \
+				environ.c \
+				envlist.c \
+				envlist_utils.c \
+				envset.c \
+				envset_utils.c \
 				)
 
 ##########################################################
@@ -72,12 +78,14 @@ EXECUTE_SRCS = $(addprefix ./srcs/execute/, \
 
 SRCS = ./srcs/main.c \
 	   ./srcs/minishell.c \
+	   ./srcs/terminal.c \
 	   ./srcs/error.c \
 	   ./srcs/signal.c \
 	   ./srcs/among_us.c \
 		$(COMMAND_SRCS) \
 		$(PARSE_SRCS) \
 		$(EXECUTE_SRCS) \
+		$(ENVIRON_SRCS) \
 		$(BUILTIN_SRCS) 
 
 OBJS = $(SRCS:.c=.o)

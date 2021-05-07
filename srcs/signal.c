@@ -6,17 +6,23 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:39:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/06 23:38:14 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 17:20:17 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <signal.h>
 #include "libft.h"
 #include "terminal.h"
 #include "command/command.h"
 
-#include <stdio.h>
 extern t_command	g_command;
+
+void	init_signal(void)
+{
+	signal(SIGINT, (void *)sigint_handler);
+	signal(SIGQUIT, (void *)sigquit_handler);
+}
 
 void	sigint_handler(void)
 {
