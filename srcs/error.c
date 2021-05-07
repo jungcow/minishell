@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 23:27:47 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/06 02:17:15 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 16:38:45 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	command_error(char *command, int err_type)
 {
-	write(2, MINISH_ERR, ft_strlen(MINISH_ERR));
+	write(2, ERR_HEAD, ft_strlen(ERR_HEAD));
 	write(2, command, ft_strlen(command));
 	if (err_type == 0)
 		write(2, COMMAND_ERR, ft_strlen(COMMAND_ERR));

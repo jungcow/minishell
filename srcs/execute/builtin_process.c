@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 04:23:28 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/07 21:08:40 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:17:24 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,27 @@ int		is_builtin(char *command)
 
 int		ft_execve(char *command, char **argv, t_environ *environ)
 {
-	int		argc;
 	int		i;
 	int		ret;
 
 	i = -1;
-	argc = 0;
 	ret = 0;
-	while (argv[++i])
-		argc++;
 	if (ft_strcmp(command, "echo") == 0)
-		ret = ft_echo(argc, argv, environ);
+		ret = ft_echo(ft_strslen(argv), argv, environ);
 	else if (ft_strcmp(command, "cd") == 0)
-		ret = ft_cd(argc, argv, environ);
+		ret = ft_cd(ft_strslen(argv), argv, environ);
 	else if (ft_strcmp(command, "pwd") == 0)
 		ret = ft_pwd();
 	else if (ft_strcmp(command, "env") == 0)
-		ret = ft_env(argc, argv, environ);
+		ret = ft_env(ft_strslen(argv), argv, environ);
 //	else if (ft_strcmp(command, "export") == 0)
-//		ret = ft_export(argc, argv, environ);
+//		ret = ft_export(ft_strslen(argv), argv, environ);
 	/*
 	else if (ft_strcmp(command, "unset") == 0)
-		ret = ft_unset(argc, argv);
-	else if (ft_strcmp(command, "exit") == 0)
-		ret = ft_exit(argc, argv);
+		ret = ft_unset(ft_strslen(argv), argv);
 		*/
+	else if (ft_strcmp(command, "exit") == 0)
+		ret = ft_exit(ft_strslen(argv), argv);
 	g_command.exit_status = ret;
 	return (ret);
 }
