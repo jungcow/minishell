@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/07 22:18:56 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 23:05:36 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			list_to_char_env(t_environ *environ, char ***env)
 	i = 0;
 	while (environ)
 	{
-		(*env)[i] = ft_strdup(environ->env);
+		(*env)[i] = environ->env;
 		if ((*env)[i] == NULL)
 			return (-1);
 		environ = environ->next;
@@ -95,33 +95,47 @@ int			list_to_char_env(t_environ *environ, char ***env)
 	return (1);
 }
 
+int			implement_child_process(t_operation *operation,
+									char *dir, int redirect_fd)
+{
+	int		exit_status;
+	char	**env;
+
+	if (list_to_char_env(g_command.environ, &env) < 0)
+		return (-1);
+	if (is_builtin(operation->argv[0]))
+		exit_status = ft_execve(operation->argv[0],
+								operation->argv, g_command.environ);
+	else
+		exit_status = execve(dir, operation->argv, env);
+	if (exit_status < 0)
+		exit(EXIT_FAILURE);
+	if (operation->len_redirects)
+		close(redirect_fd);
+	free(env);
+	return (exit_status);
+}
+
 int			execute_child_process(t_pipeline *pipelines,
 								int *new_fd, int *old_fd, int idx)
 {
 	t_operation		*operation;
 	char			*dir;
 	int				redirect_fd;
-	int				ret;
-	char			**env;
+	int				exit_status;
 
 	operation = &pipelines->operations[idx];
 	if (!is_builtin(operation->argv[0]) && get_path(operation, &dir) < 0)
 		return (-1);
 	if (treat_pipeline(pipelines, new_fd, old_fd, idx) < 0)
 		return (-1);
+	redirect_fd = 0;
 	if (operation->len_redirects)
 	{
 		redirect_fd = treat_redirect(operation);
 		if (redirect_fd < 0)
 			return (-1);
 	}
-	ret = is_builtin(operation->argv[0]);
-	if (list_to_char_env(g_command.environ, &env) < 0)
-		return (-1);
-	if (ret && ft_execve(operation->argv[0], operation->argv, g_command.environ) < 0)
-		exit(EXIT_FAILURE);
-	else if (!ret && execve(dir, operation->argv, env) < 0)
-		exit(EXIT_FAILURE);
-	close(redirect_fd);
-	exit(EXIT_SUCCESS);
+	exit_status = implement_child_process(operation, dir, redirect_fd);
+	exit(exit_status);
 }
