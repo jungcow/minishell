@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 06:05:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/07 11:59:20 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 17:19:47 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,12 @@ typedef struct		s_term
 }					t_term;
 
 int					tputs_wrapper(int tc);
+int					init_termcap(t_cp *capability);
+void				init_terminal(t_term *term);
 void				run_minishell(char **env);
+void				init_signal(void);
 void				sigquit_handler(void);
 void				sigint_handler(void);
 void				print_ascii_art(void);
+
 #endif

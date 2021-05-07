@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/07 19:49:28 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:23:52 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@
 # include "libft.h"
 # include "terminal.h"
 # include "command/history.h"
+# include "environ/environ.h"
+# include "builtin.h"
 
 typedef struct		s_command
 {
-	char			**env;
+	t_environ		*environ;
 	t_history		*history;
 	int				history_fd;
 	t_history		*ptr;
