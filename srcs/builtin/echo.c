@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:29:31 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/06 22:06:22 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/07 18:41:26 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		check_option(char *arg)
 	int		i;
 	int		len;
 
+	if (arg == NULL)
+		return (0);
 	i = 1;
 	len = ft_strlen(arg);
 	if (len > 1)
@@ -40,11 +42,12 @@ int		ft_echo(int argc, char **argv)
 
 	i = 1;
 	new_line = true;
-	if (argc > 1 && check_option(argv[1]))
-	{
-		new_line = false;
-		i++;
-	}
+	if (argc > 1)
+		while (check_option(argv[i]))
+		{
+			new_line = false;
+			i++;
+		}
 	while (i < argc)
 	{
 		if (write(1, argv[i], ft_strlen(argv[i])) < 0)
