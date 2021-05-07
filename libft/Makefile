@@ -5,6 +5,7 @@ CFLAGS = -Wall -Werror -Wextra
 SRCS = string.c \
 	   ft_strncpy.c \
 	   ft_strlen.c \
+	   ft_strslen.c \
 	   ft_split.c \
 	   ft_strdup.c \
 	   ft_atoi.c \

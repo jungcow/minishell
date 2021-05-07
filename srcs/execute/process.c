@@ -6,11 +6,10 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 03:21:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 23:37:26 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 11:46:48 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "execute/execute.h"
 #include "command/command.h"
 
@@ -33,12 +32,8 @@ int		wait_process(pid_t *process, int num)
 	while (i < num)
 	{
 		waitpid(process[i], &status, 0);
-//		printf("child[%d] (PID=%d) finished; ", i, process[i]);
 		if (WIFEXITED(status))
-		{
-//			printf("Exit, status=%d\n", WEXITSTATUS(status));
 			g_command.exit_status = WEXITSTATUS(status);
-		}
 //		else if (WIFSIGNALED(status))
 //			printf("Signal, sig=%d\n", WTERMSIG(status));
 		i++;
@@ -47,34 +42,41 @@ int		wait_process(pid_t *process, int num)
 	return (0);
 }
 
+int		fork_process(pid_t *process, t_pipeline *pipelines,
+												int (*fd)[2], int index)
+{
+	*process = fork();
+	if (*process < 0)
+		exit(EXIT_FAILURE);
+	if (*process > 0)
+		g_command.pid = 1;
+	if (*process == 0 &&
+			execute_child_process(pipelines, fd[NEW], fd[OLD], index) < 0)
+		return (-1);
+	else if (*process > 0 && (index > 0) && (pipelines->length > 1))
+		close_fds(fd[OLD]);
+	return (1);
+}
+
 int		execute_process(pid_t *process, t_pipeline *pipelines)
 {
 	int		i;
-	int		new_fd[2];
-	int		old_fd[2];
+	int		fd[2][2];
 
 	i = -1;
 	while (++i < pipelines->length)
 	{
-		if ((pipelines->length > 1) && (pipe(new_fd) < 0))
+		if ((pipelines->length > 1) && (pipe(fd[NEW]) < 0))
 			return (0);
-		process[i] = fork();
-		if (process[i] < 0)
-			return (0);
-		if (process[i] > 0)
-			g_command.pid = 1;
-		if (process[i] == 0 &&
-				execute_child_process(pipelines, new_fd, old_fd, i) < 0)
+		if (fork_process(&process[i], pipelines, fd, i) < 0)
 			return (-1);
-		else if (process[i] > 0 && (i > 0) && (pipelines->length > 1))
-			close_fds(old_fd);
-		old_fd[0] = new_fd[0];
-		old_fd[1] = new_fd[1];
+		fd[OLD][0] = fd[NEW][0];
+		fd[OLD][1] = fd[NEW][1];
 	}
 	if (pipelines->length > 1)
-		close_fds(old_fd);
+		close_fds(fd[OLD]);
 	if (wait_process(process, i) < 0)
-		return (0);
+		return (-1);
 	return (1);
 }
 

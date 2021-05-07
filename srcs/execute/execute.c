@@ -6,12 +6,15 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:09:36 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 06:48:45 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 11:50:54 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute/execute.h"
 #include <errno.h>
+#include "command/command.h"
+
+extern t_command	g_command;
 
 int		execute_instruction(t_instruction *instruction)
 {
@@ -21,6 +24,7 @@ int		execute_instruction(t_instruction *instruction)
 	i = 0;
 	while (i < instruction->length)
 	{
+		g_command.pid = 0;
 		if (check_environ(&instruction->pipelines[i]) < 0)
 			return (-1);
 		process = NULL;

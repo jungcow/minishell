@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 03:51:30 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/01 07:15:46 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 12:12:58 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 void	ft_strncpy(char *dest, const char *src, int size);
 size_t	ft_strlen(const char *str);
+size_t	ft_strslen(char **str);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
 char	*ft_itoa(int n);

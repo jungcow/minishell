@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/06 22:36:17 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 12:22:58 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,34 @@ int		init_minishell(t_term *term, t_command *command)
 	return (1);
 }
 
-void	run_minishell(void)
+int		dup_environ(char ***new_env, char **env)
+{
+	int		i;
+
+	if (env == NULL)
+		return (0);
+	*new_env = (char **)malloc(sizeof(char *) * (ft_strslen(env) + 1));
+	i = 0;
+	while (env[i])
+	{
+		(*new_env)[i] = ft_strdup(env[i]);
+		if ((*new_env)[i] == NULL)
+			return (0);
+		i++;
+	}
+	env[i] = NULL;
+	return (1);
+}
+
+
+void	run_minishell(char **env)
 {
 	t_term		term;
 
 	term.name = TERM_NAME;
 	if (!init_minishell(&term, &g_command))
+		return ;
+	if (!dup_environ(&g_command.env, env))
 		return ;
 	while (42)
 	{

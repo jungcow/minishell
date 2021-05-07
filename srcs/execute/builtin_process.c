@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 04:23:28 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 07:31:21 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 12:25:28 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		ft_execve(char *command, char **argv, char **env)
 	i = -1;
 	argc = 0;
 	ret = 0;
-	(void)env;
 	while (argv[++i])
 		argc++;
 	if (ft_strcmp(command, "echo") == 0)
@@ -55,13 +54,13 @@ int		ft_execve(char *command, char **argv, char **env)
 		ret = ft_cd(argc, argv, env);
 	else if (ft_strcmp(command, "pwd") == 0)
 		ret = ft_pwd();
-	/*
+	else if (ft_strcmp(command, "env") == 0)
+		ret = ft_env(argc, argv, env);
 	else if (ft_strcmp(command, "export") == 0)
-		ret = ft_export(argc, argv);
+		ret = ft_export(argc, argv, env);
+	/*
 	else if (ft_strcmp(command, "unset") == 0)
 		ret = ft_envset(argc, argv);
-	else if (ft_strcmp(command, "env") == 0)
-		ret = ft_env(argc, argv);
 	else if (ft_strcmp(command, "exit") == 0)
 		ret = ft_exit(argc, argv);
 		*/

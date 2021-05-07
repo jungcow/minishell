@@ -6,16 +6,18 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:18:05 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 04:44:31 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 11:40:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROCESS_H
 # define PROCESS_H
 
-# define DIRECTORY 040000
+# define DIRECTORY	040000
 # define PERMISSION 80
-# define NO_SUCH 78
+# define NO_SUCH	78
+# define OLD		0
+# define NEW		1	
 
 int		create_process(pid_t **process, int num);
 int		wait_process(pid_t *process, int num);

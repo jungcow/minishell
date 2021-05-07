@@ -13,6 +13,8 @@ BUILTIN_SRCS = $(addprefix ./srcs/builtin/, \
 				cd.c \
 				pwd.c \
 				exit.c \
+				env.c \
+				export.c \
 				)
 
 ##########################################################
