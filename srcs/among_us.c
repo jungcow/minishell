@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 05:19:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 06:47:13 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:44:27 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,3 @@ void	print_ascii_art(void)
 	printf("   @@.   (((((/    ((((#############&#(///(##########,   @@@@@@\n");
 	print_ascii_art2();
 }
-/*
-void	print_ascii_art3(void)
-{
-	int				fd;
-	long long		buf;
-	
-	fd = open("../scene", O_CREAT | O_RDONLY);
-	printf("fd: %d\n", fd);
-	if (fd < 0)
-		exit(EXIT_FAILURE);
-	buf = 0;
-	while (read(fd, &buf, 8) > 0)
-	{
-		write(1, &buf, 8);
-		buf = 0;
-	}
-	close(fd);
-}
-*/

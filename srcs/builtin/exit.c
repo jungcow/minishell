@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:48:48 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/07 21:59:45 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:45:00 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		check_argc(int argc)
 int		ft_exit(int argc, char **argv)
 {
 	int		err;
-	
+
 	err = 0;
 	if (argc > 1)
 	{

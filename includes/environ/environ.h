@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:39:05 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/07 20:54:45 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:32:53 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef struct			s_environ
 {
 	char				*env;
-	struct s_environ	*next;	
+	struct s_environ	*next;
 }						t_environ;
 
 typedef struct			s_envlist
@@ -67,7 +67,8 @@ int						join_envset(char **envset, char **arg);
 /*
 **		envset_utils
 */
-int						get_alnum_envstr(char *env, char **alnum, char **noalnum);
+int						get_alnum_envstr(char *env, char **alnum,
+										char **noalnum);
 int						get_envstr(char **envset, int idx);
 int						count_envset(char *arg);
 

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 21:24:19 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/07 21:11:59 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:40:38 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # define EXIT_ERR "exit: "
 # define CD_HOME_ERR "HOME not set"
 # define CD_ERR "cd : "
-# define CD_CWD_ERR "error retrieving current directory : getcwd: cannot access parent directories : No such file or directory"
+# define CD_CWD_ERR1 "error retrieving current directory: "
+# define CD_CWD_ERR2 "getcwd: cannot access parent directories"
 # define EXIT_NUMERIC_ERR "numeric argument required"
 # define EXIT_ARGV_ERR "too many arguments"
 # define D_SEMICOLON ";;"

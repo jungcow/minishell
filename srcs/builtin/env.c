@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 11:54:25 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/07 22:02:22 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:44:45 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		write_error_environ(char *arg, int ret)
 	write(1, ": ", 2);
 	if (ret == 0)
 		write(1, "Invalid argument", ft_strlen("Invalid argument"));
-	else	
+	else
 		write(1, NO_SUCH_ERR, ft_strlen(NO_SUCH_ERR));
 	write(1, "\n", 1);
 	if (ret == 0)
