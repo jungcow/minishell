@@ -6,13 +6,16 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:32:32 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/06 05:13:54 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/07 23:18:10 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "command/command.h"
 #include "execute/execute.h"
 #include "error/error.h"
 #include "libft.h"
+
+extern t_command	g_command;
 
 int		check_path_type(char *command)
 {
@@ -75,8 +78,12 @@ int		get_path(t_operation *operation, char **dir)
 		ret = check_path(operation->argv[0], dir);
 	if (ret == 0 || ret == DIRECTORY || ret == PERMISSION || ret == NO_SUCH)
 	{
+		if (ret == 0 || ret == NO_SUCH)
+			g_command.exit_status = 127;
+		else
+			g_command.exit_status = 126;
 		command_error(operation->argv[0], ret);
-		return (0);
+		exit(g_command.exit_status);
 	}
 	else if (ret == -1)
 		return (-1);
