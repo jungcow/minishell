@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:39:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 20:32:39 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:33:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,4 @@ void	sigint_handler(void)
 
 void	sigquit_handler(void)
 {
-	if (g_command.pid != 0)
-	{
-		write(1, "Quit: 3\n", ft_strlen("Quit: 3\n"));
-		g_command.exit_status = 131;
-	}
 }
