@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:39:05 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 16:45:24 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:00:00 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ typedef struct			s_envlist
 */
 int						init_environ(t_environ **environ, char **env);
 int						alloc_environ(t_environ **environ, char *env);
-int						dealloc_environ(t_environ *environ, char **argv);
+void					dealloc_environ(t_environ **head, int index);
 void					clear_environ(t_environ *environ);
 
 /*
 **		environ_utils
 */
+char					*get_environ(char *env);
 int						bubble_sort_environ(char **envstrs);
 int						list_to_strs_environ(t_environ *environ, char ***env);
 

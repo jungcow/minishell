@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 17:03:11 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:55:23 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	run_minishell(char **env)
 	}
 	clear_command(&g_command);
 	clear_history(g_command.history, g_command.history_fd);
+	clear_environ(g_command.environ);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.save_term);
 }

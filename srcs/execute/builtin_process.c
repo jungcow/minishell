@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 04:23:28 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 15:03:04 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 18:08:57 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ int		ft_execve(char *command, char **argv, t_environ *environ)
 		ret = ft_env(ft_strslen(argv), argv, environ);
 	else if (ft_strcmp(command, "export") == 0)
 		ret = ft_export(ft_strslen(argv), argv, environ);
-	/*
 	else if (ft_strcmp(command, "unset") == 0)
-		ret = ft_unset(ft_strslen(argv), argv);
-		*/
+		ret = ft_unset(ft_strslen(argv), argv, environ);
 	else if (ft_strcmp(command, "exit") == 0)
 		ret = ft_exit(ft_strslen(argv), argv);
 	g_command.exit_status = ret;

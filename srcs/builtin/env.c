@@ -6,14 +6,13 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 11:54:25 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 17:42:41 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 18:05:37 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <errno.h>
 #include <unistd.h>
-#include "environ/environ.h"
 #include "error/error.h"
 #include "builtin.h"
 #include "libft.h"

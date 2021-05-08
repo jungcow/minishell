@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:46:24 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 16:33:12 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:54:40 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ int		init_environ(t_environ **environ, char **env)
 	int		i;
 
 	len = ft_strslen(env);
-	*environ = (t_environ *)malloc(sizeof(t_environ) * len);
-	if (*environ == NULL)
-		return (0);
 	*environ = NULL;
 	i = 0;
 	while (i < len)
@@ -60,32 +57,40 @@ int		alloc_environ(t_environ **environ, char *env)
 	return (1);
 }
 
-/*
-int		dealloc_environ(t_environ **head, char **argv)
+void	dealloc_environ(t_environ **head, int index)
 {
-	t_environ	*ptr;
 	t_environ	*tmp;
+	t_environ	*prev;
+	int			i;
 
-	ptr = *head;
-	if (ft_strcmp(ptr->env, *argv) == 0)
+	i = 0;
+	tmp = *head;
+	while (++i < index)
+		tmp = tmp->next;
+	if (i == 1)
 	{
+		tmp = *head;
 		*head = (*head)->next;
-		ptr->next = NULL;
-		clear_environ(ptr);
+		tmp->next = NULL;
+		clear_environ(tmp);
+		return ;
 	}
-	ptr = *head;
-	while (ptr && *argv)
+	tmp = *head;
+	while (--i)
 	{
-		if (ft_strcmp(ptr->env, *argv) == 0 || ft_strcmp(ptr->env, *argv) == 0)
-		{
-			tmp->next = ptr->next;
-			argv++;
-		}
-		tmp = ptr;
-		ptr = ptr->next;
+		prev = tmp;
+		tmp = tmp->next;
 	}
+	if (tmp == NULL)
+	{
+		prev->next = NULL;
+		clear_environ(tmp);
+		return ;
+	}
+	prev->next = tmp->next;
+	tmp->next = NULL;
+	clear_environ(tmp);
 }
-*/
 
 int		check_environ(t_pipeline *pipeline)
 {
@@ -121,10 +126,9 @@ void	clear_environ(t_environ *environ)
 	while (environ)
 	{
 		tmp = environ;
+		environ = environ->next;
 		free(tmp->env);
-		tmp->env = NULL;
 		tmp->next = NULL;
 		free(tmp);
-		environ = environ->next;
 	}
 }

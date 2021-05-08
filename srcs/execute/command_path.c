@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:32:32 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 17:27:31 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:21:49 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ int		check_path_env(char *filename, char **dir)
 {
 	char	**path;
 	int		i;
+	char	*value;
 
-	path = ft_split(getenv("PATH"), ':');
+	value = get_environ("PATH");
+	path = ft_split(value, ':');
+	free(value);
 	if (path == NULL)
 		return (-1);
 	i = -1;

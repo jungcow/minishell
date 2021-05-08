@@ -6,12 +6,42 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 17:31:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 17:40:56 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:24:03 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ/environ.h"
+#include "command/command.h"
 #include "libft.h"
+
+extern t_command	g_command;
+
+char	*get_environ(char *env)
+{
+	t_environ	*environ;
+	char		**strs;
+	char		*ret;
+
+	environ = g_command.environ;
+	while (environ)
+	{
+		strs = ft_split(environ->env, '=');
+		if (strs == NULL)
+			return (NULL);
+		if (ft_strcmp(strs[0], env) == 0)
+		{
+			if (strs[1] == NULL)
+				ret = ft_strdup("");
+			else
+				ret = ft_strdup(strs[1]);
+			ft_strsfree(strs);
+			return (ret);
+		}
+		environ = environ->next;
+	}
+	ft_strsfree(strs);
+	return (NULL);
+}
 
 int		bubble_sort_environ(char **envstrs)
 {
