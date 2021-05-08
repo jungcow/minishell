@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 17:31:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 20:24:03 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:42:26 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ char	*get_environ(char *env)
 			ft_strsfree(strs);
 			return (ret);
 		}
+		ft_strsfree(strs);
 		environ = environ->next;
 	}
-	ft_strsfree(strs);
 	return (NULL);
 }
 
