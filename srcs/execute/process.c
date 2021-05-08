@@ -6,10 +6,11 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 03:21:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/07 11:46:48 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:28:49 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include "execute/execute.h"
 #include "command/command.h"
 
@@ -34,9 +35,20 @@ int		wait_process(pid_t *process, int num)
 		waitpid(process[i], &status, 0);
 		if (WIFEXITED(status))
 			g_command.exit_status = WEXITSTATUS(status);
-//		else if (WIFSIGNALED(status))
-//			printf("Signal, sig=%d\n", WTERMSIG(status));
 		i++;
+	}
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGINT)
+		{
+			write(1, "\n", 1);
+			g_command.exit_status = 130;
+		}
+		else if (WTERMSIG(status) == SIGQUIT)
+		{
+			write(1, "Quit: 3\n", ft_strlen("Quit : 3\n"));
+			g_command.exit_status = 131;
+		}
 	}
 	g_command.pid = 0;
 	return (0);
