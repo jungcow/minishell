@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strsfree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 16:22:02 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 17:42:23 by jungwkim         ###   ########.fr       */
+/*   Created: 2021/05/08 14:21:24 by jungwkim          #+#    #+#             */
+/*   Updated: 2021/05/08 14:23:49 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "terminal.h"
-#include "command/command.h"
+#include "libft.h"
 
-extern t_command	g_command;
-
-int		main(int argc, char **argv, char **env)
+void	ft_strsfree(char **strs)
 {
-	(void)argc;
-	(void)argv;
-	print_ascii_art();
-	run_minishell(env);
-	// return what if error
-	return (0);
+	int		i;
+
+	i = 0;
+	if (strs == NULL)
+		return ;
+	while (strs[i])
+	{
+		free(strs[i]);
+		i++;
+	}
+	free(strs);
 }

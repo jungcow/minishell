@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 21:24:19 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/07 22:40:38 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:28:20 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,14 @@
 # define DIRECTORY_ERR ": is a directory"
 # define PERMISSION_ERR ": Permission denied"
 # define NO_SUCH_ERR ": No such file or directory"
+# define INVALID_IDENTIFIER_ERR ": not a valid identifier"
+# define ENV_ERR "env :"
+# define SETENV "setenv "
+# define INVALID_ARGUMENT_ERR ": Invalid argument"
 
 void	command_error(char *command, int err_type);
 void	unexpected_token(char *token);
+void	invalid_identifier(char *arg);
+void	invalid_argument(char *arg, int err_type);
 
 #endif

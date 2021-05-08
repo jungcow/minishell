@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:32:32 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/07 23:18:10 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 17:27:31 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int		get_path(t_operation *operation, char **dir)
 	int		ret;
 
 	ret = 1;
+	*dir = NULL;
 	if (check_path_type(operation->argv[0]) == 0)
 		ret = check_path_env(operation->argv[0], dir);
 	else if (check_path_type(operation->argv[0]) == '/')

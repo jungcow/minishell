@@ -66,6 +66,7 @@ EXECUTE_SRCS = $(addprefix ./srcs/execute/, \
 ##########################################################
 ENVIRON_SRCS = $(addprefix ./srcs/environ/, \
 				environ.c \
+				environ_utils.c \
 				envlist.c \
 				envlist_utils.c \
 				envset.c \

@@ -6,12 +6,13 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/07 23:16:55 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 17:19:55 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "execute/execute.h"
+#include "environ/environ.h"
 #include "command/command.h"
 
 extern t_command	g_command;
@@ -68,40 +69,13 @@ int			treat_redirect(t_operation *operation)
 	return (last_fd);
 }
 
-int			list_to_char_env(t_environ *environ, char ***env)
-{
-	t_environ	*tmp;
-	int			len;
-	int			i;
-
-	*env = NULL;
-	len = 0;
-	tmp = environ;
-	while (tmp && (len++) + 1)
-		tmp = tmp->next;
-	*env = (char **)malloc(sizeof(char *) * (len + 1));
-	if (*env == NULL)
-		return (-1);
-	i = 0;
-	while (environ)
-	{
-		(*env)[i] = environ->env;
-		if ((*env)[i] == NULL)
-			return (-1);
-		environ = environ->next;
-		i++;
-	}
-	(*env)[i] = NULL;
-	return (1);
-}
-
 int			implement_child_process(t_operation *operation,
 									char *dir, int redirect_fd)
 {
 	int		exit_status;
 	char	**env;
 
-	if (list_to_char_env(g_command.environ, &env) < 0)
+	if (list_to_strs_environ(g_command.environ, &env) < 0)
 		return (-1);
 	if (is_builtin(operation->argv[0]))
 		exit_status = ft_execve(operation->argv[0],
@@ -112,7 +86,7 @@ int			implement_child_process(t_operation *operation,
 		exit(EXIT_FAILURE);
 	if (operation->len_redirects)
 		close(redirect_fd);
-	free(env);
+	ft_strsfree(env);
 	return (exit_status);
 }
 

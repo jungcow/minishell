@@ -8,6 +8,8 @@ SRCS = string.c \
 	   ft_strslen.c \
 	   ft_split.c \
 	   ft_strdup.c \
+	   ft_strsfree.c \
+	   ft_strswap.c \
 	   ft_atoi.c \
 	   ft_itoa.c \
 	   ft_isspace.c \
