@@ -6,11 +6,10 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 19:33:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/02 20:07:15 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:05:50 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "libft.h"

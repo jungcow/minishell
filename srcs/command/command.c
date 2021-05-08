@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:55:18 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/06 23:36:38 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:20:05 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ bool	init_command(t_command *command)
 
 	command->command_status = false;
 	command->prev_exit_status = command->exit_status;
-	command->exit_status = 0;
 	command->cursor = 0;
 	command->length = 0;
 	flag = true;

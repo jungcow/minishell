@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 19:55:23 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:30:10 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		init_minishell(t_term *term, t_command *command)
 		!init_history(command))
 		return (0);
 	command->pwd = getcwd(NULL, 0);
+	command->exit_status = 0;
 	if (command->pwd == NULL)
 		return (0);
 	init_signal();
