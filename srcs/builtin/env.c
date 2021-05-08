@@ -6,12 +6,11 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 11:54:25 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 18:05:37 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/09 02:18:17 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <errno.h>
 #include <unistd.h>
 #include "error/error.h"
 #include "builtin.h"
@@ -36,25 +35,39 @@ int		validate_env_argv(char **argv, char **arg)
 	return (0);
 }
 
-void	write_entire_environ(t_environ *environ)
+int		write_entire_environ(t_environ *environ, char **argv)
 {
-	while (environ)
+	int		i;
+
+	if (write_original_environ(environ, &argv) < 0)
+		return (-1);
+	i = -1;
+	while (argv && argv[++i])
 	{
-		if (ft_strchr(environ->env, '='))
-		{
-			write(1, environ->env, ft_strlen(environ->env));
-			write(1, "\n", 1);
-		}
-		environ = environ->next;
+		write(1, argv[i], ft_strlen(argv[i]));
+		write(1, "\n", 1);
 	}
+	ft_strsfree(argv);
+	return (0);
 }
 
 int		ft_env(int argc, char **argv, t_environ *environ)
 {
 	char	*arg;
-	int		i;
+	char	**new;
 	int		ret;
 
+	new = (char **)malloc(sizeof(char *) * (argc));
+	ret = -1;
+	while (++ret < argc)
+		new[ret] = NULL;
+	ret = -1;
+	while (++ret < argc - 1)
+	{
+		new[ret] = ft_strdup(argv[ret + 1]);
+		if (new[ret] == NULL)
+			return (-1);
+	}
 	if (argc > 1)
 	{
 		ret = validate_env_argv(argv + 1, &arg);
@@ -63,15 +76,6 @@ int		ft_env(int argc, char **argv, t_environ *environ)
 			invalid_argument(arg, ret);
 			return (ret);
 		}
-		write_entire_environ(environ);
-		i = 0;
-		while (argv[++i])
-		{
-			write(1, argv[i], ft_strlen(argv[i]));
-			write(1, "\n", 1);
-		}
 	}
-	if (argc == 1)
-		write_entire_environ(environ);
-	return (errno);
+	return (write_entire_environ(environ, new));
 }

@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 02:14:43 by jungwkim          #+#    #+#             */
-/*   Updated: 2020/12/29 15:39:35 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/09 01:35:01 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strdup(const char *s1)
 	int				i;
 
 	i = 0;
+	if (s1 == NULL)
+		return (NULL);
 	len = ft_strlen(s1);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
