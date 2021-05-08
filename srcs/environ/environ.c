@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:46:24 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 16:33:12 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:54:33 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ int		init_environ(t_environ **environ, char **env)
 	int		i;
 
 	len = ft_strslen(env);
-	*environ = (t_environ *)malloc(sizeof(t_environ) * len);
-	if (*environ == NULL)
-		return (0);
 	*environ = NULL;
 	i = 0;
 	while (i < len)
