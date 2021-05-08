@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 03:21:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 20:28:49 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/08 21:23:16 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ int		wait_process(pid_t *process, int num)
 	int		status;
 	int		i;
 
-	i = 0;
-	while (i < num)
+	i = -1;
+	while (++i < num)
 	{
 		waitpid(process[i], &status, 0);
 		if (WIFEXITED(status))
 			g_command.exit_status = WEXITSTATUS(status);
-		i++;
 	}
 	if (WIFSIGNALED(status))
 	{

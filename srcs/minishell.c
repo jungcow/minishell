@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:18:05 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 20:39:49 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:50:32 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	run_minishell(char **env)
 		if (run_command(&g_command) == -1)
 			break ;
 		clear_command(&g_command);
-		system("leaks minishell");
 	}
 	clear_command(&g_command);
 	clear_history(g_command.history, g_command.history_fd);

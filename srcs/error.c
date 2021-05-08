@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 23:27:47 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 16:28:47 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 21:33:44 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	unexpected_token(char *token)
 	write(2, TOKEN_ERR, ft_strlen(TOKEN_ERR));
 	write(2, " '", 2);
 	write(2, token, ft_strlen(token));
-	write(1, "'\n", 2); //이거 개행 fd 2번에 찍히나요??
+	write(1, "'\n", 2);
 }
 
 void	invalid_identifier(char *arg)

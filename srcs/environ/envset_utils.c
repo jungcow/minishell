@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:51:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 20:45:47 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 21:18:57 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int		get_envstr(char **envset, int idx)
 	char	*num;
 	int		flag;
 
-	rest = NULL;
-	env = NULL;
 	flag = get_alnum_envstr(envset[idx], &env, &rest);
 	if (flag == -1)
 		return (-1);
@@ -63,9 +61,8 @@ int		get_envstr(char **envset, int idx)
 	if (flag == 0 && dup_str(&value, num) < 0)
 		return (-1);
 	free(num);
-	if (!value && dup_str(&env, "") < 0)
-		return (-1);
-	else if (value && dup_str(&env, value) < 0)
+	if ((!value && dup_str(&env, "") < 0) ||
+			(value && dup_str(&env, value) < 0))
 		return (-1);
 	free(envset[idx]);
 	envset[idx] = ft_strjoin(env, rest);

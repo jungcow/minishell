@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 17:31:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 20:42:26 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 21:18:29 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,29 @@ int		list_to_strs_environ(t_environ *environ, char ***env)
 		environ = environ->next;
 	}
 	return (1);
+}
+
+void	dealloc_environ_head(t_environ **head)
+{
+	t_environ	*tmp;
+
+	tmp = *head;
+	*head = (*head)->next;
+	tmp->next = NULL;
+	clear_environ(tmp);
+}
+
+void	dealloc_environ_nohead(t_environ *prev, t_environ *tmp)
+{
+	if (tmp->next == NULL)
+	{
+		prev->next = NULL;
+		clear_environ(tmp);
+	}
+	else
+	{
+		prev->next = tmp->next;
+		tmp->next = NULL;
+		clear_environ(tmp);
+	}
 }

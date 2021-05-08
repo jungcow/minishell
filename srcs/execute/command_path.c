@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:32:32 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 20:21:49 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 21:26:34 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ int		check_path_type(char *command)
 	if (*command == '.')
 		return (*command);
 	return (0);
+}
+
+int		join_path(char **dir, char *filename)
+{
+	*dir = ft_strjoin(*dir, "/");
+	if (*dir == NULL)
+		return (-1);
+	*dir = ft_strjoin(*dir, filename);
+	if (*dir == NULL)
+		return (-1);
+	return (1);
 }
 
 int		check_path_env(char *filename, char **dir)
@@ -49,11 +60,7 @@ int		check_path_env(char *filename, char **dir)
 	if (dup_str(dir, path[i]) < 0)
 		return (-1);
 	clear_strs(path);
-	*dir = ft_strjoin(*dir, "/");
-	if (*dir == NULL)
-		return (-1);
-	*dir = ft_strjoin(*dir, filename);
-	if (*dir == NULL)
+	if (join_path(dir, filename) < 0)
 		return (-1);
 	return (1);
 }

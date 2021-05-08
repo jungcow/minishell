@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:46:24 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 20:33:11 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/08 21:17:13 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,17 @@ void	dealloc_environ(t_environ **head, int index)
 	while (++i < index)
 		tmp = tmp->next;
 	if (i == 1)
+		dealloc_environ_head(head);
+	else
 	{
 		tmp = *head;
-		*head = (*head)->next;
-		tmp->next = NULL;
-		clear_environ(tmp);
-		return ;
+		while (--i && tmp->next)
+		{
+			prev = tmp;
+			tmp = tmp->next;
+		}
+		dealloc_environ_nohead(prev, tmp);
 	}
-	tmp = *head;
-	while (--i)
-	{
-		prev = tmp;
-		tmp = tmp->next;
-	}
-	if (tmp == NULL)
-	{
-		prev->next = NULL;
-		clear_environ(tmp);
-		return ;
-	}
-	prev->next = tmp->next;
-	tmp->next = NULL;
-	clear_environ(tmp);
 }
 
 int		check_environ(t_pipeline *pipeline)
