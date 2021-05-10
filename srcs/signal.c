@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:39:04 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 20:33:46 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:48:20 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	sigint_handler(void)
 {
 	if (g_command.pid == 0)
 	{
+		while (g_command.cursor + 1 < g_command.length)
+			if (apply_cursor_key(&g_command, g_command.term, RIGHT_ARROW) == -1)
+				exit(1);
 		clear_command(&g_command);
 		if (!init_command(&g_command))
 			exit(1);
