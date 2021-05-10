@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/07 22:23:52 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:39:57 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_command
 {
 	t_environ		*environ;
 	t_history		*history;
+	t_term			*term;
 	int				history_fd;
 	t_history		*ptr;
 	t_string		line;
