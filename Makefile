@@ -103,6 +103,8 @@ $(NAME) : $(OBJS)
 	make build_libft
 	$(CC) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
 
+bonus : all
+
 build_libft : 
 	make -C ./libft
 
