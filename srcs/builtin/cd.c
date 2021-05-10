@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 18:33:25 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 20:09:14 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:01:39 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ extern t_command	g_command;
 
 int		cd_home(char **argv)
 {
+	free(argv[1]);
 	argv[1] = get_environ("HOME");
 	if (argv[1] == NULL)
 	{
@@ -30,7 +31,6 @@ int		cd_home(char **argv)
 		write(2, "\n", 1);
 		return (1);
 	}
-	free(argv[1]);
 	return (0);
 }
 

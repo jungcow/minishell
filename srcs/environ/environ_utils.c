@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 17:31:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 21:18:29 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:02:27 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,10 @@ void	dealloc_environ_head(t_environ **head)
 
 	tmp = *head;
 	*head = (*head)->next;
+	free(tmp->env);
 	tmp->next = NULL;
-	clear_environ(tmp);
+	free(tmp);
+	tmp = NULL;
 }
 
 void	dealloc_environ_nohead(t_environ *prev, t_environ *tmp)

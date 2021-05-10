@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 17:19:55 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:33:08 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			implement_child_process(t_operation *operation,
 		return (-1);
 	if (is_builtin(operation->argv[0]))
 		exit_status = ft_execve(operation->argv[0],
-								operation->argv, g_command.environ);
+								operation->argv, &g_command.environ);
 	else
 		exit_status = execve(dir, operation->argv, env);
 	if (exit_status < 0)
@@ -96,11 +96,12 @@ int			execute_child_process(t_pipeline *pipelines,
 	t_operation		*operation;
 	char			*dir;
 	int				redirect_fd;
-	int				exit_status;
+	int				ret;
 
 	operation = &pipelines->operations[idx];
-	if (!is_builtin(operation->argv[0]) && get_path(operation, &dir) < 0)
-		return (-1);
+	ret = !is_builtin(operation->argv[0]) && get_path(operation, &dir);
+	if (ret < 0)
+		exit(ret);
 	if (treat_pipeline(pipelines, new_fd, old_fd, idx) < 0)
 		return (-1);
 	redirect_fd = 0;
@@ -110,6 +111,11 @@ int			execute_child_process(t_pipeline *pipelines,
 		if (redirect_fd < 0)
 			return (-1);
 	}
-	exit_status = implement_child_process(operation, dir, redirect_fd);
-	exit(exit_status);
+	if (!is_builtin(operation->argv[0]) && ret)
+	{
+		close(redirect_fd);
+		exit(ret);
+	}
+	exit(implement_child_process(operation, dir, redirect_fd));
+	return (1);
 }

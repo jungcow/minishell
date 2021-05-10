@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:32:32 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 21:26:34 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:51:40 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		check_path_env(char *filename, char **dir)
 	char	*value;
 
 	value = get_environ("PATH");
+	if (value == NULL)
+		return (NO_SUCH);
 	path = ft_split(value, ':');
 	free(value);
 	if (path == NULL)
@@ -94,9 +96,9 @@ int		get_path(t_operation *operation, char **dir)
 		else
 			g_command.exit_status = 126;
 		command_error(operation->argv[0], ret);
-		exit(g_command.exit_status);
+		return (g_command.exit_status);
 	}
 	else if (ret == -1)
 		return (-1);
-	return (1);
+	return (0);
 }

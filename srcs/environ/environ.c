@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:46:24 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 21:17:13 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:34:15 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	dealloc_environ(t_environ **head, int index)
 	tmp = *head;
 	while (++i < index)
 		tmp = tmp->next;
-	if (i == 1)
+	if (index == 1)
 		dealloc_environ_head(head);
 	else
 	{
@@ -119,5 +119,6 @@ void	clear_environ(t_environ *environ)
 		free(tmp->env);
 		tmp->next = NULL;
 		free(tmp);
+		tmp = NULL;
 	}
 }
