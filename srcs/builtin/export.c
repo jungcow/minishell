@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 12:24:21 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/11 18:26:33 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 20:39:32 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		search_value_export(t_environ *environ, char *arg)
 		if (ft_strcmp(env_key, arg_key) == 0)
 		{
 			flag = 1;
-			if (ft_strlchr(arg, '='))
+			if (ft_strchr(arg, '='))
 				change_value_export(environ, ptr + 1);
 		}
 		free(env_key);

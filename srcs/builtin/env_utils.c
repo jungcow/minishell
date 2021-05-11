@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 01:42:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/11 18:21:46 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 20:36:44 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int		write_original_environ(t_environ *environ, char ***argv)
 		ret = 0;
 		ptr = ft_strlchr(environ->env, '=');
 		key = ft_strndup(environ->env, ptr - environ->env);
-		if (ft_strlchr(environ->env, '='))
+		if (ft_strchr(environ->env, '='))
 		{
 			write(1, key, ft_strlen(key));
 			write(1, "=", 1);
