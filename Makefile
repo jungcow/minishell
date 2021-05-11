@@ -2,7 +2,7 @@ NAME = minishell
 CC = gcc
 CURSES = -lncurses
 INC = -I ./includes -I ./libft
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra
 LIB = -L./libft -lft $(CURSES)
 
 ##########################################################
@@ -11,6 +11,7 @@ LIB = -L./libft -lft $(CURSES)
 BUILTIN_SRCS = $(addprefix ./srcs/builtin/, \
 				echo.c \
 				cd.c \
+				cd_util.c \
 				pwd.c \
 				exit.c \
 				env.c \

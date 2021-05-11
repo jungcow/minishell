@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 18:35:17 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/10 18:25:29 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 16:14:25 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int		ft_history(void);
 /*
 **		utils
 */
+void	update_pwd(char **argv);
 int		alloc_env_value(char *key, char ***argv, char **value, int *flag);
 int		write_original_environ(t_environ *environ, char ***argv);
+void	success_getcwd(void);
+void	fail_getcwd(char **argv);
 
 #endif
