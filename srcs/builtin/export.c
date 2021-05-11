@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 12:24:21 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/11 09:22:56 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 10:09:55 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ int		apply_export_argv(t_environ *environ, char **argv)
 
 int		ft_export(int argc, char **argv, t_environ *environ)
 {
-	char	**strs;
+	char	*str;
+	char	*ptr;
 	int		i;
 	char	**envstrs;
 
@@ -125,16 +126,13 @@ int		ft_export(int argc, char **argv, t_environ *environ)
 	i = 0;
 	while (envstrs[i])
 	{
-		strs = ft_split(envstrs[i], '=');
-		if (strs == NULL)
-		{
-			ft_strsfree(envstrs);
-			return (-1);
-		}
-		write_env_export(strs[0], strs[1], ft_strchr(envstrs[i], '='));
-		ft_strsfree(strs);
+		ptr = ft_strchr(envstrs[i], '=');
+		str = ft_strndup(envstrs[i], (ptr - envstrs[i]));
+		if (str == NULL)
+			exit(-1);
+		write_env_export(str, ++ptr, ft_strchr(envstrs[i], '='));
+		free(str);
 		i++;
 	}
-	ft_strsfree(envstrs);
 	return (0);
 }
