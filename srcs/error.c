@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 23:27:47 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 21:33:44 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:17:36 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	invalid_argument(char *arg, int err_type)
 	write(2, ENV_ERR, ft_strlen(ENV_ERR));
 	if (err_type == 1)
 		write(2, SETENV, ft_strlen(SETENV));
+	write(1, " ", 1);
 	write(2, arg, ft_strlen(arg));
 	if (err_type == 1)
 		write(2, INVALID_ARGUMENT_ERR, ft_strlen(INVALID_ARGUMENT_ERR));

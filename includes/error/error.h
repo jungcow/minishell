@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 21:24:19 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 16:28:20 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:18:40 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define NO_SUCH_ERR ": No such file or directory"
 # define INVALID_IDENTIFIER_ERR ": not a valid identifier"
 # define ENV_ERR "env :"
-# define SETENV "setenv "
+# define SETENV " setenv"
 # define INVALID_ARGUMENT_ERR ": Invalid argument"
 
 void	command_error(char *command, int err_type);
