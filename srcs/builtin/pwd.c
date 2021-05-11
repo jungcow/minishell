@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 18:22:56 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/11 09:41:22 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 11:32:10 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ extern t_command	g_command;
 
 int		ft_pwd(void)
 {
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-		exit(errno);
-	write(1, pwd, ft_strlen(pwd));
+	if (g_command.pwd == NULL)
+		return (1);
+	write(1, g_command.pwd, ft_strlen(g_command.pwd));
 	write(1, "\n", 1);
 	return (0);
 }
