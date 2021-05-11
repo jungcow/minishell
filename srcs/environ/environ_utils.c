@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 17:31:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/10 20:02:27 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 09:39:07 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int		bubble_sort_environ(char **envstrs)
 {
 	int			j;
 	int			i;
+	char		**key1;
+	char		**key2;
 
 	j = ft_strslen(envstrs);
 	while (--j)
@@ -54,10 +56,16 @@ int		bubble_sort_environ(char **envstrs)
 		i = 0;
 		while (envstrs[i + 1])
 		{
-			if (ft_strcmp(envstrs[i], envstrs[i + 1]) > 0)
+			key1 = ft_split(envstrs[i], '=');
+			key2 = ft_split(envstrs[i + 1], '=');
+			if (!key1 || !key2)
+				exit(-1);
+			if (ft_strcmp(key1[0], key2[0]) > 0)
 				if (!ft_strswap(&envstrs[i], &envstrs[i + 1]))
 					return (0);
 			i++;
+			ft_strsfree(key1);
+			ft_strsfree(key2);
 		}
 	}
 	return (1);

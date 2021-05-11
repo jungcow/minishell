@@ -6,12 +6,11 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:29:31 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/10 16:06:18 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 09:23:27 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <errno.h>
 #include "libft.h"
 
 int		check_option(char *arg)

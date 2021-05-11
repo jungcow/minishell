@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:32:32 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/10 18:51:40 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 09:41:04 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ int		check_path_env(char *filename, char **dir)
 		clear_strs(path);
 		return (0);
 	}
-	if (dup_str(dir, path[i]) < 0)
+	if ((dup_str(dir, path[i]) < 0) || (join_path(dir, filename) < 0))
 		return (-1);
 	clear_strs(path);
-	if (join_path(dir, filename) < 0)
-		return (-1);
 	return (1);
 }
 

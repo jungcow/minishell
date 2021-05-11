@@ -6,11 +6,10 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 12:24:21 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 18:05:30 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 09:22:56 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
 #include <stdlib.h>
 #include "error/error.h"
 #include "libft.h"
