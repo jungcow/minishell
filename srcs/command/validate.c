@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:17:01 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/04 18:10:07 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:12:43 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "libft.h"
 #include "command/command.h"
 #include "error/error.h"
+
+extern t_command	g_command;
 
 static char	*dump_command(t_command *command)
 {
@@ -115,7 +117,10 @@ bool		validate_command(t_command *command)
 	flag = flag && validate_quote(command->line.content,
 									command->line.length);
 	if (flag == false)
+	{
+		g_command.exit_status = 258;
 		command->line.length = 1;
+	}
 	return (true);
 }
 

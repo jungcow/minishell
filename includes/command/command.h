@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/10 18:39:57 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:12:57 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct		s_command
 	int				cursor;
 	int				length;
 	bool			command_status;
-	unsigned char	exit_status;
-	unsigned char	prev_exit_status;
+	unsigned short	exit_status;
+	unsigned short	prev_exit_status;
 	char			*pwd;
 	int				pid;
 }					t_command;
