@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 17:31:13 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/11 09:39:07 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 18:26:54 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,53 +19,55 @@ extern t_command	g_command;
 char	*get_environ(char *env)
 {
 	t_environ	*environ;
-	char		**strs;
+	char		*ptr;
+	char		*key;
 	char		*ret;
 
 	environ = g_command.environ;
 	while (environ)
 	{
-		strs = ft_split(environ->env, '=');
-		if (strs == NULL)
-			return (NULL);
-		if (ft_strcmp(strs[0], env) == 0)
+		ptr = ft_strlchr(environ->env, '=');
+		key = ft_strndup(environ->env, ptr - environ->env);
+		if (!key)
+			exit(-1);
+		if (ft_strcmp(key, env) == 0)
 		{
-			if (strs[1] == NULL)
+			if (ptr + 1 == NULL)
 				ret = ft_strdup("");
 			else
-				ret = ft_strdup(strs[1]);
-			ft_strsfree(strs);
+				ret = ft_strdup(ptr + 1);
+			free(key);
 			return (ret);
 		}
-		ft_strsfree(strs);
+		free(key);
 		environ = environ->next;
 	}
 	return (NULL);
 }
 
-int		bubble_sort_environ(char **envstrs)
+int		bubble_sort_environ(char **envstrs, int i, int j)
 {
-	int			j;
-	int			i;
-	char		**key1;
-	char		**key2;
+	char		*key1;
+	char		*key2;
+	char		*ptr;
 
 	j = ft_strslen(envstrs);
 	while (--j)
 	{
-		i = 0;
-		while (envstrs[i + 1])
+		i = -1;
+		while (envstrs[++i + 1])
 		{
-			key1 = ft_split(envstrs[i], '=');
-			key2 = ft_split(envstrs[i + 1], '=');
+			ptr = ft_strlchr(envstrs[i], '=');
+			key1 = ft_strndup(envstrs[i], ptr - envstrs[i]);
+			ptr = ft_strlchr(envstrs[i + 1], '=');
+			key2 = ft_strndup(envstrs[i + 1], ptr - envstrs[i + 1]);
 			if (!key1 || !key2)
 				exit(-1);
-			if (ft_strcmp(key1[0], key2[0]) > 0)
+			if (ft_strcmp(key1, key2) > 0)
 				if (!ft_strswap(&envstrs[i], &envstrs[i + 1]))
 					return (0);
-			i++;
-			ft_strsfree(key1);
-			ft_strsfree(key2);
+			free(key1);
+			free(key2);
 		}
 	}
 	return (1);

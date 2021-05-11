@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 12:24:21 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/11 10:09:55 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 18:26:33 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,59 +32,56 @@ void	write_env_export(char *key, char *value, char *flag)
 
 int		change_value_export(t_environ *environ, char *value)
 {
-	char	**strs;
+	char	*str;
+	char	*ptr;
 	char	*key;
 
-	strs = ft_split(environ->env, '=');
-	if (strs == NULL)
+	ptr = ft_strlchr(environ->env, '=');
+	str = ft_strndup(environ->env, ptr - environ->env);
+	if (str == NULL)
 		return (-1);
-	key = ft_strjoin(strs[0], "=");
+	key = ft_strjoin(str, "=");
+	free(str);
 	if (key == NULL)
-	{
-		ft_strsfree(strs);
-		return (-1);
-	}
+		exit(-1);
 	free(environ->env);
 	if (value == NULL)
 		environ->env = ft_strjoin(key, "");
 	else
 		environ->env = ft_strjoin(key, value);
 	if (environ->env == NULL)
-	{
-		ft_strsfree(strs);
-		return (-1);
-	}
-	ft_strsfree(strs);
+		exit(-1);
+	free(key);
 	return (1);
 }
 
 int		search_value_export(t_environ *environ, char *arg)
 {
-	char	**env_tmp;
-	char	**arg_tmp;
+	char	*ptr;
+	char	*arg_key;
+	char	*env_key;
 	int		flag;
 
 	flag = 0;
-	while (environ)
+	while (environ && flag == 0)
 	{
-		env_tmp = ft_split(environ->env, '=');
-		arg_tmp = ft_split(arg, '=');
-		if (!env_tmp || !arg_tmp)
-			return (-1);
-		if (ft_strcmp(env_tmp[0], arg_tmp[0]) == 0)
+		ptr = ft_strlchr(environ->env, '=');
+		env_key = ft_strndup(environ->env, ptr - environ->env);
+		ptr = ft_strlchr(arg, '=');
+		arg_key = ft_strndup(arg, ptr - arg);
+		if (!env_key || !arg_key)
+			exit(1);
+		if (ft_strcmp(env_key, arg_key) == 0)
 		{
 			flag = 1;
-			if (ft_strchr(arg, '='))
-				change_value_export(environ, arg_tmp[1]);
-			break ;
+			if (ft_strlchr(arg, '='))
+				change_value_export(environ, ptr + 1);
 		}
+		free(env_key);
+		free(arg_key);
 		environ = environ->next;
 	}
-	ft_strsfree(env_tmp);
-	ft_strsfree(arg_tmp);
-	if (!flag)
-		return (0);
-	return (1);
+	return (flag);
 }
 
 int		apply_export_argv(t_environ *environ, char **argv)
@@ -106,6 +103,7 @@ int		apply_export_argv(t_environ *environ, char **argv)
 		{
 			if (!alloc_environ(&environ, argv[i]))
 				return (-1);
+			continue ;
 		}
 	}
 	return (flag);
@@ -121,12 +119,12 @@ int		ft_export(int argc, char **argv, t_environ *environ)
 	if (argc > 1)
 		return (apply_export_argv(environ, argv));
 	if (list_to_strs_environ(environ, &envstrs) < 0 ||
-			!bubble_sort_environ(envstrs))
+			!bubble_sort_environ(envstrs, 0, 0))
 		return (-1);
 	i = 0;
 	while (envstrs[i])
 	{
-		ptr = ft_strchr(envstrs[i], '=');
+		ptr = ft_strlchr(envstrs[i], '=');
 		str = ft_strndup(envstrs[i], (ptr - envstrs[i]));
 		if (str == NULL)
 			exit(-1);
@@ -134,5 +132,6 @@ int		ft_export(int argc, char **argv, t_environ *environ)
 		free(str);
 		i++;
 	}
+	ft_strsfree(envstrs);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:39:05 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 21:18:16 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 18:28:01 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void					clear_environ(t_environ *environ);
 **		environ_utils
 */
 char					*get_environ(char *env);
-int						bubble_sort_environ(char **envstrs);
+int						bubble_sort_environ(char **envstrs, int i, int j);
 int						list_to_strs_environ(t_environ *environ, char ***env);
 void					dealloc_environ_head(t_environ **head);
 void					dealloc_environ_nohead(t_environ *prev, t_environ *tmp);

@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 03:51:30 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/08 17:17:47 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:57:14 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int			ft_isalnum(int c);
 
 void		ft_strncpy(char *dest, const char *src, int size);
 char		*ft_strchr(const char *s, int c);
+char		*ft_strlchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*ft_strjoin(const char *s1, const char *s2);
 

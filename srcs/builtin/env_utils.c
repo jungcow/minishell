@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 01:42:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/09 02:37:17 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 18:21:46 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,26 @@ int		realloc_argv(char ***argv, int *idx, int *flag)
 
 int		alloc_env_value(char *key, char ***argv, char **value, int *flag)
 {
-	char	**arg_tmp;
+	char	*ptr;
+	char	*arg_key;
 	int		i;
 
 	i = -1;
 	while ((*argv)[++i])
 	{
-		arg_tmp = ft_split((*argv)[i], '=');
-		if (arg_tmp == NULL)
-			return (-1);
-		if (!ft_strcmp(arg_tmp[0], key))
+		ptr = ft_strlchr((*argv)[i], '=');
+		arg_key = ft_strndup((*argv)[i], ptr - (*argv)[i]);
+		if (!ft_strcmp(arg_key, key))
 		{
-			free(*value);
-			*value = ft_strdup(arg_tmp[1]);
-			if ((arg_tmp[1] != NULL && *value == NULL) ||
+			*value = ptr + 1;
+			if ((ptr + 1 != NULL && *value == NULL) ||
 				realloc_argv(argv, &i, flag) < 0)
 			{
-				ft_strsfree(arg_tmp);
+				free(arg_key);
 				return (-1);
 			}
 		}
-		ft_strsfree(arg_tmp);
+		free(arg_key);
 	}
 	return (1);
 }
@@ -81,34 +80,33 @@ int		search_env_key(char *key, char ***argv)
 		write(1, "", 0);
 	else if (flag && value)
 		write(1, value, ft_strlen(value));
-	free(value);
 	return (flag);
 }
 
 int		write_original_environ(t_environ *environ, char ***argv)
 {
-	char	**env_tmp;
+	char	*ptr;
+	char	*key;
 	int		ret;
 
 	while (environ)
 	{
 		ret = 0;
-		env_tmp = ft_split(environ->env, '=');
-		if (!env_tmp)
-			return (-1);
-		if (ft_strchr(environ->env, '='))
+		ptr = ft_strlchr(environ->env, '=');
+		key = ft_strndup(environ->env, ptr - environ->env);
+		if (ft_strlchr(environ->env, '='))
 		{
-			write(1, env_tmp[0], ft_strlen(env_tmp[0]));
+			write(1, key, ft_strlen(key));
 			write(1, "=", 1);
 			if (*argv)
-				ret = search_env_key(env_tmp[0], argv);
+				ret = search_env_key(key, argv);
 			if (ret < 0)
 				return (-1);
-			else if (!ret && env_tmp[1])
-				write(1, env_tmp[1], ft_strlen(env_tmp[1]));
+			else if (!ret && ptr + 1)
+				write(1, ptr + 1, ft_strlen(ptr + 1));
 			write(1, "\n", 1);
 		}
-		ft_strsfree(env_tmp);
+		free(key);
 		environ = environ->next;
 	}
 	return (1);

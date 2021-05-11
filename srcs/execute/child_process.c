@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:22:06 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/10 18:33:08 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 16:46:28 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,9 @@ int			execute_child_process(t_pipeline *pipelines,
 	int				ret;
 
 	operation = &pipelines->operations[idx];
-	ret = !is_builtin(operation->argv[0]) && get_path(operation, &dir);
+	ret = 0;
+	if (!is_builtin(operation->argv[0]))
+		ret = get_path(operation, &dir);
 	if (ret < 0)
 		exit(ret);
 	if (treat_pipeline(pipelines, new_fd, old_fd, idx) < 0)
@@ -112,10 +114,7 @@ int			execute_child_process(t_pipeline *pipelines,
 			return (-1);
 	}
 	if (!is_builtin(operation->argv[0]) && ret)
-	{
-		close(redirect_fd);
 		exit(ret);
-	}
 	exit(implement_child_process(operation, dir, redirect_fd));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 11:54:25 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/10 18:33:41 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 18:38:51 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,47 +16,54 @@
 #include "builtin.h"
 #include "libft.h"
 
-int		validate_env_argv(char **argv, char **arg)
+int		validate_env_argv(char **argv, char *arg, int i)
 {
-	while (*argv)
+	int		ret;
+
+	ret = 0;
+	while (argv[++i])
 	{
-		if (ft_strchr(*argv, '=') == NULL)
+		if (ft_strchr(argv[i], '=') == NULL)
 		{
-			*arg = *argv;
-			return (127);
+			arg = argv[i];
+			ret = 127;
+			break ;
 		}
-		else if (**argv == '=')
+		else if (*(argv[i]) == '=')
 		{
-			*arg = *argv;
-			return (1);
+			arg = argv[i];
+			ret = 1;
+			break ;
 		}
-		argv++;
 	}
-	return (0);
+	if (ret)
+	{
+		invalid_argument(arg, ret);
+		ft_strsfree(argv);
+	}
+	return (ret);
 }
 
-int		search_key_buf(char **buf, char *key)
+int		search_key_buf(char **buf, char *str)
 {
 	int		i;
-	char	**var;
+	char	*ptr;
+	char	*key;
 
-	var = ft_split(key, '=');
-	if (!var)
-		exit(1);
+	ptr = ft_strlchr(str, '=');
+	if (!ptr)
+		return (0);
+	key = ft_strndup(str, ptr - str);
+	if (!key)
+		exit(-1);
 	i = -1;
 	while (buf[++i])
-		if (!ft_strcmp(buf[i], var[0]))
+		if (!ft_strcmp(buf[i], key))
 		{
-			ft_strsfree(var);
+			free(key);
 			return (1);
 		}
-	i = 0;
-	while (buf[i])
-		i++;
-	buf[i] = ft_strdup(var[0]);
-	if (buf[i] == NULL)
-		exit(1);
-	ft_strsfree(var);
+	buf[i] = key;
 	return (0);
 }
 
@@ -90,8 +97,8 @@ int		write_entire_environ(t_environ *environ, char **argv)
 
 int		ft_env(int argc, char **argv, t_environ *environ)
 {
-	char	*arg;
 	char	**new;
+	char	*arg;
 	int		ret;
 
 	new = (char **)malloc(sizeof(char *) * (argc));
@@ -105,14 +112,9 @@ int		ft_env(int argc, char **argv, t_environ *environ)
 		if (new[ret] == NULL)
 			return (-1);
 	}
+	arg = NULL;
 	if (argc > 1)
-	{
-		ret = validate_env_argv(argv + 1, &arg);
-		if (ret == 1 || ret == 127)
-		{
-			invalid_argument(arg, ret);
+		if (validate_env_argv(new, arg, -1))
 			return (ret);
-		}
-	}
 	return (write_entire_environ(environ, new));
 }

@@ -17,6 +17,7 @@ SRCS = string.c \
 	   ft_isalpha.c \
 	   ft_isalnum.c \
 	   ft_strchr.c \
+	   ft_strlchr.c \
 	   ft_strcmp.c \
 	   ft_strjoin.c \
 	   ft_atoll.c \
