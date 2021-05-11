@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 11:54:25 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/11 18:38:51 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:22:41 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,10 @@ int		ft_env(int argc, char **argv, t_environ *environ)
 	}
 	arg = NULL;
 	if (argc > 1)
-		if (validate_env_argv(new, arg, -1))
+	{
+		ret = validate_env_argv(new, arg, -1);
+		if (ret)
 			return (ret);
+	}
 	return (write_entire_environ(environ, new));
 }
