@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 04:23:28 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/10 18:32:24 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:29:44 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ int		is_builtin(char *command)
 
 int		ft_execve(char *command, char **argv, t_environ **environ)
 {
-	int		i;
 	int		ret;
 
-	i = -1;
 	ret = 0;
 	if (ft_strcmp(command, "echo") == 0)
 		ret = ft_echo(ft_strslen(argv), argv, *environ);
