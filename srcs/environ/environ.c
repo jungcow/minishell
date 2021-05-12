@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:46:24 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/10 18:34:15 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 02:24:24 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ int		check_environ(t_pipeline *pipeline)
 			envlist = NULL;
 			ret = prepare_envlist(&envlist, pipeline->operations[i].argv[j]);
 			if (ret >= 0)
+			{
 				ret = replace_envlist(envlist);
+			}
 			if (ret >= 0)
 				ret = join_envlist(envlist, &pipeline->operations[i].argv[j]);
 			clear_envlist(envlist);

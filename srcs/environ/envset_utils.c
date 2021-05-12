@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:51:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/08 21:18:57 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 02:43:35 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,60 +17,41 @@
 
 extern t_command	g_command;
 
-int		get_alnum_envstr(char *env, char **alnum, char **noalnum)
+int		handle_backslash(char **envset)
 {
-	int		i;
-	int		len;
-	int		flag;
+	const char	*set = "$\\\"`";
+	char		*tmp;
 
-	i = 0;
-	flag = 1;
-	len = ft_strlen(env);
-	while (ft_isalnum(env[i]) || env[i] == '_')
-		i++;
-	if (env[0] == '?')
+	if (ft_strchr(set, (*envset)[1]))
 	{
-		i = 1;
-		flag = 0;
+		tmp = ft_strdup(*envset + 1);
+		if (tmp == NULL)
+			exit(-1);
+		free(*envset);
+		*envset = tmp;
 	}
-	*alnum = ft_strndup(env, i);
-	if (*alnum == NULL)
-		return (-1);
-	*noalnum = ft_strndup(env + i, len - i);
-	if (*noalnum == NULL)
-	{
-		free(*alnum);
-		return (-1);
-	}
-	return (flag);
+	return (1);
 }
 
-int		get_envstr(char **envset, int idx)
+int		handle_dollar(char **envset)
 {
-	char	*rest;
-	char	*env;
-	char	*value;
-	char	*num;
-	int		flag;
+	char		*tmp;
 
-	flag = get_alnum_envstr(envset[idx], &env, &rest);
-	if (flag == -1)
-		return (-1);
-	value = get_environ(env);
-	num = ft_itoa(g_command.prev_exit_status);
-	if (flag == 0 && dup_str(&value, num) < 0)
-		return (-1);
-	free(num);
-	if ((!value && dup_str(&env, "") < 0) ||
-			(value && dup_str(&env, value) < 0))
-		return (-1);
-	free(envset[idx]);
-	envset[idx] = ft_strjoin(env, rest);
-	if (envset[idx] == NULL)
-		return (-1);
-	free(env);
-	free(rest);
-	free(value);
+	if ((*envset)[1] == '?')
+	{
+		free(*envset);
+		*envset = ft_itoa(g_command.prev_exit_status);
+		return (1);
+	}
+	tmp = get_environ(*envset + 1);
+	if (tmp == NULL)
+	{
+		tmp = ft_strdup("");
+		if (tmp == NULL)
+			exit(-1);
+	}
+	free(*envset);
+	*envset = tmp;
 	return (1);
 }
 
@@ -87,17 +68,28 @@ int		count_envset(char *arg)
 {
 	int		i;
 	int		num;
+	int		flag;
 
+	flag = 0;
 	i = 0;
-	num = 0;
+	if (!ft_isalnum(arg[i]) && arg[i] != '_')
+		flag = arg[i++];
+	if (flag == BACKSLASH)
+		i++;
+	num = 1;
 	while (arg[i])
 	{
-		if (arg[i] == '$' && (arg[i + 1] != '$' && arg[i + 1] != '\0'))
+		flag = 0;
+		if ((!ft_isalnum(arg[i]) && arg[i] != '_'))
+			flag = arg[i];
+		if (flag == BACKSLASH && arg[i + 1])
+			i++;
+		else if (flag == '$' && arg[i + 1] == '?')
+			i++;
+		if (flag)
 			num++;
 		i++;
 	}
-	if (*arg != '$')
-		num++;
 	return (num);
 }
 

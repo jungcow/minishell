@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 18:14:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/03 21:15:52 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 02:32:33 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,24 @@ void		clear_envlist(t_envlist *envlist)
 int			count_envstr(char *arg, int *idx, int *flag)
 {
 	int		num;
+	int		backslash;
 
 	if (arg[*idx] == SINGLE_QUOTE || arg[*idx] == DOUBLE_QUOTE)
-	{
-		*flag = arg[*idx];
-		(*idx)++;
-	}
+		*flag = arg[(*idx)++];
 	else
 		*flag = NONE_QUOTE;
 	num = 0;
-	while (arg[*idx] &&
-			((*flag == SINGLE_QUOTE && arg[*idx] != SINGLE_QUOTE) ||
-			(*flag == DOUBLE_QUOTE && arg[*idx] != DOUBLE_QUOTE) ||
-			(*flag == NONE_QUOTE && (arg[*idx] != SINGLE_QUOTE &&
-									arg[*idx] != DOUBLE_QUOTE))))
+	backslash = 0;
+	while (arg[*idx] && ((*flag == SINGLE_QUOTE && (arg[*idx] != SINGLE_QUOTE))
+		|| (*flag == DOUBLE_QUOTE && (arg[*idx] != DOUBLE_QUOTE || backslash))
+		|| (*flag == NONE_QUOTE
+		&& (arg[*idx] != SINGLE_QUOTE && arg[*idx] != DOUBLE_QUOTE))))
 	{
 		num++;
+		if (arg[*idx] == BACKSLASH && !backslash)
+			backslash = 1;
+		else
+			backslash = 0;
 		(*idx)++;
 	}
 	if (*flag == NONE_QUOTE)
