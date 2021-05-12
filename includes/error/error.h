@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 21:24:19 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/11 21:18:40 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 03:20:54 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define SEMICOLON ";"
 # define EXIT_ERR "exit: "
 # define CD_HOME_ERR "HOME not set"
-# define CD_ERR "cd : "
+# define CD_ERR "cd: "
 # define CD_CWD_ERR1 "error retrieving current directory: "
 # define CD_CWD_ERR2 "getcwd: cannot access parent directories"
 # define EXIT_NUMERIC_ERR "numeric argument required"
