@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:26:26 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/01 17:13:13 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/13 17:55:15 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void		refactor_instruction(t_string *command)
 	i = 0;
 	while (i < command->length)
 	{
-		if (command->content[i] == 34)
+		if (command->content[i] == 39)
 			i = skip_quote(command->content, command->length, i);
-		else if (command->content[i] == 39)
+		else if (command->content[i] == 34)
 			i = skip_dquote(command->content, command->length, i);
 		else if (command->content[i] == ';')
 			command->content[i] = '\0';

@@ -6,11 +6,12 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 03:21:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/10 18:34:06 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/13 16:51:46 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
+#include <sys/wait.h>
 #include "execute/execute.h"
 #include "command/command.h"
 

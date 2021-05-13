@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 15:43:22 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/02 19:54:32 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/13 17:56:28 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int			count_redirection(char *token)
 	count = 0;
 	while (token[i] != '\0')
 	{
-		if (token[i] == 34)
+		if (token[i] == 39)
 			i = skip_quote(token, ft_strlen(token), i);
-		else if (token[i] == 39)
+		else if (token[i] == 34)
 			i = skip_dquote(token, ft_strlen(token), i);
 		else if (token[i] == '<')
 			count++;
@@ -94,9 +94,9 @@ bool		parse_redirect_to(t_redirect *redirect, char *token, int *i)
 	{
 		if (ft_strchr("<> \n", token[*i]) != NULL)
 			break ;
-		else if (token[*i] == 34)
-			*i = skip_quote(token, ft_strlen(token), *i);
 		else if (token[*i] == 39)
+			*i = skip_quote(token, ft_strlen(token), *i);
+		else if (token[*i] == 34)
 			*i = skip_dquote(token, ft_strlen(token), *i);
 		*i += 1;
 	}
@@ -121,9 +121,9 @@ bool		parse_redirection(t_redirect *redirect, char *token)
 	count = 0;
 	while (token[i] != '\0')
 	{
-		if (token[i] == 34)
+		if (token[i] == 39)
 			i = skip_quote(token, ft_strlen(token), i);
-		else if (token[i] == 39)
+		else if (token[i] == 34)
 			i = skip_dquote(token, ft_strlen(token), i);
 		else if (token[i] == '<' || token[i] == '>')
 		{

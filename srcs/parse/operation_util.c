@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 19:39:15 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/02 22:03:54 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/13 17:55:41 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int		count_operation2(char *token, int i)
 	{
 		if (token[i] == ' ' || token[i] == '\n')
 			break ;
-		else if (token[i] == 34)
-			i = skip_quote(token, ft_strlen(token), i);
 		else if (token[i] == 39)
+			i = skip_quote(token, ft_strlen(token), i);
+		else if (token[i] == 34)
 			i = skip_dquote(token, ft_strlen(token), i);
 		i++;
 	}
@@ -63,9 +63,9 @@ int		move_operation(char **argv, char *token, int i)
 	{
 		if (token[i] == ' ' || token[i] == '\n')
 			break ;
-		else if (token[i] == 34)
-			i = skip_quote(token, ft_strlen(token), i);
 		else if (token[i] == 39)
+			i = skip_quote(token, ft_strlen(token), i);
+		else if (token[i] == 34)
 			i = skip_dquote(token, ft_strlen(token), i);
 		i++;
 	}
