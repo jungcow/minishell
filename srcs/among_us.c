@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 05:19:34 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/13 15:41:25 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 16:15:37 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	print_description(void)
 {
 	printf("Welcome to Imposter shell!\n");
-	printf("This program is for 42Seoul minishell subject made by seunghoh\n");
+	printf("This program is for 42Seoul minishell subject, made by seunghoh\n");
 	printf("and jungwkim. The action of this program follow the bash shell.\n");
 	printf("If you encounter errors or need other inquiries, welcome slack\n");
 	printf("DM or active PR to github.com/jungcow/minishell\n");
