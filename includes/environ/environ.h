@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:39:05 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/13 02:42:44 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 13:32:42 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void					add_envlist_back(t_envlist **envlist, t_envlist *new);
 /*
 **		envset
 */
-int						check_envset(char **env);
+int						check_envset(char **env, int flag);
 int						create_envset(char ***envset, char *arg);
 int						init_envset(char **envset, char *arg);
-int						replace_envset(char **envset, char *arg);
+int						replace_envset(char **envset, char *arg, int flag);
 int						join_envset(char **envset, char **arg);
 
 /*

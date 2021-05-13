@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 18:21:37 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/13 02:49:38 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 13:31:55 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		create_envset(char ***envset, char *arg)
 	return (1);
 }
 
-int		replace_envset(char **envset, char *arg)
+int		replace_envset(char **envset, char *arg, int flag)
 {
 	int		i;
 	int		num;
@@ -70,7 +70,7 @@ int		replace_envset(char **envset, char *arg)
 	{
 		if ((envset[i][0] == '$' && envset[i][1]) || envset[i][0] == '\\')
 		{
-			if (envset[i][0] == BACKSLASH)
+			if (flag == DOUBLE_QUOTE && envset[i][0] == BACKSLASH)
 				handle_backslash(envset + i);
 			else if (envset[i][0] == '$')
 				handle_dollar(envset + i);
@@ -106,7 +106,7 @@ int		join_envset(char **envset, char **arg)
 	return (1);
 }
 
-int		check_envset(char **env)
+int		check_envset(char **env, int flag)
 {
 	char	**envset;
 	int		ret;
@@ -115,7 +115,7 @@ int		check_envset(char **env)
 		return (1);
 	ret = create_envset(&envset, *env);
 	if (ret >= 0)
-		ret = replace_envset(envset, *env);
+		ret = replace_envset(envset, *env, flag);
 	if (ret >= 0)
 		ret = join_envset(envset, env);
 	clear_strs(envset);

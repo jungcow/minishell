@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 18:12:44 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/13 02:33:12 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 13:31:09 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		replace_envlist(t_envlist *envlist)
 	while (envlist)
 	{
 		if (envlist->flag == DOUBLE_QUOTE || envlist->flag == NONE_QUOTE)
-			if (check_envset(&envlist->env) < 0)
+			if (check_envset(&envlist->env, envlist->flag) < 0)
 				return (-1);
 		envlist = envlist->next;
 	}
