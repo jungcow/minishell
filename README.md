@@ -50,21 +50,7 @@
 
 ## 확인해봐야 할 테스트 케이스(예외 케이스)
 1. `< , >, >> 기호 좌측값은 공백없이 붙여야합니다. 그렇지 않으면 명령의 인수로 인식이 됩니다`
-2. `>, >> 기호의 우측값은 파일이름이 올경우는 괜찮지만 FD 번호가 올경우는 & 기호를 붙여줘야 합니다. 그렇지 않으면 FD 숫자가 파일이름이 됩니다.`
 3. `명령 치환에는 redirection 을 적용할 수 없습니다.`
-```
-$ echo $( expr a + 2 ) 2>/dev/null
-expr: non-integer argument
-
-$ 2> /dev/null echo $( expr a + 2 )
-expr: non-integer argument
-
-$ echo $( expr a + 2 2> /dev/null )
-OK
-
-$ { echo $( expr a + 2 ) ;} 2> /dev/null
-OK
-```
 4. 명령어의 옵션은 여러번 와도 괜찮다.
 ```
 echo -nnnnnnnnnnnn "hello"
@@ -74,8 +60,6 @@ echo -nnnnnnnnnnnn "hello"
 echo -nnnnn -n-n-n-n-n "hello"
 => -n-n-n-n-n hello$
 ```
-5. .sh 확장자 실행파일이 올 때 bash를 앞에 붙여주어 실행시켜준다.
-
 ## 학습 내용
 ### 21.04.12(월)
 
