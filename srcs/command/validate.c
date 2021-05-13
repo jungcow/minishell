@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:17:01 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/13 14:15:33 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/13 15:41:57 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ bool		validate_quote(char *dump, int length)
 				quote_status = dump[i];
 			else if (quote_status == dump[i])
 				if (quote_status == QUOTE || dump[i - 1] != '\\')
-				quote_status = 0;
+					quote_status = 0;
 		}
 		i++;
 	}
