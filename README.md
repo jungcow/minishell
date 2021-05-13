@@ -50,21 +50,7 @@
 
 ## 확인해봐야 할 테스트 케이스(예외 케이스)
 1. `< , >, >> 기호 좌측값은 공백없이 붙여야합니다. 그렇지 않으면 명령의 인수로 인식이 됩니다`
-2. `>, >> 기호의 우측값은 파일이름이 올경우는 괜찮지만 FD 번호가 올경우는 & 기호를 붙여줘야 합니다. 그렇지 않으면 FD 숫자가 파일이름이 됩니다.`
 3. `명령 치환에는 redirection 을 적용할 수 없습니다.`
-```
-$ echo $( expr a + 2 ) 2>/dev/null
-expr: non-integer argument
-
-$ 2> /dev/null echo $( expr a + 2 )
-expr: non-integer argument
-
-$ echo $( expr a + 2 2> /dev/null )
-OK
-
-$ { echo $( expr a + 2 ) ;} 2> /dev/null
-OK
-```
 4. 명령어의 옵션은 여러번 와도 괜찮다.
 ```
 echo -nnnnnnnnnnnn "hello"
@@ -74,8 +60,6 @@ echo -nnnnnnnnnnnn "hello"
 echo -nnnnn -n-n-n-n-n "hello"
 => -n-n-n-n-n hello$
 ```
-5. .sh 확장자 실행파일이 올 때 bash를 앞에 붙여주어 실행시켜준다.
-
 ## 학습 내용
 ### 21.04.12(월)
 
@@ -204,5 +188,6 @@ int main(int argc, char *argv[])
 	- [multi pipeline 참고자료2](https://stackoverflow.com/questions/17630247/coding-multiple-pipe-in-c)
 
 ### 21.04.30(금) 학습내용
+1. 멀티 파이프라인으로 구현을 위한 자료
 	- [42 minishell 허용 함수 정리한 블로그](https://42kchoi.tistory.com/259)
 	- [dup2 을 이용한 pipe 설명 중 가장 이해가 쉬웠던 설명들 및 여러 프로세스를 확인하기 위한 리눅스 명령어들을 알려준 블로그](https://codingdog.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-dup2-%ED%95%A8%EC%88%98-%ED%8C%8C%EC%9D%BC-%EB%94%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%84%B0%EB%A5%BC-%EB%B3%B5%EC%82%AC%ED%95%9C%EB%8B%A4)

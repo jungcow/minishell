@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:39:05 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/13 13:32:42 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 15:38:29 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void					add_envlist_back(t_envlist **envlist, t_envlist *new);
 **		envset
 */
 int						check_envset(char **env, int flag);
-int						create_envset(char ***envset, char *arg);
-int						init_envset(char **envset, char *arg);
-int						replace_envset(char **envset, char *arg, int flag);
+int						create_envset(char ***envset, char *arg, int flag);
+int						init_envset(char **envset, char *arg, int quote_flag);
+int						replace_envset(char **envset, int flag);
 int						join_envset(char **envset, char **arg);
 
 /*
@@ -81,6 +81,6 @@ int						get_alnum_envstr(char *env, char **alnum,
 										char **noalnum);
 int						handle_backslash(char **envset);
 int						handle_dollar(char **envset);
-int						count_envset(char *arg);
+int						count_envset(char *arg, int flag);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:51:39 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/13 02:43:35 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 15:39:05 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,21 @@ int		handle_backslash(char **envset)
 int		handle_dollar(char **envset)
 {
 	char		*tmp;
+	int			i;
 
-	if ((*envset)[1] == '?')
+	i = 1;
+	if ((*envset)[0] == BACKSLASH)
+		i++;
+	if ((*envset)[i] == '?')
+		tmp = ft_itoa(g_command.prev_exit_status);
+	else
 	{
-		free(*envset);
-		*envset = ft_itoa(g_command.prev_exit_status);
-		return (1);
-	}
-	tmp = get_environ(*envset + 1);
-	if (tmp == NULL)
-	{
-		tmp = ft_strdup("");
+		tmp = get_environ(*envset + i);
 		if (tmp == NULL)
-			exit(-1);
+			tmp = ft_strdup("");
 	}
+	if (tmp == NULL)
+		exit(-1);
 	free(*envset);
 	*envset = tmp;
 	return (1);
@@ -64,29 +65,29 @@ int		dup_str(char **env, char *str)
 	return (1);
 }
 
-int		count_envset(char *arg)
+int		count_envset(char *arg, int flag)
 {
 	int		i;
 	int		num;
-	int		flag;
+	int		tmp;
 
-	flag = 0;
 	i = 0;
+	tmp = 0;
 	if (!ft_isalnum(arg[i]) && arg[i] != '_')
-		flag = arg[i++];
-	if (flag == BACKSLASH)
+		tmp = arg[i++];
+	if (flag == DOUBLE_QUOTE && tmp == BACKSLASH)
 		i++;
 	num = 1;
 	while (arg[i])
 	{
-		flag = 0;
+		tmp = 0;
 		if ((!ft_isalnum(arg[i]) && arg[i] != '_'))
-			flag = arg[i];
-		if (flag == BACKSLASH && arg[i + 1])
+			tmp = arg[i];
+		if (flag == DOUBLE_QUOTE && tmp == BACKSLASH && arg[i + 1])
 			i++;
-		else if (flag == '$' && arg[i + 1] == '?')
+		else if (tmp == '$' && arg[i + 1] == '?')
 			i++;
-		if (flag)
+		if (tmp)
 			num++;
 		i++;
 	}

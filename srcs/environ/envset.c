@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 18:21:37 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/13 13:31:55 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/13 15:39:32 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "execute/execute.h"
 #include "libft.h"
 
-int		init_envset(char **envset, char *arg)
+int		init_envset(char **envset, char *arg, int quote_flag)
 {
 	int		i;
 	int		tmp;
@@ -29,7 +29,7 @@ int		init_envset(char **envset, char *arg)
 		exit_flag = 0;
 		if (!ft_isalnum(arg[i]) && arg[i] != '_')
 			flag = arg[i++];
-		if (flag == BACKSLASH && arg[i])
+		if (quote_flag == DOUBLE_QUOTE && flag == BACKSLASH && arg[i])
 			i++;
 		else if (flag == '$' && arg[i] == '?' && i++)
 			exit_flag = 1;
@@ -43,40 +43,36 @@ int		init_envset(char **envset, char *arg)
 	return (1);
 }
 
-int		create_envset(char ***envset, char *arg)
+int		create_envset(char ***envset, char *arg, int flag)
 {
 	int		i;
 	int		num;
 
 	i = 0;
-	num = count_envset(arg);
+	num = count_envset(arg, flag);
 	*envset = (char **)malloc(sizeof(char *) * (num + 1));
 	i = 0;
 	while (i < num)
 		(*envset)[i++] = NULL;
 	(*envset)[i] = NULL;
-	init_envset(*envset, arg);
+	init_envset(*envset, arg, flag);
 	return (1);
 }
 
-int		replace_envset(char **envset, char *arg, int flag)
+int		replace_envset(char **envset, int flag)
 {
 	int		i;
-	int		num;
 
-	i = 0;
-	num = count_envset(arg);
-	while (envset[i])
-	{
+	i = -1;
+	while (envset[++i])
 		if ((envset[i][0] == '$' && envset[i][1]) || envset[i][0] == '\\')
 		{
 			if (flag == DOUBLE_QUOTE && envset[i][0] == BACKSLASH)
 				handle_backslash(envset + i);
-			else if (envset[i][0] == '$')
+			else if ((flag == NONE_QUOTE && envset[i][0] == BACKSLASH &&
+						ft_strchr(envset[i], '$')) || envset[i][0] == '$')
 				handle_dollar(envset + i);
 		}
-		i++;
-	}
 	return (1);
 }
 
@@ -113,9 +109,9 @@ int		check_envset(char **env, int flag)
 
 	if (!(*env) || **env == '\0')
 		return (1);
-	ret = create_envset(&envset, *env);
+	ret = create_envset(&envset, *env, flag);
 	if (ret >= 0)
-		ret = replace_envset(envset, *env, flag);
+		ret = replace_envset(envset, flag);
 	if (ret >= 0)
 		ret = join_envset(envset, env);
 	clear_strs(envset);
