@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 04:23:28 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/12 10:29:44 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/16 01:34:55 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int		ft_execve(char *command, char **argv, t_environ **environ)
 
 	ret = 0;
 	if (ft_strcmp(command, "echo") == 0)
+	{
+		printf("arg: %s\n", argv[1]);
 		ret = ft_echo(ft_strslen(argv), argv, *environ);
+	}
 	else if (ft_strcmp(command, "cd") == 0)
 		ret = ft_cd(ft_strslen(argv), argv);
 	else if (ft_strcmp(command, "pwd") == 0)

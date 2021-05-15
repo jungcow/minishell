@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:29:31 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/11 10:51:00 by jungwkim         ###   ########.fr       */
+/*   Updated: 2021/05/16 01:35:51 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ int		ft_echo(int argc, char **argv)
 	{
 		if (write(1, argv[i], ft_strlen(argv[i])) < 0)
 			return (-1);
+		if (i + 1 != argc && write(1, " ", 1) < 0)
+			return (-1);
 		i++;
-		if (argv[i - 1] && *argv[i - 1])
-			if (i != argc && write(1, " ", 1) < 0)
-				return (-1);
 	}
 	if (new_line)
 		write(1, "\n", 1);
