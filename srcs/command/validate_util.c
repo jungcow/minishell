@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 23:15:41 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/01 19:05:25 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/15 13:26:05 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,16 @@ bool	validate_pipe(char *dump, int pos)
 			unexpected_token(PIPE);
 	}
 	return (!is_space);
+}
+
+bool	validate_dquote(char *dump, int pos)
+{
+	int		i;
+
+	i = 1;
+	while (pos >= i && dump[pos - i] == '\\')
+		i++;
+	if (i % 2 == 1)
+		return (true);
+	return (false);
 }

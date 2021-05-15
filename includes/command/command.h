@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:54:40 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/11 21:12:57 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/15 13:27:16 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,5 @@ bool				validate_redirect(char *dump, int i);
 bool				validate_input_redirect(char *dump, int i);
 bool				validate_output_redirect(char *dump, int i);
 bool				validate_newline(char *dump, int i);
-
+bool				validate_dquote(char *dump, int i);
 #endif

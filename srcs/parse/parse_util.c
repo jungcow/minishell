@@ -6,7 +6,7 @@
 /*   By: seunghoh <seunghoh@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 19:51:29 by seunghoh          #+#    #+#             */
-/*   Updated: 2021/05/13 17:55:52 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/05/15 13:22:30 by seunghoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,17 @@ int		skip_quote(char *str, int length, int start)
 
 int		skip_dquote(char *str, int length, int start)
 {
+	int		i;
+	int		j;
+	i = 0;
 	start++;
 	while (start < length)
 	{
-		if (str[start] == 34 && str[start - 1] != '\\')
+		j = 1;
+		if (str[start] == 34)
+			while (str[start - j] == '\\')
+				j++;
+		if (j % 2 == 1)
 			break ;
 		start++;
 	}
