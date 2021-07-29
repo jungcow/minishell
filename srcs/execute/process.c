@@ -6,7 +6,7 @@
 /*   By: jungwkim <jungwkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 03:21:12 by jungwkim          #+#    #+#             */
-/*   Updated: 2021/05/13 16:51:46 by seunghoh         ###   ########.fr       */
+/*   Updated: 2021/07/29 10:22:50 by jungwkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int		wait_process(pid_t *process, int num)
 	int		i;
 
 	i = -1;
+	process = NULL; //process 변수를 사용하지 않는 것으로 변경.
 	while (++i < num)
 	{
-		waitpid(process[i], &status, 0);
+		waitpid(-1, &status, 0);
 		if ((unsigned char)status == 0)
 			g_command.exit_status = (unsigned char)(status >> 8);
 	}
