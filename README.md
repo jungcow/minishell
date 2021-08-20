@@ -2,10 +2,9 @@
 
 ## 실행 방법
 ```shell
-1. make 명령을 통해 컴파일 및 링크
-2. minishell이라는 이름의 프로그램이 생성
-3. minishell 프로그램을 실행(./minishell)
-4. bash 쉘 처럼 명령어를 입력
+make
+make clean
+./minishell
 ```
 
 ## git commit 규칙
