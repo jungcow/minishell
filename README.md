@@ -4,7 +4,7 @@
 ---
 ## Index
 - [Execution](#execution)
-- [Redirection & Pipeline](#redirection-&-pipeline)
+- [Redirection and Pipeline](#redirection-and-pipeline)
 - Broken Pipe
 - BuiltIn Command
 	- echo
@@ -25,7 +25,7 @@ make && make clean
 ./minishell
 ```
 ---
-## Redirection & Pipeline
+## Redirection and Pipeline
 |Redirection|Pipeline|
 :---------:|:--------:
 |![redirection](https://user-images.githubusercontent.com/60311340/147553579-4eb6c9dd-85fd-4a59-a630-9e2e7a7464d3.gif)|![pipeline](https://user-images.githubusercontent.com/60311340/147553573-0d1aa8fd-cd0a-4e73-94de-5c78977a37c7.gif)|
