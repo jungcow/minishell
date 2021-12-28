@@ -1,11 +1,57 @@
 # minishell
-
-## 실행 방법
+## Overview
+![minishell](https://user-images.githubusercontent.com/60311340/147553101-57e3945e-dd0b-4c74-b273-67be6baedd57.gif)
+---
+## Index
+- Redirection & Pipeline
+- Broken Pipe
+- BuiltIn Command
+	- echo
+	- env
+	- export
+	- unset
+	- cd
+	- history
+- Shell variable
+	- Double Quote
+	- Single Quote
+	- Back Slash
+---
+## Execution
 ```shell
-make
-make clean
+make && make clean
 ./minishell
 ```
+---
+## Redirection & Pipeline
+|Redirection|Pipeline|
+:---------:|:--------:
+|![redirection](https://user-images.githubusercontent.com/60311340/147553579-4eb6c9dd-85fd-4a59-a630-9e2e7a7464d3.gif)|![pipeline](https://user-images.githubusercontent.com/60311340/147553573-0d1aa8fd-cd0a-4e73-94de-5c78977a37c7.gif)|
+
+### Broken Pipe
+|zsh|minishell|
+:---------:|:--------:
+|![broken_pipe_zsh](https://user-images.githubusercontent.com/60311340/147553755-e6a6f4a0-0cca-4150-8444-a7ef7f6b9ceb.gif)|![broken_pipe_minishell](https://user-images.githubusercontent.com/60311340/147553766-90f78b18-977a-4d54-847d-b6a797707b11.gif)|
+
+## BuiltIn Command
+|command|implementation|
+:------:|:------:
+|echo|![echo](https://user-images.githubusercontent.com/60311340/147555091-1ec06ef6-796d-4536-b5f5-a4dd9b4ce534.gif)|
+|cd
+
+	- echo
+	- env
+	- export
+	- unset
+	- cd
+	- history
+## Shell Variable
+|Special Character|Image|
+:-----------:|:-----------:
+|Double Quote|<img width="400" alt="doublequote" src="https://user-images.githubusercontent.com/60311340/147553969-785b813c-b518-4bdc-8cb1-573dd3670dc6.png">|
+|Single Quote|<img width="400" alt="singlequote" src="https://user-images.githubusercontent.com/60311340/147553960-f6608f06-ca45-4270-8d78-57f8daf34afd.png">|
+|Back Slash|<img width="400" alt="backslash" src="https://user-images.githubusercontent.com/60311340/147553920-8431ad0f-8d28-4b02-9b61-ea272adf060e.png">|
+---
 
 ## git commit 규칙
 ```
