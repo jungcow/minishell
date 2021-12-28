@@ -4,7 +4,7 @@
 ---
 ## Index
 - [Execution](#execution)
-- [Redirection & Pipeline](#redirection-pipeline)
+- [Redirection & Pipeline](#redirection-&-pipeline)
 - Broken Pipe
 - BuiltIn Command
 	- echo
