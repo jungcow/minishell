@@ -56,16 +56,17 @@ make && make clean
 |Single Quote|<img width="400" alt="singlequote" src="https://user-images.githubusercontent.com/60311340/147553960-f6608f06-ca45-4270-8d78-57f8daf34afd.png">|
 |Back Slash|<img width="400" alt="backslash" src="https://user-images.githubusercontent.com/60311340/147553920-8431ad0f-8d28-4b02-9b61-ea272adf060e.png">|
 ---
+
 ## Documentation
-1. [termios 구조체 사용 방법](htts://github.com/jungcow/42Cursus/wiki/20210411(일))
-2. [termcap 과 escape sequence](htts://github.com/jungcow/42Cursus/wiki/20210412(월))
-3. [termios를 통한 terminal mode 설정](htts://github.com/jungcow/42Cursus/wiki/20210413(화))
-4. [shell의 버퍼관리와 유용한 escape sequence](htts://github.com/jungcow/42Cursus/wiki/20210414(수))
-5. [history 구현1](htts://github.com/jungcow/42Cursus/wiki/20210416(금))
-6. [history 구현2 - cursor](htts://github.com/jungcow/42Cursus/wiki/20210418(일))
-7. [history 구현3 - termcap capability 적용](htts://github.com/jungcow/42Cursus/wiki/20210419(월))
-8. [history 구현4 - history line editing](htts://github.com/jungcow/42Cursus/wiki/20210420(화))
-9. [history 구현5 - termcap의 문제점 발견](htts://github.com/jungcow/42Cursus/wiki/20210423(금))
-10. [pipeline 구현1 - fork, exec, waitpid 학습](htts://github.com/jungcow/42Cursus/wiki/20210426(월))
-11. [pipeline 구현2 - 실습](htts://github.com/jungcow/42Cursus/wiki/20210427(화))
-12. [pipeline 구현3 - pipe, dup2 학습](htts://github.com/jungcow/42Cursus/wiki/20210428(수))
+1. [termios 구조체 사용 방법](htts://github.com/jungcow/42Cursus/wiki/20210411(%EC%9D%BC))
+2. [termcap 과 escape sequence](htts://github.com/jungcow/42Cursus/wiki/20210412(%EC%9B%94))
+3. [termios를 통한 terminal mode 설정](htts://github.com/jungcow/42Cursus/wiki/20210413(%ED%99%94))
+4. [shell의 버퍼관리와 유용한 escape sequence](htts://github.com/jungcow/42Cursus/wiki/20210414(%EC%88%98))
+5. [history 구현1](htts://github.com/jungcow/42Cursus/wiki/20210416(%EA%B8%88))
+6. [history 구현2 - cursor](htts://github.com/jungcow/42Cursus/wiki/20210418(%EC%9D%BC))
+7. [history 구현3 - termcap capability 적용](htts://github.com/jungcow/42Cursus/wiki/20210419(%EC%9B%94))
+8. [history 구현4 - history line editing](htts://github.com/jungcow/42Cursus/wiki/20210420(%ED%99%94))
+9. [history 구현5 - termcap의 문제점 발견](htts://github.com/jungcow/42Cursus/wiki/20210423(%EA%B8%88))
+10. [pipeline 구현1 - fork, exec, waitpid 학습](htts://github.com/jungcow/42Cursus/wiki/20210426(%EC%9B%94))
+11. [pipeline 구현2 - 실습](htts://github.com/jungcow/42Cursus/wiki/20210427(%ED%99%94))
+12. [pipeline 구현3 - pipe, dup2 학습](htts://github.com/jungcow/42Cursus/wiki/20210428(%EC%88%98))
