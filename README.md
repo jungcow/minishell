@@ -3,7 +3,7 @@
 ![minishell](https://user-images.githubusercontent.com/60311340/147553101-57e3945e-dd0b-4c74-b273-67be6baedd57.gif)
 ---
 ## Index
-- [Execution](#execution)
+- [Execution](#실행)
 - [Redirection and Pipeline](#redirection-and-pipeline)
 - [Broken Pipe](#broken-pipe)
 - [BuiltIn Command](#buildin-command)
@@ -16,7 +16,7 @@
 - [Shell variable](#shell-variable)
 - [Documentation](#documentation)
 ---
-## Execution
+## 실행
 ```shell
 make && make clean
 ./minishell
