@@ -7,7 +7,7 @@
 - [Redirection and Pipeline](#redirection-and-pipeline)
 - [Broken Pipe](#broken-pipe)
 - [BuiltIn Command](#buildin-command)
-	- [echo](#echo)
+	- [echo](#1-echo)
 	- [env](#env)
 	- [export](#export)
 	- [unset](#unset)
