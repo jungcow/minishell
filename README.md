@@ -14,9 +14,6 @@
 	- [cd](#5cd)
 	- [history](#6history)
 - [Shell variable](#shell-variable)
-	- [Double Quote](#double-quote)
-	- [Single Quote](#single-quote)
-	- [Back Slash](#back-slash)
 - [Documentation](#documentation)
 ---
 ## Execution
