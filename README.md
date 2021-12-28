@@ -36,22 +36,16 @@ make && make clean
 |![broken_pipe_zsh](https://user-images.githubusercontent.com/60311340/147553755-e6a6f4a0-0cca-4150-8444-a7ef7f6b9ceb.gif)|![broken_pipe_minishell](https://user-images.githubusercontent.com/60311340/147553766-90f78b18-977a-4d54-847d-b6a797707b11.gif)|
 
 ## BuiltIn Command
-### 1.echo
+#### 1.echo
 ![echo](https://user-images.githubusercontent.com/60311340/147555091-1ec06ef6-796d-4536-b5f5-a4dd9b4ce534.gif)
-
-### 2.cd
+#### 2.cd
 ![cd](https://user-images.githubusercontent.com/60311340/147555665-976f4f33-fa03-4dff-894f-b51752572dcc.gif)
-
-### 3.env
-<img width="600" alt="env-default" src="https://user-images.githubusercontent.com/60311340/147555876-95fe54d7-2a2b-4ec1-8b10-5c2fbbc10a05.png">
-
-### 4.export
-<img width="600" alt="export" src="https://user-images.githubusercontent.com/60311340/147556145-00cdff7a-8765-4adc-acc2-dcbcdae8e76e.png">
-
-### 5.unset
+#### 3.env
+#### 4.export
+#### 5.unset
 <img width="600" alt="unset-var" src="https://user-images.githubusercontent.com/60311340/147556155-5f78616d-d153-4127-be03-24b6fd778193.png">
 
-### 6.history
+#### 6.history
 ![history](https://user-images.githubusercontent.com/60311340/147556306-47771946-cce1-4d61-b250-2f65254137e1.gif)
 
 ---
