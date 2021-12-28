@@ -8,15 +8,15 @@
 - [Broken Pipe](#broken-pipe)
 - [BuiltIn Command](#buildin-command)
 	- [echo](#1echo)
-	- [env](#env)
-	- [export](#export)
-	- [unset](#unset)
-	- [cd](#cd)
-	- [history](#history)
-- Shell variable
-	- Double Quote
-	- Single Quote
-	- Back Slash
+	- [env](#2env)
+	- [export](#3export)
+	- [unset](#4unset)
+	- [cd](#5cd)
+	- [history](#6history)
+- [Shell variable](#shell-variable)
+	- [Double Quote](#double-quote)
+	- [Single Quote](#single-quote)
+	- [Back Slash](#back-slash)
 - Documentation
 ---
 ## Execution
