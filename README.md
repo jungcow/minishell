@@ -5,14 +5,14 @@
 ## Index
 - [Execution](#execution)
 - [Redirection and Pipeline](#redirection-and-pipeline)
-- Broken Pipe
-- BuiltIn Command
-	- echo
-	- env
-	- export
-	- unset
-	- cd
-	- history
+- [Broken Pipe](#broken-pipe)
+- [BuiltIn Command](#buildin-command)
+	- [echo](#echo)
+	- [env](#env)
+	- [export](#export)
+	- [unset](#unset)
+	- [cd](#cd)
+	- [history](#history)
 - Shell variable
 	- Double Quote
 	- Single Quote
